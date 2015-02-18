@@ -4,10 +4,11 @@
 
 /* Sébastien Millet, February 2015 */
 
-/*#define DEBUG*/
+#define DEBUG
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <errno.h>
 #include <string.h>
 #include <strings.h>
@@ -20,6 +21,8 @@ int snprintf(char *str, size_t size, const char *format, ...);
 #define UNUSED(x) (void)(x)
 
 int opt_verbose = 0;
+int opt_hex = 0;
+int opt_width = 8;
 
 #define out(args...) \
 	printf(args)
@@ -34,9 +37,9 @@ int opt_verbose = 0;
 void out_errno(const ssize_t offset)
 {
 	if (offset >= 0)
-		out("Error: %s, position %u.\n", strerror(errno), (unsigned int)offset);
+		out("Error: %s, position %u\n", strerror(errno), (unsigned int)offset);
 	else
-		out("Error: %s.\n", strerror(errno));
+		out("Error: %s\n", strerror(errno));
 }
 
 const char *classes[] = {
@@ -51,20 +54,28 @@ const char *short_classes[] = {
 	"cont", /* CLASS_CONTEXT_SPECIFIC */
 	"priv"  /* CLASS_PRIVATE */
 };
-#define CLASS_UNIVERSAL        0
-#define CLASS_APPLICATION      1
-#define CLASS_CONTEXT_SPECIFIC 2
-#define CLASS_PRIVATE          3
+#define TAG_CLASS_UNIVERSAL        0
+#define TAG_CLASS_APPLICATION      1
+#define TAG_CLASS_CONTEXT_SPECIFIC 2
+#define TAG_CLASS_PRIVATE          3
 
-const char *PCs[] = {"Primitive", "Constructed"};
-const char *short_PCs[] = {"prim", "cons"};
+const char *PCs[] = {
+	"Primitive",  /* TAG_TYPE_PRIMITIVE */
+	"Constructed" /* TAG_TYPE_CONSTRUCTED */
+};
+const char *short_PCs[] = {
+	"prim", /* TAG_TYPE_PRIMITIVE */
+	"cons"  /* TAG_TYPE_CONSTRUCTED */
+};
+#define TAG_TYPE_PRIMITIVE   0
+#define TAG_TYPE_CONSTRUCTED 1
 
-struct t_universal_class_tag {
+struct t_tag_universal_class {
 	const char *name;
 	int pc;
 };
 
-struct t_universal_class_tag universal_class_tags[] = {
+struct t_tag_universal_class universal_class_tags[] = {
 	{"EOC", 0},
 	{"BOOLEAN", 0},
 	{"INTEGER", 0},
@@ -81,7 +92,7 @@ struct t_universal_class_tag universal_class_tags[] = {
 	{"RELATIVE-OID", 1},
 	{"(reserved)", -1},
 	{"(reserved)", -1},
-	{"SEQUENCE", 1},          /* UTAG_SEQUENCE */
+	{"SEQUENCE", 1},
 	{"SET", 1},
 	{"NUMERICSTRING", 2},
 	{"PRINTABLESTRING", 2},
@@ -98,8 +109,8 @@ struct t_universal_class_tag universal_class_tags[] = {
 	{"BMPString", 2},
 	{"(long form)", -1}        /* UTAG_LONG_FORMAT */
 };
-#define UTAG_SEQUENCE    16
-#define UTAG_LONG_FORMAT 31
+#define TAG_U_OBJECT_IDENTIFIER 6
+#define TAG_U_LONG_FORMAT       31
 
 const char *length_coding_types[] = {
 	"ONE BYTE",   /* LENGTH_CODE_TYPE_ONE */
@@ -110,16 +121,29 @@ const char *length_coding_types[] = {
 
 #define assert(b) \
 if (!(b)) { \
-	fprintf(stderr, "FATAL ERROR: file %s, line %i.\n", __FILE__, __LINE__); \
+	fprintf(stderr, "FATAL ERROR: file %s, line %i\n", __FILE__, __LINE__); \
 	exit(-999); \
 }
 
 void usage()
 {
 	fprintf(stderr, "Usage:\n");
-	fprintf(stderr, "  dder FILE\n\n");
-	fprintf(stderr, "Parses FILE according to DER syntax.\n\n");
+	fprintf(stderr, "  dder [OPTION]... [FILE]\n");
+	fprintf(stderr, "Parses FILE according to DER syntax\n");
+	fprintf(stderr, "Uses standard input if FILE is not specified\n");
+	fprintf(stderr, "  -help      print this help screen\n");
+	fprintf(stderr, "  -version   output version information and exit\n");
+	fprintf(stderr, "  -v         verbose output. Implies -hex\n");
+	fprintf(stderr, "  -hex       hexadecimal output of data values\n");
+	fprintf(stderr, "  -width     number of bytes per line (hexadecimal output)\n");
+	fprintf(stderr, "  --         end of parameters\n");
 	exit(-1);
+}
+
+void version()
+{
+	printf("dder version 0.1\n");
+	exit(0);
 }
 
 ssize_t get_file_size(const char* filename)
@@ -128,6 +152,22 @@ ssize_t get_file_size(const char* filename)
 	stat(filename, &st);
 	return st.st_size;
 }
+
+char *s_strncpy(char *dest, const char *src, size_t n)
+{
+		strncpy(dest, src, n);
+		dest[n - 1] = '\0';
+		return dest;
+}
+#define strncpy(a, b, c) ErrorDontUse_strncpy_Use_s_strncpy_Instead
+
+char *s_strncat(char *dest, const char *src, size_t n)
+{
+	strncat(dest, src, n);
+	dest[n - 1] = '\0';
+	return dest;
+}
+#define strncat(a, b, c) ErrorDontUse_strncat_Use_s_strncat_Instead
 
 char *char_to_binary_base_string(char *b, const size_t blen, unsigned char c)
 {
@@ -145,8 +185,9 @@ char *char_to_binary_base_string(char *b, const size_t blen, unsigned char c)
 void myfclose(FILE **F, const char *err, size_t position)
 {
 	if (err != NULL)
-		out("Error: %s, position: %u.\n", err, (unsigned int)position);
-	fclose(*F);
+		out("Error: %s, position: %u\n", err, (unsigned int)position);
+	if (*F != stdin)
+		fclose(*F);
 	*F = NULL;
 }
 
@@ -162,36 +203,50 @@ int myfgetc(FILE **F, size_t *offset)
 	return r;
 }
 
-void out_sequence(size_t offset, char *buf, const unsigned long len, const int string)
+void out_sequence(size_t offset, char *buf, const unsigned long len, const int is_value)
 {
 
 const unsigned long lbytes = 8;
 
 	const unsigned long hbytes = lbytes / 2;
-	if (!string) {
+
+	char *str = malloc(lbytes + 50);
+	int strpos = 0;
+
+	if (!is_value || opt_hex) {
 		unsigned long i;
 		unsigned long lim = ((len + lbytes - 1) / lbytes) * lbytes;
 		if (!lim)
 			lim = (unsigned long)lbytes;
 		for (i = 0; i < lim; ++i) {
 			if (!(i % lbytes)) {
+				strpos = 0;
 				if (len)
 					out("%06x  ", (unsigned int)offset);
 				else
 					out("        ");
 			}
-			if (!((i + hbytes) % lbytes))
+			if (!((i + hbytes) % lbytes)) {
 				out("   ");
-			if (i < len)
+				str[strpos++] = ' ';
+				str[strpos++] = ' ';
+			}
+			if (i < len) {
 				out("%02x ", (unsigned char)buf[i]);
-			else
+				str[strpos++] = (buf[i] < ' ' || buf[i] == 127 ? '.' : buf[i]);
+			} else {
 				out("   ");
+				str[strpos++] = ' ';
+			}
 			if (!((i + 1) % lbytes)) {
+				out("  ");
+				if (is_value) {
+					str[strpos] = '\0';
+					out("%s ", str);
+				}
 				if (i + 1 < lim) {
 					out("\n");
 					offset += lbytes;
-				} else {
-					out("  ");
 				}
 			}
 		}
@@ -201,18 +256,22 @@ const unsigned long lbytes = 8;
 		unsigned i;
 		for (i = 0; i < len; ++i) {
 			c = buf[i];
-			if (c < ' ')
+			if (c < ' ' || c == 127)
 				c = '.';
 			out("%c", c);
 		}
+		out("  ");
 	}
+	free(str);
 }
 
-int check_position(FILE **F, const size_t offset, const ssize_t remaining_length)
+int check_position(FILE **F, const size_t offset, const ssize_t remaining_length, const int insert_newline)
 {
 	if (*F == NULL)
 		return 0;
 	if (remaining_length < 0) {
+		if (insert_newline)
+			out("\n");
 		myfclose(F, "inconsistent items length", offset);
 		return 0;
 	}
@@ -221,33 +280,35 @@ int check_position(FILE **F, const size_t offset, const ssize_t remaining_length
 
 void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag_number)
 {
-	if (tag_class == CLASS_UNIVERSAL) {
-		strncpy(s, universal_class_tags[tag_number].name, slen);
+	if (tag_class == TAG_CLASS_UNIVERSAL) {
+		s_strncpy(s, universal_class_tags[tag_number].name, slen);
 		s[slen - 1] = '\0';
 	} else {
 		snprintf(s, slen, "[ %i ]", tag_number);
 	}
 }
 
-void parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *tag_class, int *tag_PC, int *tag_number)
+int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *tag_class, int *tag_PC, int *tag_number)
 {
 	int c;
 	size_t old_offset = *offset;
 	if ((c = myfgetc(F, offset)) == EOF)
-		return;
+		return 0;
 
 	*tag_class = (c & 0xc0) >> 6;
 	*tag_PC = (c & 0x20) >> 5;
 	*tag_number = (c & 0x1F);
 	int allowed_pc = universal_class_tags[*tag_number].pc;
-	if (tag_class == CLASS_UNIVERSAL && allowed_pc >= 0 && allowed_pc <= 1 && *tag_PC != allowed_pc)
-		out("Warning: tag number does not match primitive/constructed bit.\n");
+	if (tag_class == TAG_CLASS_UNIVERSAL && allowed_pc >= 0 && allowed_pc <= 1 && *tag_PC != allowed_pc) {
+		*tag_PC = TAG_TYPE_PRIMITIVE;
+		out("Warning: tag number does not match primitive/constructed bit\n");
+	}
 	char tag_name[100];
 	get_tag_name(tag_name, sizeof(tag_name), *tag_class, *tag_number);
 
-	char buf[1];
-	buf[0] = (char)c;
-	out_sequence(old_offset, buf, 1, 0);
+	char s[1];
+	s[0] = (char)c;
+	out_sequence(old_offset, s, 1, 0);
 
 	if (opt_verbose) {
 		char b[9];
@@ -263,25 +324,60 @@ void parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *
 		out("%s-%s: %s\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name);
 	}
 
-	if (*tag_number == UTAG_LONG_FORMAT) {
-			/* FIXME */
-		out("Long tag number format not handled.\n");
-		assert(0);
+	if (*tag_number == TAG_U_LONG_FORMAT) {
+		char buf[5];
+		int pos = 0;
+
+		old_offset = *offset;
+		do {
+			if ((c = myfgetc(F, offset)) == EOF)
+				return 0;
+			buf[pos] = (char)c;
+			--(*remaining_length);
+		} while (buf[pos] & 0x80 && (unsigned)++pos < sizeof(buf));
+		if (pos == sizeof(buf)) {
+			myfclose(F, "Tag number too big", old_offset);
+			return 0;
+		}
+		int rev;
+		long unsigned multi = 1;
+		int shift = 0;
+		unsigned rmask;
+		unsigned lmask;
+		unsigned bm1;
+		unsigned v0;
+		long unsigned value = 0;
+		for (rev = pos; rev >= 0; --rev) {
+			if (rev == 0)
+				bm1 = 0;
+			else
+				bm1 = (unsigned)buf[rev - 1];
+			rmask = (0x7Fu >> shift);
+			lmask = (0xFFu << (7 - shift)) & 0xFFu;
+			v0 = (long unsigned)(((bm1 << (7 - shift)) & lmask) | (((unsigned)buf[rev] >> shift) & rmask));
+
+			value += v0 * multi;
+			multi *= 256;   /* Can be written <<8, but... */
+			++shift;
+		}
+		*tag_number = (int)value;
+		out_sequence(old_offset, buf, (unsigned long)pos + 1, 0);
+		out("Tag number: %i\n", *tag_number);
 	}
 
 	--(*remaining_length);
 
-	check_position(F, *offset, *remaining_length);
+	return check_position(F, *offset, *remaining_length, 0);
 }
 
-void parse_length(FILE **F, size_t *offset, ssize_t *remaining_length, unsigned long *length)
+int parse_length(FILE **F, size_t *offset, ssize_t *remaining_length, unsigned long *length)
 {
 	char buf[7];
 
 	int c;
 	size_t old_offset = *offset;
 	if ((c = myfgetc(F, offset)) == EOF)
-		return;
+		return 0;
 	int n = 0;
 	buf[0] = (char)c;
 	*length = (unsigned long)c;
@@ -290,16 +386,16 @@ void parse_length(FILE **F, size_t *offset, ssize_t *remaining_length, unsigned 
 		n = (c & 0x7F);
 		if ((unsigned int)n > sizeof(buf) - 1) {
 			myfclose(F, "number of bytes to encode length exceeds maximum", old_offset);
-			return;
+			return 0;
 		} else if (n == 0) {
 			myfclose(F, "number of bytes to encode length cannot be null", old_offset);
-			return;
+			return 0;
 		}
 		*length = 0;
 		int i;
 		for (i = 1; i <= n; ++i) {
 			if ((c = myfgetc(F, offset)) == EOF)
-				return;
+				return 0;
 			(*length) <<= 8;
 			(*length) += (unsigned int)c;
 			buf[i] = (char)c;
@@ -326,7 +422,55 @@ void parse_length(FILE **F, size_t *offset, ssize_t *remaining_length, unsigned 
 
 	*remaining_length -= (n + 1);
 
-	check_position(F, *offset, *remaining_length);
+	return check_position(F, *offset, *remaining_length, 0);
+}
+
+int decode_oid(char *p, const size_t plen, const char *buf, const size_t buflen)
+{
+	char tmp[20];
+	int pos = 0;
+	while ((unsigned)pos < buflen) {
+		int old_pos = pos;
+		for (; (buf[pos] & 0x80) && (unsigned)pos < buflen; ++pos)
+			;
+		if ((unsigned)pos >= buflen) {
+			return 0;
+		}
+		int rev;
+		long unsigned multi = 1;
+		int shift = 0;
+		unsigned rmask;
+		unsigned lmask;
+		unsigned bm1;
+		unsigned v0;
+		long unsigned value = 0;
+		for (rev = pos; rev >= old_pos; --rev) {
+			if (rev == old_pos)
+				bm1 = 0;
+			else
+				bm1 = (unsigned)buf[rev - 1];
+			rmask = (0x7Fu >> shift);
+			lmask = (0xFFu << (7 - shift)) & 0xFFu;
+			v0 = (long unsigned)(((bm1 << (7 - shift)) & lmask) | (((unsigned)buf[rev] >> shift) & rmask));
+
+			value += v0 * multi;
+			multi *= 256;   /* Can be written <<8, but... */
+			++shift;
+		}
+
+		if (!old_pos) {
+			int x = (int)value / 40;
+			if (x > 2)
+				x = 2;
+			int y = (int)value - 40 * x;
+			snprintf(p, plen, "%i.%i", x, y);
+		} else {
+			snprintf(tmp, sizeof(tmp), ".%i", value);
+			s_strncat(p, tmp, plen);
+		}
+		++pos;
+	}
+	return 1;
 }
 
 void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
@@ -335,16 +479,22 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 	int tag_PC;
 	int tag_number;
 
-	parse_identifier(F, offset, remaining_length, &tag_class, &tag_PC, &tag_number);
+	if (!parse_identifier(F, offset, remaining_length, &tag_class, &tag_PC, &tag_number))
+		return;
 	unsigned long length;
-	parse_length(F, offset, remaining_length, &length);
+	if (!parse_length(F, offset, remaining_length, &length))
+		return;
 
-	out_dbg("DEBUG: remaining length = %li.\n", *remaining_length);
-
-	if (tag_number == UTAG_SEQUENCE) {
-		while(*remaining_length >= 1) {
-			parse(F, offset, remaining_length);
+	if (tag_PC == TAG_TYPE_CONSTRUCTED) {
+		ssize_t inner_remaining_length = (ssize_t)length;
+		while(inner_remaining_length >= 1 && *F != NULL) {
+			parse(F, offset, &inner_remaining_length);
 		}
+		if (inner_remaining_length && *F != NULL) {
+			myfclose(F, "contained data out of container boundaries", *offset);
+			return;
+		}
+		*remaining_length -= (ssize_t)length;
 	} else {
 		char *buf;
 		buf = (char *)malloc(length);
@@ -354,9 +504,7 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 		*offset += nbread;
 		*remaining_length -= (ssize_t)nbread;
 
-		out_sequence(old_offset, buf, nbread, !opt_verbose);
-
-		out_dbg("DEBUG: remaining length = %li.\n", *remaining_length);
+		out_sequence(old_offset, buf, nbread, 1);
 
 		if (nbread != length) {
 			if (feof(*F)) {
@@ -367,9 +515,23 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 				myfclose(F, NULL, 0);
 			}
 		} else {
-			if (!check_position(F, *offset, *remaining_length)) {
+			if (!check_position(F, *offset, *remaining_length, 1)) {
 				free(buf);
 				return;
+			}
+			if (tag_class == TAG_CLASS_UNIVERSAL && tag_number == TAG_U_OBJECT_IDENTIFIER) {
+				const size_t sizeof_printable = 200;
+				char *printable = malloc(sizeof_printable);
+				if (!decode_oid(printable, sizeof_printable, buf, length)) {
+					out("\n");
+					myfclose(F, "unable to decode OID", *offset);
+				} else {
+					if (opt_verbose)
+						out("OID: %s", printable);
+					else
+						out("\n        OID: %s", printable);
+				}
+				free(printable);
 			}
 		}
 		if (*F == NULL) {
@@ -379,43 +541,105 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 		free(buf);
 		out("\n");
 	}
+	return;
+}
+
+void opt_check(int n, const char *opt)
+{
+	static int defined_options[3] = {0, 0, 0};
+
+	if (defined_options[n]) {
+		fprintf(stderr, "Option %s already set\n", opt);
+		exit(-2);
+	} else
+	defined_options[n] = 1;
 }
 
 int main(int argc, char **argv)
 {
+	FILE *F = NULL;
+
 	int a = 1;
-	if (a < argc) {
-		if (!strcasecmp(argv[a], "-v")) {
+	while (a >= 1 && a < argc) {
+		if (!strcasecmp(argv[a], "-help")) {
+			usage();
+		} else if (!strcasecmp(argv[a], "-version")) {
+			version();
+		} else if (!strcasecmp(argv[a], "-v")) {
+			opt_check(0, argv[a]);
 			opt_verbose = 1;
-			a++;
+			opt_hex = 1;
+		} else if (!strcasecmp(argv[a], "-hex")) {
+			opt_check(1, argv[a]);
+			opt_hex = 1;
+		} else if (!strcasecmp(argv[a], "-width")) {
+			opt_check(2, argv[a]);
+			if (++a >= argc) {
+				a = -1;
+			} else {
+				opt_width = atoi(argv[a]);
+				if (opt_width < 2) {
+					fprintf(stderr, "width must be greater than, or equal to, 2");
+					a = 0;
+				} else if (opt_width % 2) {
+					fprintf(stderr, "width must be an even number");
+					a = 0;
+				}
+			}
+		} else if (argv[a][0] == '-') {
+			if (strcmp(argv[a], "--")) {
+				fprintf(stderr, "unknown option %s\n", argv[a]);
+				a = 0;
+			} else {
+				++a;
+				break;
+			}
+		} else {
+			break;
 		}
+		if (a >= 1)
+			++a;
 	}
-	if (a != argc - 1)
+	if (a == -1) {
+		fprintf(stderr, "Option %s: missing value\n", argv[a]);
+	} else if (a <= 0) {
+		;
+	} else if (a < argc - 1) {
+		fprintf(stderr, "Trailing parameter(s)\n");
+		a = 0;
+	} else if (a >= argc) {
+		out("Reading from standard input...\n");
+		F = stdin;
+	}
+	if (a <= 0)
 		usage();
 
-	char *f = argv[a];
-	out("Parsing file %s.\n", f);
+	ssize_t s = INT_MAX;
+	if (F == NULL) {
+		char *f = argv[a];
 
-	ssize_t s = get_file_size(f);
-	if (s < 0) {
-		out_errno(-1);
-		exit(-3);
-	}
-	FILE *F;
-	if ((F = fopen(f, "rb")) == NULL) {
-		out_errno(-1);
-		exit(-2);
+		s = get_file_size(f);
+		if (s < 0) {
+			out_errno(-1);
+			exit(-3);
+		}
+		if ((F = fopen(f, "rb")) == NULL) {
+			out_errno(-1);
+			exit(-2);
+		}
+
+		out("Reading from file %s...\n", f);
 	}
 
 	size_t offset = 0;
 	parse(&F, &offset, &s);
-
-	if (F != NULL) {
+	if (F != NULL && F != stdin) {
 		if (s != 0 || fgetc(F) != EOF) {
+			out_dbg("s = %li\n", s);
 			myfclose(&F, "trailing characters in file", offset);
 			return -5;
 		} else {
-			fclose(F);
+			myfclose(&F, NULL, 0);
 		}
 	} else {
 		return -99;
