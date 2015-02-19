@@ -1,0 +1,104 @@
+Reading from file abc1.der...
+000000  30                           univ-cons: SEQUENCE
+000001  82 01 a2                     Length: 418
+000004  30                           univ-cons: SEQUENCE
+000005  82 01 48                     Length: 328
+000008  02                           univ-prim: INTEGER
+000009  09                           Length: 9
+00000a  ..j.z....  
+000013  30                           univ-cons: SEQUENCE
+000014  0a                           Length: 10
+000015  06                           univ-prim: OBJECT IDENTIFIER
+000016  08                           Length: 8
+000017  *.H.=...  
+        OID: 1.2.840.10045.4.3.2
+00001f  30                           univ-cons: SEQUENCE
+000020  2a                           Length: 42
+000021  31                           univ-cons: SET
+000022  13                           Length: 19
+000023  30                           univ-cons: SEQUENCE
+000024  11                           Length: 17
+000025  06                           univ-prim: OBJECT IDENTIFIER
+000026  03                           Length: 3
+000027  U..  
+        OID: 2.5.4.10
+00002a  0c                           univ-prim: UTF8String
+00002b  0a                           Length: 10
+00002c  My Company  
+000036  31                           univ-cons: SET
+000037  13                           Length: 19
+000038  30                           univ-cons: SEQUENCE
+000039  11                           Length: 17
+00003a  06                           univ-prim: OBJECT IDENTIFIER
+00003b  03                           Length: 3
+00003c  U..  
+        OID: 2.5.4.3
+00003f  0c                           univ-prim: UTF8String
+000040  0a                           Length: 10
+000041  SMT DEV CA  
+00004b  30                           univ-cons: SEQUENCE
+00004c  1e                           Length: 30
+00004d  17                           univ-prim: UTCTime
+00004e  0d                           Length: 13
+00004f  150219213318Z  
+00005c  17                           univ-prim: UTCTime
+00005d  0d                           Length: 13
+00005e  250219213318Z  
+00006b  30                           univ-cons: SEQUENCE
+00006c  41                           Length: 65
+00006d  31                           univ-cons: SET
+00006e  14                           Length: 20
+00006f  30                           univ-cons: SEQUENCE
+000070  12                           Length: 18
+000071  06                           univ-prim: OBJECT IDENTIFIER
+000072  03                           Length: 3
+000073  U..  
+        OID: 2.5.4.10
+000076  0c                           univ-prim: UTF8String
+000077  0b                           Length: 11
+000078  Lapinou Ltd  
+000083  31                           univ-cons: SET
+000084  0b                           Length: 11
+000085  30                           univ-cons: SEQUENCE
+000086  09                           Length: 9
+000087  06                           univ-prim: OBJECT IDENTIFIER
+000088  03                           Length: 3
+000089  U..  
+        OID: 2.5.4.6
+00008c  13                           univ-prim: PRINTABLESTRING
+00008d  02                           Length: 2
+00008e  FR  
+000090  31                           univ-cons: SET
+000091  1c                           Length: 28
+000092  30                           univ-cons: SEQUENCE
+000093  1a                           Length: 26
+000094  06                           univ-prim: OBJECT IDENTIFIER
+000095  03                           Length: 3
+000096  U..  
+        OID: 2.5.4.3
+000099  0c                           univ-prim: UTF8String
+00009a  13                           Length: 19
+00009b  S....bastien Millet  
+0000ae  30                           univ-cons: SEQUENCE
+0000af  81 9f                        Length: 159
+0000b1  30                           univ-cons: SEQUENCE
+0000b2  0d                           Length: 13
+0000b3  06                           univ-prim: OBJECT IDENTIFIER
+0000b4  09                           Length: 9
+0000b5  *.H......  
+        OID: 1.2.840.113549.1.1.1
+0000be  05                           univ-prim: NULL
+0000bf  00                           Length: 0
+0000c0    
+0000c0  03                           univ-prim: BIT STRING
+0000c1  81 8d                        Length: 141
+0000c3  .0..............]G.P.....Z1W&T.YI.?.Lt........3...I-....D......Fb!jf...`.@e......!...e...p..a..@.e.&O.]....Z.....N.%......Al.5W...-..F.......  
+000150  30                           univ-cons: SEQUENCE
+000151  0a                           Length: 10
+000152  06                           univ-prim: OBJECT IDENTIFIER
+000153  08                           Length: 8
+000154  *.H.=...  
+        OID: 1.2.840.10045.4.3.2
+00015c  03                           univ-prim: BIT STRING
+00015d  48                           Length: 72
+00015e  .0E. ...H...`m..5......H..,x]. cw."b4.!..4ud".<....F=.x..K...T...,...f>.  

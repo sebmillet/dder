@@ -1,0 +1,29 @@
+Error: inconsistent items length, position: 101
+Reading from file f6.pem...
+000000  23                           00 1 00011
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   3 -> BIT STRING
+000001  20                           0 0100000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 32
+000002  4d                           01 0 01101
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:  13 -> [ 13 ]
+000003  61                           0 1100001
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 97
+000004  6b 65 66 69    6c 65 0a 0a   kefi  le.. 
+00000c  23 20 4d 61    6b 65 66 69   # Ma  kefi 
+000014  6c 65 0a 23    20 69 64 70   le.#   idp 
+00001c  6b 63 73 0a    0a 23 20 53   kcs.  .# S 
+000024  c3 a9 62 61    73 74 69 65   ..ba  stie 
+00002c  6e 20 4d 69    6c 6c 65 74   n Mi  llet 
+000034  2c 20 46 65    62 72 75 61   , Fe  brua 
+00003c  79 20 32 30    31 35 0a 0a   y 20  15.. 
+000044  43 50 50 20    3d 20 67 63   CPP   = gc 
+00004c  63 0a 43 50    50 46 4c 41   c.CP  PFLA 
+000054  47 53 20 3d    20 2d 57 61   GS =   -Wa 
+00005c  6c 6c 20 2d    57 65 78 74   ll -  Wext 
+000064  72                           r          

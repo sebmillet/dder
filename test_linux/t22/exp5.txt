@@ -1,0 +1,141 @@
+Reading from file f5.pem...
+000000  7f                           01 1 11111
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  31 -> [ 31 ]
+000001  45                           Tag number: 69
+000002  4c                           0 1001100
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 76
+000003  46                           01 0 00110
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   6 -> [ 6 ]
+000004  02                           0 0000010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 2
+000005  01 01                        ..         
+000007  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+000008  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000009  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+00000a  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+00000b  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+00000c  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+00000d  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+00000e  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+00000f  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+000010  02                           0 0000010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 2
+000011  00 3e                        .>         
+000013  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+000014  01                           0 0000001
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 1
+000015  00                           .          
+000016  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+000017  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000018  30                           00 1 10000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  16 -> SEQUENCE
+000019  0a                           0 0001010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 10
+00001a  40                           01 0 00000
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> [ 0 ]
+00001b  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+00001c  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+00001d  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+00001e  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+00001f  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000020  40                           01 0 00000
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> [ 0 ]
+000021  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000022  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+000023  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000024  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   0 -> EOC
+000025  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000026  00                           00 0 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^Error: number of bytes to encode length exceeds maximum, position: 41
+^^^ Tag number:   0 -> EOC
+000027  00                           0 0000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 0
+                                                
+000028  20                           00 1 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   0 -> EOC

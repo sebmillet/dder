@@ -1,0 +1,7 @@
+Reading from file f9.der...
+000000  7f                           appl-cons: [ 31 ]
+000001  cd 85 ff 48                  Tag number: 161578952
+000005  06                           Length: 6
+000006  02                           univ-prim: INTEGER
+000007  04                           Length: 4
+000008  aa aa aa aa                  ....       

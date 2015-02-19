@@ -1,0 +1,10 @@
+Error: inconsistent items length, position: 16
+Reading from file f2.der...
+000000  30                           univ-cons: SEQUENCE
+000001  81 0c                        Length: 12
+000003  30                           univ-cons: SEQUENCE
+000004  00                           Length: 0
+000005  02                           univ-prim: INTEGER
+000006  09                           Length: 9
+000007  05 06 07 08    09 0a 0b 0c   ....  .... 
+00000f  0d                           .          

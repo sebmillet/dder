@@ -1,0 +1,30 @@
+Reading from file abc5.der...
+000000  30                           univ-cons: SEQUENCE
+000001  82 02 5e                     Length: 606
+000004  02                           univ-prim: INTEGER
+000005  01                           Length: 1
+000006  .  
+000007  02                           univ-prim: INTEGER
+000008  81 81                        Length: 129
+00000a  .........]G.P.....Z1W&T.YI.?.Lt........3...I-....D......Fb!jf...`.@e......!...e...p..a..@.e.&O.]....Z.....N.%......Al.5W...-..F..  
+00008b  02                           univ-prim: INTEGER
+00008c  03                           Length: 3
+00008d  ...  
+000090  02                           univ-prim: INTEGER
+000091  81 80                        Length: 128
+000093  e..^.a....h...r..MggK].q....<5.<f.1....6.W..*..........?.U.G....2.d..ss......t:..J.X.......[....@..Rv.......n.....D.0.....a...~.  
+000113  02                           univ-prim: INTEGER
+000114  41                           Length: 65
+000115  ..w..ad.:..v.......]^.j..h:.C..0I..AU.r.M.1RW.r.2...Wq..6..m..>..  
+000156  02                           univ-prim: INTEGER
+000157  41                           Length: 65
+000158  ..Ex...$.......FdD8..JZ\|..b.l.>M..{...Ri..ey....g..f.g...'.\....  
+000199  02                           univ-prim: INTEGER
+00019a  41                           Length: 65
+00019b  ....W-.sk..\..\y.&........v.......!=+..=..........4>7.g^.T.,l|a.E  
+0001dc  02                           univ-prim: INTEGER
+0001dd  41                           Length: 65
+0001de  ...>.j........n....C.uk..L.U.........../p.v.k9.+.!..s..C.O.....N.  
+00021f  02                           univ-prim: INTEGER
+000220  41                           Length: 65
+000221  .........R..+...V....PR..+..P....Z..o|m.P.......s...L.wh}D.....Z.  

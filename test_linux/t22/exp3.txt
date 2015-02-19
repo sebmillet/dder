@@ -1,0 +1,39 @@
+Error: inconsistent items length, position: 79
+Reading from file f3.pem...
+000000  2d                           00 1 01101
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
+000001  2d                           0 0101101
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 45
+000002  2d                           00 1 01101
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
+000003  2d                           0 0101101
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 45
+000004  2d                           00 1 01101
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
+000005  42                           0 1000010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 66
+000006  45                           01 0 00101
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   5 -> [ 5 ]
+000007  47                           0 1000111
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 71
+000008  49 4e 20 44    53 41 20 50   IN D  SA P 
+000010  41 52 41 4d    45 54 45 52   ARAM  ETER 
+000018  53 2d 2d 2d    2d 2d 0a 4d   S---  --.M 
+000020  49 47 63 41    6b 45 41 6a   IGcA  kEAj 
+000028  59 5a 35 66    63 50 74 4b   YZ5f  cPtK 
+000030  30 30 73 70    4b 31 36 53   00sp  K16S 
+000038  67 75 34 37    63 46 69 70   gu47  cFip 
+000040  72 44 68 33    45 32 4b 42   rDh3  E2KB 
+000048  56 59 6f 44    46 51 76      VYoD  FQv  

@@ -1,0 +1,20 @@
+Reading from file abc12.der...
+000000  30                           univ-cons: SEQUENCE
+000001  77                           Length: 119
+000002  02                           univ-prim: INTEGER
+000003  01                           Length: 1
+000004  .  
+000005  04                           univ-prim: OCTET STRING
+000006  20                           Length: 32
+000007  a...>..&..<W..+ ..W.....<...U(..  
+000027  a0                           cont-cons: [ 0 ]
+000028  0a                           Length: 10
+000029  06                           univ-prim: OBJECT IDENTIFIER
+00002a  08                           Length: 8
+00002b  *.H.=...  
+        OID: 1.2.840.10045.3.1.7
+000033  a1                           cont-cons: [ 1 ]
+000034  44                           Length: 68
+000035  03                           univ-prim: BIT STRING
+000036  42                           Length: 66
+000037  ......v>U}.n...4..b..2th..b..8..L.6....+...K,&J".^.{=q..~.>))q4uJ.  

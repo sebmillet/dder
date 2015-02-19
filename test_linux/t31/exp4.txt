@@ -1,0 +1,31 @@
+Reading from file abc4.der...
+000000  30                           univ-cons: SEQUENCE
+000001  73                           Length: 115
+000002  02                           univ-prim: INTEGER
+000003  01                           Length: 1
+000004  01                           .          
+000005  04                           univ-prim: OCTET STRING
+000006  1f                           Length: 31
+000007  fd d8 e0 c3    41 ee 2a a3   ....  A.*. 
+00000f  d0 f1 40 07    0d 19 ba 5e   ..@.  ...^ 
+000017  9e bb ae dd    e6 10 a7 f8   ....  .... 
+00001f  79 ae 69 17    54 cd 93      y.i.  T..  
+000026  a0                           cont-cons: [ 0 ]
+000027  07                           Length: 7
+000028  06                           univ-prim: OBJECT IDENTIFIER
+000029  05                           Length: 5
+00002a  2b 81 04 00    0a            +...  .    
+        OID: 1.3.132.0.10
+00002f  a1                           cont-cons: [ 1 ]
+000030  44                           Length: 68
+000031  03                           univ-prim: BIT STRING
+000032  42                           Length: 66
+000033  00 04 89 08    e0 bf 56 1d   ....  ..V. 
+00003b  4c 28 a5 5f    96 c2 3e cd   L(._  ..>. 
+000043  a6 59 17 78    0c 0b 29 18   .Y.x  ..). 
+00004b  01 5c 61 f7    1b cd 5e 31   .\a.  ..^1 
+000053  1d f1 81 c6    81 04 ca a0   ....  .... 
+00005b  ee af 07 ba    5b 27 7c 22   ....  ['|" 
+000063  8d 26 c0 e7    36 c3 37 58   .&..  6.7X 
+00006b  c9 be 2a 1f    b3 f8 79 a5   ..*.  ..y. 
+000073  99 ec                        ..         

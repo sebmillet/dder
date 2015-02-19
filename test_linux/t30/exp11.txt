@@ -1,0 +1,50 @@
+Reading from file abc11.der...
+000000  30                           univ-cons: SEQUENCE
+000001  82 01 68                     Length: 360
+000004  02                           univ-prim: INTEGER
+000005  01                           Length: 1
+000006  .  
+000007  04                           univ-prim: OCTET STRING
+000008  20                           Length: 32
+000009  ...^...Y...'.9>.........C.-0...{  
+000029  a0                           cont-cons: [ 0 ]
+00002a  81 fa                        Length: 250
+00002c  30                           univ-cons: SEQUENCE
+00002d  81 f7                        Length: 247
+00002f  02                           univ-prim: INTEGER
+000030  01                           Length: 1
+000031  .  
+000032  30                           univ-cons: SEQUENCE
+000033  2c                           Length: 44
+000034  06                           univ-prim: OBJECT IDENTIFIER
+000035  07                           Length: 7
+000036  *.H.=..  
+        OID: 1.2.840.10045.1.1
+00003d  02                           univ-prim: INTEGER
+00003e  21                           Length: 33
+00003f  .................................  
+000060  30                           univ-cons: SEQUENCE
+000061  5b                           Length: 91
+000062  04                           univ-prim: OCTET STRING
+000063  20                           Length: 32
+000064  ................................  
+000084  04                           univ-prim: OCTET STRING
+000085  20                           Length: 32
+000086  Z.5..:.....Uv...e....S..;.<>'.`K  
+0000a6  03                           univ-prim: BIT STRING
+0000a7  15                           Length: 21
+0000a8  ...6.....jfx...&...~.  
+0000bd  04                           univ-prim: OCTET STRING
+0000be  41                           Length: 65
+0000bf  .k....,BG....c.@.w.}.-.3...9E....O.B........J|...+.3Wk1^...@h7.Q.  
+000100  02                           univ-prim: INTEGER
+000101  21                           Length: 33
+000102  ..............................c%Q  
+000123  02                           univ-prim: INTEGER
+000124  01                           Length: 1
+000125  .  
+000126  a1                           cont-cons: [ 1 ]
+000127  44                           Length: 68
+000128  03                           univ-prim: BIT STRING
+000129  42                           Length: 66
+00012a  .....2/^...c7..t.".hGz.j..5..Z.Z.HR...*....j.@Ou.kcx#........m..?a  

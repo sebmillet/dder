@@ -1,0 +1,18 @@
+Error: inconsistent items length, position: 10
+Reading from file f7.der...
+000000  7f                           01 1 11111
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  31 -> [ 31 ]
+000001  cd 48                        Tag number: 9928
+000003  05                           0 0000101
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 5
+000004  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000005  04                           0 0000100
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 4
+000006  aa aa aa aa                  ....       

@@ -1,0 +1,35 @@
+Reading from file abc8.der...
+000000  30                           univ-cons: SEQUENCE
+000001  81 f7                        Length: 247
+000003  02                           univ-prim: INTEGER
+000004  01                           Length: 1
+000005  .  
+000006  30                           univ-cons: SEQUENCE
+000007  2c                           Length: 44
+000008  06                           univ-prim: OBJECT IDENTIFIER
+000009  07                           Length: 7
+00000a  *.H.=..  
+        OID: 1.2.840.10045.1.1
+000011  02                           univ-prim: INTEGER
+000012  21                           Length: 33
+000013  .................................  
+000034  30                           univ-cons: SEQUENCE
+000035  5b                           Length: 91
+000036  04                           univ-prim: OCTET STRING
+000037  20                           Length: 32
+000038  ................................  
+000058  04                           univ-prim: OCTET STRING
+000059  20                           Length: 32
+00005a  Z.5..:.....Uv...e....S..;.<>'.`K  
+00007a  03                           univ-prim: BIT STRING
+00007b  15                           Length: 21
+00007c  ...6.....jfx...&...~.  
+000091  04                           univ-prim: OCTET STRING
+000092  41                           Length: 65
+000093  .k....,BG....c.@.w.}.-.3...9E....O.B........J|...+.3Wk1^...@h7.Q.  
+0000d4  02                           univ-prim: INTEGER
+0000d5  21                           Length: 33
+0000d6  ..............................c%Q  
+0000f7  02                           univ-prim: INTEGER
+0000f8  01                           Length: 1
+0000f9  .  

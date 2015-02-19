@@ -1,0 +1,11 @@
+Error: inconsistent items length, position: 79
+Reading from file f1.pem...
+000000  2d                           univ-cons: RELATIVE-OID
+000001  2d                           Length: 45
+000002  2d                           univ-cons: RELATIVE-OID
+000003  2d                           Length: 45
+000004  2d                           univ-cons: RELATIVE-OID
+000005  42                           Length: 66
+000006  45                           appl-prim: [ 5 ]
+000007  47                           Length: 71
+000008  IN DSA PARAMETERS-----.MIICLQKCAQEAojLe9QMP/4Itk5uEq5inDxtT39e7XZoEL7zv  

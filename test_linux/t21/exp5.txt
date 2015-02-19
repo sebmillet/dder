@@ -1,0 +1,53 @@
+Error: number of bytes to encode length exceeds maximum, position: 41
+Reading from file f5.pem...
+000000  7f                           appl-cons: [ 31 ]
+000001  45                           Tag number: 69
+000002  4c                           Length: 76
+000003  46                           appl-prim: [ 6 ]
+000004  02                           Length: 2
+000005  01 01                        ..         
+000007  00                           univ-prim: EOC
+000008  00                           Length: 0
+                                                
+000009  00                           univ-prim: EOC
+00000a  00                           Length: 0
+                                                
+00000b  00                           univ-prim: EOC
+00000c  00                           Length: 0
+                                                
+00000d  00                           univ-prim: EOC
+00000e  00                           Length: 0
+                                                
+00000f  00                           univ-prim: EOC
+000010  02                           Length: 2
+000011  00 3e                        .>         
+000013  00                           univ-prim: EOC
+000014  01                           Length: 1
+000015  00                           .          
+000016  00                           univ-prim: EOC
+000017  00                           Length: 0
+                                                
+000018  30                           univ-cons: SEQUENCE
+000019  0a                           Length: 10
+00001a  40                           appl-prim: [ 0 ]
+00001b  00                           Length: 0
+                                                
+00001c  00                           univ-prim: EOC
+00001d  00                           Length: 0
+                                                
+00001e  00                           univ-prim: EOC
+00001f  00                           Length: 0
+                                                
+000020  40                           appl-prim: [ 0 ]
+000021  00                           Length: 0
+                                                
+000022  00                           univ-prim: EOC
+000023  00                           Length: 0
+                                                
+000024  00                           univ-prim: EOC
+000025  00                           Length: 0
+                                                
+000026  00                           univ-prim: EOC
+000027  00                           Length: 0
+                                                
+000028  20                           univ-cons: EOC

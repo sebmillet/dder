@@ -1,0 +1,411 @@
+Reading from file abc7.der...
+000000  30                           univ-cons: SEQUENCE
+000001  82 06 c5                     Length: 1733
+000004  30                           univ-cons: SEQUENCE
+000005  82 05 ad                     Length: 1453
+000008  a0                           cont-cons: [ 0 ]
+000009  03                           Length: 3
+00000a  02                           univ-prim: INTEGER
+00000b  01                           Length: 1
+00000c  02                           .          
+00000d  02                           univ-prim: INTEGER
+00000e  08                           Length: 8
+00000f  06 87 32 a0    53 81 1d e7   ..2.  S... 
+000017  30                           univ-cons: SEQUENCE
+000018  0d                           Length: 13
+000019  06                           univ-prim: OBJECT IDENTIFIER
+00001a  09                           Length: 9
+00001b  2a 86 48 86    f7 0d 01 01   *.H.  .... 
+000023  05                           .          
+        OID: 1.2.840.113549.1.1.5
+000024  05                           univ-prim: NULL
+000025  00                           Length: 0
+                                                
+000026  30                           univ-cons: SEQUENCE
+000027  49                           Length: 73
+000028  31                           univ-cons: SET
+000029  0b                           Length: 11
+00002a  30                           univ-cons: SEQUENCE
+00002b  09                           Length: 9
+00002c  06                           univ-prim: OBJECT IDENTIFIER
+00002d  03                           Length: 3
+00002e  55 04 06                     U..        
+        OID: 2.5.4.6
+000031  13                           univ-prim: PRINTABLESTRING
+000032  02                           Length: 2
+000033  55 53                        US         
+000035  31                           univ-cons: SET
+000036  13                           Length: 19
+000037  30                           univ-cons: SEQUENCE
+000038  11                           Length: 17
+000039  06                           univ-prim: OBJECT IDENTIFIER
+00003a  03                           Length: 3
+00003b  55 04 0a                     U..        
+        OID: 2.5.4.10
+00003e  13                           univ-prim: PRINTABLESTRING
+00003f  0a                           Length: 10
+000040  47 6f 6f 67    6c 65 20 49   Goog  le I 
+000048  6e 63                        nc         
+00004a  31                           univ-cons: SET
+00004b  25                           Length: 37
+00004c  30                           univ-cons: SEQUENCE
+00004d  23                           Length: 35
+00004e  06                           univ-prim: OBJECT IDENTIFIER
+00004f  03                           Length: 3
+000050  55 04 03                     U..        
+        OID: 2.5.4.3
+000053  13                           univ-prim: PRINTABLESTRING
+000054  1c                           Length: 28
+000055  47 6f 6f 67    6c 65 20 49   Goog  le I 
+00005d  6e 74 65 72    6e 65 74 20   nter  net  
+000065  41 75 74 68    6f 72 69 74   Auth  orit 
+00006d  79 20 47 32                  y G2       
+000071  30                           univ-cons: SEQUENCE
+000072  1e                           Length: 30
+000073  17                           univ-prim: UTCTime
+000074  0d                           Length: 13
+000075  31 35 30 31    31 34 31 33   1501  1413 
+00007d  33 30 30 39    5a            3009  Z    
+000082  17                           univ-prim: UTCTime
+000083  0d                           Length: 13
+000084  31 35 30 34    31 34 30 30   1504  1400 
+00008c  30 30 30 30    5a            0000  Z    
+000091  30                           univ-cons: SEQUENCE
+000092  66                           Length: 102
+000093  31                           univ-cons: SET
+000094  0b                           Length: 11
+000095  30                           univ-cons: SEQUENCE
+000096  09                           Length: 9
+000097  06                           univ-prim: OBJECT IDENTIFIER
+000098  03                           Length: 3
+000099  55 04 06                     U..        
+        OID: 2.5.4.6
+00009c  13                           univ-prim: PRINTABLESTRING
+00009d  02                           Length: 2
+00009e  55 53                        US         
+0000a0  31                           univ-cons: SET
+0000a1  13                           Length: 19
+0000a2  30                           univ-cons: SEQUENCE
+0000a3  11                           Length: 17
+0000a4  06                           univ-prim: OBJECT IDENTIFIER
+0000a5  03                           Length: 3
+0000a6  55 04 08                     U..        
+        OID: 2.5.4.8
+0000a9  0c                           univ-prim: UTF8String
+0000aa  0a                           Length: 10
+0000ab  43 61 6c 69    66 6f 72 6e   Cali  forn 
+0000b3  69 61                        ia         
+0000b5  31                           univ-cons: SET
+0000b6  16                           Length: 22
+0000b7  30                           univ-cons: SEQUENCE
+0000b8  14                           Length: 20
+0000b9  06                           univ-prim: OBJECT IDENTIFIER
+0000ba  03                           Length: 3
+0000bb  55 04 07                     U..        
+        OID: 2.5.4.7
+0000be  0c                           univ-prim: UTF8String
+0000bf  0d                           Length: 13
+0000c0  4d 6f 75 6e    74 61 69 6e   Moun  tain 
+0000c8  20 56 69 65    77             Vie  w    
+0000cd  31                           univ-cons: SET
+0000ce  13                           Length: 19
+0000cf  30                           univ-cons: SEQUENCE
+0000d0  11                           Length: 17
+0000d1  06                           univ-prim: OBJECT IDENTIFIER
+0000d2  03                           Length: 3
+0000d3  55 04 0a                     U..        
+        OID: 2.5.4.10
+0000d6  0c                           univ-prim: UTF8String
+0000d7  0a                           Length: 10
+0000d8  47 6f 6f 67    6c 65 20 49   Goog  le I 
+0000e0  6e 63                        nc         
+0000e2  31                           univ-cons: SET
+0000e3  15                           Length: 21
+0000e4  30                           univ-cons: SEQUENCE
+0000e5  13                           Length: 19
+0000e6  06                           univ-prim: OBJECT IDENTIFIER
+0000e7  03                           Length: 3
+0000e8  55 04 03                     U..        
+        OID: 2.5.4.3
+0000eb  0c                           univ-prim: UTF8String
+0000ec  0c                           Length: 12
+0000ed  2a 2e 67 6f    6f 67 6c 65   *.go  ogle 
+0000f5  2e 63 6f 6d                  .com       
+0000f9  30                           univ-cons: SEQUENCE
+0000fa  59                           Length: 89
+0000fb  30                           univ-cons: SEQUENCE
+0000fc  13                           Length: 19
+0000fd  06                           univ-prim: OBJECT IDENTIFIER
+0000fe  07                           Length: 7
+0000ff  2a 86 48 ce    3d 02 01      *.H.  =..  
+        OID: 1.2.840.10045.2.1
+000106  06                           univ-prim: OBJECT IDENTIFIER
+000107  08                           Length: 8
+000108  2a 86 48 ce    3d 03 01 07   *.H.  =... 
+        OID: 1.2.840.10045.3.1.7
+000110  03                           univ-prim: BIT STRING
+000111  42                           Length: 66
+000112  00 04 96 b0    fa 07 db 42   ....  ...B 
+00011a  76 29 46 29    26 e9 60 8b   v)F)  &.`. 
+000122  3b b1 84 f6    14 3e 2f 71   ;...  .>/q 
+00012a  ce 42 00 14    50 8b 9b 9b   .B..  P... 
+000132  06 21 f2 e7    b5 61 0e 72   .!..  .a.r 
+00013a  38 6c b3 fb    cc 22 41 03   8l..  ."A. 
+000142  03 57 ac ff    1c aa b6 e4   .W..  .... 
+00014a  64 a9 7b 2b    04 91 88 de   d.{+  .... 
+000152  06 05                        ..         
+000154  a3                           cont-cons: [ 3 ]
+000155  82 04 5d                     Length: 1117
+000158  30                           univ-cons: SEQUENCE
+000159  82 04 59                     Length: 1113
+00015c  30                           univ-cons: SEQUENCE
+00015d  1d                           Length: 29
+00015e  06                           univ-prim: OBJECT IDENTIFIER
+00015f  03                           Length: 3
+000160  55 1d 25                     U.%        
+        OID: 2.5.29.37
+000163  04                           univ-prim: OCTET STRING
+000164  16                           Length: 22
+000165  30 14 06 08    2b 06 01 05   0...  +... 
+00016d  05 07 03 01    06 08 2b 06   ....  ..+. 
+000175  01 05 05 07    03 02         ....  ..   
+00017b  30                           univ-cons: SEQUENCE
+00017c  82 03 26                     Length: 806
+00017f  06                           univ-prim: OBJECT IDENTIFIER
+000180  03                           Length: 3
+000181  55 1d 11                     U..        
+        OID: 2.5.29.17
+000184  04                           univ-prim: OCTET STRING
+000185  82 03 1d                     Length: 797
+000188  30 82 03 19    82 0c 2a 2e   0...  ..*. 
+000190  67 6f 6f 67    6c 65 2e 63   goog  le.c 
+000198  6f 6d 82 0d    2a 2e 61 6e   om..  *.an 
+0001a0  64 72 6f 69    64 2e 63 6f   droi  d.co 
+0001a8  6d 82 16 2a    2e 61 70 70   m..*  .app 
+0001b0  65 6e 67 69    6e 65 2e 67   engi  ne.g 
+0001b8  6f 6f 67 6c    65 2e 63 6f   oogl  e.co 
+0001c0  6d 82 12 2a    2e 63 6c 6f   m..*  .clo 
+0001c8  75 64 2e 67    6f 6f 67 6c   ud.g  oogl 
+0001d0  65 2e 63 6f    6d 82 16 2a   e.co  m..* 
+0001d8  2e 67 6f 6f    67 6c 65 2d   .goo  gle- 
+0001e0  61 6e 61 6c    79 74 69 63   anal  ytic 
+0001e8  73 2e 63 6f    6d 82 0b 2a   s.co  m..* 
+0001f0  2e 67 6f 6f    67 6c 65 2e   .goo  gle. 
+0001f8  63 61 82 0b    2a 2e 67 6f   ca..  *.go 
+000200  6f 67 6c 65    2e 63 6c 82   ogle  .cl. 
+000208  0e 2a 2e 67    6f 6f 67 6c   .*.g  oogl 
+000210  65 2e 63 6f    2e 69 6e 82   e.co  .in. 
+000218  0e 2a 2e 67    6f 6f 67 6c   .*.g  oogl 
+000220  65 2e 63 6f    2e 6a 70 82   e.co  .jp. 
+000228  0e 2a 2e 67    6f 6f 67 6c   .*.g  oogl 
+000230  65 2e 63 6f    2e 75 6b 82   e.co  .uk. 
+000238  0f 2a 2e 67    6f 6f 67 6c   .*.g  oogl 
+000240  65 2e 63 6f    6d 2e 61 72   e.co  m.ar 
+000248  82 0f 2a 2e    67 6f 6f 67   ..*.  goog 
+000250  6c 65 2e 63    6f 6d 2e 61   le.c  om.a 
+000258  75 82 0f 2a    2e 67 6f 6f   u..*  .goo 
+000260  67 6c 65 2e    63 6f 6d 2e   gle.  com. 
+000268  62 72 82 0f    2a 2e 67 6f   br..  *.go 
+000270  6f 67 6c 65    2e 63 6f 6d   ogle  .com 
+000278  2e 63 6f 82    0f 2a 2e 67   .co.  .*.g 
+000280  6f 6f 67 6c    65 2e 63 6f   oogl  e.co 
+000288  6d 2e 6d 78    82 0f 2a 2e   m.mx  ..*. 
+000290  67 6f 6f 67    6c 65 2e 63   goog  le.c 
+000298  6f 6d 2e 74    72 82 0f 2a   om.t  r..* 
+0002a0  2e 67 6f 6f    67 6c 65 2e   .goo  gle. 
+0002a8  63 6f 6d 2e    76 6e 82 0b   com.  vn.. 
+0002b0  2a 2e 67 6f    6f 67 6c 65   *.go  ogle 
+0002b8  2e 64 65 82    0b 2a 2e 67   .de.  .*.g 
+0002c0  6f 6f 67 6c    65 2e 65 73   oogl  e.es 
+0002c8  82 0b 2a 2e    67 6f 6f 67   ..*.  goog 
+0002d0  6c 65 2e 66    72 82 0b 2a   le.f  r..* 
+0002d8  2e 67 6f 6f    67 6c 65 2e   .goo  gle. 
+0002e0  68 75 82 0b    2a 2e 67 6f   hu..  *.go 
+0002e8  6f 67 6c 65    2e 69 74 82   ogle  .it. 
+0002f0  0b 2a 2e 67    6f 6f 67 6c   .*.g  oogl 
+0002f8  65 2e 6e 6c    82 0b 2a 2e   e.nl  ..*. 
+000300  67 6f 6f 67    6c 65 2e 70   goog  le.p 
+000308  6c 82 0b 2a    2e 67 6f 6f   l..*  .goo 
+000310  67 6c 65 2e    70 74 82 12   gle.  pt.. 
+000318  2a 2e 67 6f    6f 67 6c 65   *.go  ogle 
+000320  61 64 61 70    69 73 2e 63   adap  is.c 
+000328  6f 6d 82 0f    2a 2e 67 6f   om..  *.go 
+000330  6f 67 6c 65    61 70 69 73   ogle  apis 
+000338  2e 63 6e 82    14 2a 2e 67   .cn.  .*.g 
+000340  6f 6f 67 6c    65 63 6f 6d   oogl  ecom 
+000348  6d 65 72 63    65 2e 63 6f   merc  e.co 
+000350  6d 82 11 2a    2e 67 6f 6f   m..*  .goo 
+000358  67 6c 65 76    69 64 65 6f   glev  ideo 
+000360  2e 63 6f 6d    82 0c 2a 2e   .com  ..*. 
+000368  67 73 74 61    74 69 63 2e   gsta  tic. 
+000370  63 6e 82 0d    2a 2e 67 73   cn..  *.gs 
+000378  74 61 74 69    63 2e 63 6f   tati  c.co 
+000380  6d 82 0a 2a    2e 67 76 74   m..*  .gvt 
+000388  31 2e 63 6f    6d 82 0a 2a   1.co  m..* 
+000390  2e 67 76 74    32 2e 63 6f   .gvt  2.co 
+000398  6d 82 14 2a    2e 6d 65 74   m..*  .met 
+0003a0  72 69 63 2e    67 73 74 61   ric.  gsta 
+0003a8  74 69 63 2e    63 6f 6d 82   tic.  com. 
+0003b0  0c 2a 2e 75    72 63 68 69   .*.u  rchi 
+0003b8  6e 2e 63 6f    6d 82 10 2a   n.co  m..* 
+0003c0  2e 75 72 6c    2e 67 6f 6f   .url  .goo 
+0003c8  67 6c 65 2e    63 6f 6d 82   gle.  com. 
+0003d0  16 2a 2e 79    6f 75 74 75   .*.y  outu 
+0003d8  62 65 2d 6e    6f 63 6f 6f   be-n  ocoo 
+0003e0  6b 69 65 2e    63 6f 6d 82   kie.  com. 
+0003e8  0d 2a 2e 79    6f 75 74 75   .*.y  outu 
+0003f0  62 65 2e 63    6f 6d 82 16   be.c  om.. 
+0003f8  2a 2e 79 6f    75 74 75 62   *.yo  utub 
+000400  65 65 64 75    63 61 74 69   eedu  cati 
+000408  6f 6e 2e 63    6f 6d 82 0b   on.c  om.. 
+000410  2a 2e 79 74    69 6d 67 2e   *.yt  img. 
+000418  63 6f 6d 82    0b 61 6e 64   com.  .and 
+000420  72 6f 69 64    2e 63 6f 6d   roid  .com 
+000428  82 04 67 2e    63 6f 82 06   ..g.  co.. 
+000430  67 6f 6f 2e    67 6c 82 14   goo.  gl.. 
+000438  67 6f 6f 67    6c 65 2d 61   goog  le-a 
+000440  6e 61 6c 79    74 69 63 73   naly  tics 
+000448  2e 63 6f 6d    82 0a 67 6f   .com  ..go 
+000450  6f 67 6c 65    2e 63 6f 6d   ogle  .com 
+000458  82 12 67 6f    6f 67 6c 65   ..go  ogle 
+000460  63 6f 6d 6d    65 72 63 65   comm  erce 
+000468  2e 63 6f 6d    82 0a 75 72   .com  ..ur 
+000470  63 68 69 6e    2e 63 6f 6d   chin  .com 
+000478  82 08 79 6f    75 74 75 2e   ..yo  utu. 
+000480  62 65 82 0b    79 6f 75 74   be..  yout 
+000488  75 62 65 2e    63 6f 6d 82   ube.  com. 
+000490  14 79 6f 75    74 75 62 65   .you  tube 
+000498  65 64 75 63    61 74 69 6f   educ  atio 
+0004a0  6e 2e 63 6f    6d            n.co  m    
+0004a5  30                           univ-cons: SEQUENCE
+0004a6  0b                           Length: 11
+0004a7  06                           univ-prim: OBJECT IDENTIFIER
+0004a8  03                           Length: 3
+0004a9  55 1d 0f                     U..        
+        OID: 2.5.29.15
+0004ac  04                           univ-prim: OCTET STRING
+0004ad  04                           Length: 4
+0004ae  03 02 07 80                  ....       
+0004b2  30                           univ-cons: SEQUENCE
+0004b3  68                           Length: 104
+0004b4  06                           univ-prim: OBJECT IDENTIFIER
+0004b5  08                           Length: 8
+0004b6  2b 06 01 05    05 07 01 01   +...  .... 
+        OID: 1.3.6.1.5.5.7.1.1
+0004be  04                           univ-prim: OCTET STRING
+0004bf  5c                           Length: 92
+0004c0  30 5a 30 2b    06 08 2b 06   0Z0+  ..+. 
+0004c8  01 05 05 07    30 02 86 1f   ....  0... 
+0004d0  68 74 74 70    3a 2f 2f 70   http  ://p 
+0004d8  6b 69 2e 67    6f 6f 67 6c   ki.g  oogl 
+0004e0  65 2e 63 6f    6d 2f 47 49   e.co  m/GI 
+0004e8  41 47 32 2e    63 72 74 30   AG2.  crt0 
+0004f0  2b 06 08 2b    06 01 05 05   +..+  .... 
+0004f8  07 30 01 86    1f 68 74 74   .0..  .htt 
+000500  70 3a 2f 2f    63 6c 69 65   p://  clie 
+000508  6e 74 73 31    2e 67 6f 6f   nts1  .goo 
+000510  67 6c 65 2e    63 6f 6d 2f   gle.  com/ 
+000518  6f 63 73 70                  ocsp       
+00051c  30                           univ-cons: SEQUENCE
+00051d  1d                           Length: 29
+00051e  06                           univ-prim: OBJECT IDENTIFIER
+00051f  03                           Length: 3
+000520  55 1d 0e                     U..        
+        OID: 2.5.29.14
+000523  04                           univ-prim: OCTET STRING
+000524  16                           Length: 22
+000525  04 14 58 be    c5 75 00 c7   ..X.  .u.. 
+00052d  d3 a0 84 c7    87 c2 33 fa   ....  ..3. 
+000535  a4 e4 f0 1f    c9 28         ....  .(   
+00053b  30                           univ-cons: SEQUENCE
+00053c  0c                           Length: 12
+00053d  06                           univ-prim: OBJECT IDENTIFIER
+00053e  03                           Length: 3
+00053f  55 1d 13                     U..        
+        OID: 2.5.29.19
+000542  01                           univ-prim: BOOLEAN
+000543  01                           Length: 1
+000544  ff                           .          
+000545  04                           univ-prim: OCTET STRING
+000546  02                           Length: 2
+000547  30 00                        0.         
+000549  30                           univ-cons: SEQUENCE
+00054a  1f                           Length: 31
+00054b  06                           univ-prim: OBJECT IDENTIFIER
+00054c  03                           Length: 3
+00054d  55 1d 23                     U.#        
+        OID: 2.5.29.35
+000550  04                           univ-prim: OCTET STRING
+000551  18                           Length: 24
+000552  30 16 80 14    4a dd 06 16   0...  J... 
+00055a  1b bc f6 68    b5 76 f5 81   ...h  .v.. 
+000562  b6 bb 62 1a    ba 5a 81 2f   ..b.  .Z./ 
+00056a  30                           univ-cons: SEQUENCE
+00056b  17                           Length: 23
+00056c  06                           univ-prim: OBJECT IDENTIFIER
+00056d  03                           Length: 3
+00056e  55 1d 20                     U.         
+        OID: 2.5.29.32
+000571  04                           univ-prim: OCTET STRING
+000572  10                           Length: 16
+000573  30 0e 30 0c    06 0a 2b 06   0.0.  ..+. 
+00057b  01 04 01 d6    79 02 05 01   ....  y... 
+000583  30                           univ-cons: SEQUENCE
+000584  30                           Length: 48
+000585  06                           univ-prim: OBJECT IDENTIFIER
+000586  03                           Length: 3
+000587  55 1d 1f                     U..        
+        OID: 2.5.29.31
+00058a  04                           univ-prim: OCTET STRING
+00058b  29                           Length: 41
+00058c  30 27 30 25    a0 23 a0 21   0'0%  .#.! 
+000594  86 1f 68 74    74 70 3a 2f   ..ht  tp:/ 
+00059c  2f 70 6b 69    2e 67 6f 6f   /pki  .goo 
+0005a4  67 6c 65 2e    63 6f 6d 2f   gle.  com/ 
+0005ac  47 49 41 47    32 2e 63 72   GIAG  2.cr 
+0005b4  6c                           l          
+0005b5  30                           univ-cons: SEQUENCE
+0005b6  0d                           Length: 13
+0005b7  06                           univ-prim: OBJECT IDENTIFIER
+0005b8  09                           Length: 9
+0005b9  2a 86 48 86    f7 0d 01 01   *.H.  .... 
+0005c1  05                           .          
+        OID: 1.2.840.113549.1.1.5
+0005c2  05                           univ-prim: NULL
+0005c3  00                           Length: 0
+                                                
+0005c4  03                           univ-prim: BIT STRING
+0005c5  82 01 01                     Length: 257
+0005c8  00 00 2f 92    05 9f 3e 31   ../.  ..>1 
+0005d0  4d 6c 45 11    de 9b 0d 4e   MlE.  ...N 
+0005d8  d8 85 48 5b    c9 f0 7a 1a   ..H[  ..z. 
+0005e0  d8 12 5d 00    58 96 f1 6b   ..].  X..k 
+0005e8  6f 50 6a 26    7b 85 a4 97   oPj&  {... 
+0005f0  16 7e 38 67    c8 3b 76 04   .~8g  .;v. 
+0005f8  49 dd 7f fd    6d 9e 74 c4   I...  m.t. 
+000600  b5 41 f0 60    fa 9f 9a 4a   .A.`  ...J 
+000608  43 e6 07 51    c6 b5 58 b4   C..Q  ..X. 
+000610  8d ef e8 57    0b ca 15 99   ...W  .... 
+000618  6f 31 d5 da    aa cd 21 a5   o1..  ..!. 
+000620  72 e7 5d 19    04 98 84 c8   r.].  .... 
+000628  93 06 39 4e    47 8f 77 37   ..9N  G.w7 
+000630  e7 87 4e 6f    4a 8d 92 b8   ..No  J... 
+000638  e1 f5 68 c6    04 bd 9d 83   ..h.  .... 
+000640  a3 a2 65 47    99 26 86 2f   ..eG  .&./ 
+000648  77 25 96 75    7f 1b 1d 60   w%.u  ...` 
+000650  3d 17 8e 19    f1 9a 1b 73   =...  ...s 
+000658  a4 7c 13 88    d3 18 0a 1d   .|..  .... 
+000660  6b 67 fe 70    1b b2 42 c0   kg.p  ..B. 
+000668  5e d6 71 7b    2f 9c 57 76   ^.q{  /.Wv 
+000670  90 63 fe 89    a8 8c 21 23   .c..  ..!# 
+000678  8f 98 8e de    6f 44 8f 1a   ....  oD.. 
+000680  0a 72 33 38    fe 20 55 03   .r38  . U. 
+000688  89 ce 01 63    86 7b 7c 91   ...c  .{|. 
+000690  a6 75 f9 bb    9a 31 a1 de   .u..  .1.. 
+000698  2b 3d eb 82    89 0c a4 fd   +=..  .... 
+0006a0  bc 2f b1 0a    48 83 03 df   ./..  H... 
+0006a8  3d c6 fd 03    6e 4c bd 15   =...  nL.. 
+0006b0  91 9d b2 63    c5 6e 19 d1   ...c  .n.. 
+0006b8  3a e6 89 9c    8a b9 02 b0   :...  .... 
+0006c0  79 4f c6 93    c1 b8 23 48   yO..  ..#H 
+0006c8  d4                           .          

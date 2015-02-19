@@ -1,0 +1,101 @@
+Reading from file abc5.der...
+000000  30                           univ-cons: SEQUENCE
+000001  82 02 5e                     Length: 606
+000004  02                           univ-prim: INTEGER
+000005  01                           Length: 1
+000006  00                           .          
+000007  02                           univ-prim: INTEGER
+000008  81 81                        Length: 129
+00000a  00 c2 00 1c    f8 f3 8a c9   ....  .... 
+000012  11 5d 47 0a    50 82 e0 96   .]G.  P... 
+00001a  05 e8 5a 31    57 26 54 f6   ..Z1  W&T. 
+000022  59 49 99 3f    b0 4c 74 df   YI.?  .Lt. 
+00002a  fe a2 16 bf    a3 d3 87 33   ....  ...3 
+000032  89 0a 9f 49    2d 10 a8 d8   ...I  -... 
+00003a  01 44 c1 fa    b7 fa e4 af   .D..  .... 
+000042  46 62 21 6a    66 1f 87 d2   Fb!j  f... 
+00004a  60 1d 40 65    bd 8b 09 c3   `.@e  .... 
+000052  c9 b2 21 7f    fb e5 65 e4   ..!.  ..e. 
+00005a  95 d0 70 8c    ef 61 8b d8   ..p.  .a.. 
+000062  40 bd 65 be    26 4f 8c 5d   @.e.  &O.] 
+00006a  ee b1 da 01    5a 8a f4 c9   ....  Z... 
+000072  11 bf 4e fc    25 00 0f 10   ..N.  %... 
+00007a  d7 1a 83 41    6c e8 35 57   ...A  l.5W 
+000082  10 cc 95 2d    e7 cb 46 05   ...-  ..F. 
+00008a  17                           .          
+00008b  02                           univ-prim: INTEGER
+00008c  03                           Length: 3
+00008d  01 00 01                     ...        
+000090  02                           univ-prim: INTEGER
+000091  81 80                        Length: 128
+000093  65 d6 af 5e    d4 61 ff 88   e..^  .a.. 
+00009b  d9 01 68 dd    b8 c6 72 9a   ..h.  ..r. 
+0000a3  a9 4d 67 67    4b 5d 00 71   .Mgg  K].q 
+0000ab  00 9c ac fd    3c 35 82 3c   ....  <5.< 
+0000b3  66 14 31 07    ac 0b e6 36   f.1.  ...6 
+0000bb  c3 57 b8 8f    2a 96 a7 c5   .W..  *... 
+0000c3  8a b5 95 8a    ac ef 0d 3f   ....  ...? 
+0000cb  92 55 de 47    bb b7 8d ec   .U.G  .... 
+0000d3  32 91 64 0c    af 73 73 0f   2.d.  .ss. 
+0000db  0b d2 85 a0    10 74 3a 10   ....  .t:. 
+0000e3  e1 4a df 58    c3 ca a9 16   .J.X  .... 
+0000eb  19 86 ed 5b    14 00 e7 bd   ...[  .... 
+0000f3  40 e5 f5 52    76 f3 1b bd   @..R  v... 
+0000fb  ae e3 a6 9f    6e a3 de a3   ....  n... 
+000103  ba cf 44 a4    30 ca 0c 9b   ..D.  0... 
+00010b  ee be 61 1e    8f c2 7e a9   ..a.  ..~. 
+000113  02                           univ-prim: INTEGER
+000114  41                           Length: 65
+000115  00 e1 77 c5    b4 61 64 0d   ..w.  .ad. 
+00011d  3a 9c f8 76    01 f4 ee e6   :..v  .... 
+000125  16 f8 f5 5d    5e 98 6a 09   ...]  ^.j. 
+00012d  9e 68 3a 04    43 93 05 30   .h:.  C..0 
+000135  49 b8 b5 41    55 e3 72 b3   I..A  U.r. 
+00013d  4d a1 31 52    57 99 72 17   M.1R  W.r. 
+000145  32 97 b9 99    57 71 cc a7   2...  Wq.. 
+00014d  36 af b5 6d    1b 03 3e ab   6..m  ..>. 
+000155  1d                           .          
+000156  02                           univ-prim: INTEGER
+000157  41                           Length: 65
+000158  00 dc 45 78    1c f5 c4 24   ..Ex  ...$ 
+000160  d5 7f ee 16    1b cb d6 46   ....  ...F 
+000168  64 44 38 b1    9e 4a 5a 5c   dD8.  .JZ\ 
+000170  7c da ac 62    b2 6c e8 3e   |..b  .l.> 
+000178  4d da ad 7b    0e ac f5 52   M..{  ...R 
+000180  69 db c6 65    79 fd 86 b1   i..e  y... 
+000188  b0 67 f2 81    66 a8 67 97   .g..  f.g. 
+000190  10 c2 27 e9    5c c6 f3 06   ..'.  \... 
+000198  c3                           .          
+000199  02                           univ-prim: INTEGER
+00019a  41                           Length: 65
+00019b  00 dd a2 a6    57 2d d1 73   ....  W-.s 
+0001a3  6b a5 b8 5c    10 8a 5c 79   k..\  ..\y 
+0001ab  14 26 00 d4    9a d3 8a 91   .&..  .... 
+0001b3  10 05 76 da    90 2e aa d0   ..v.  .... 
+0001bb  0f f8 21 3d    2b 97 dd 3d   ..!=  +..= 
+0001c3  c2 d6 ec ab    fb ee 9c 07   ....  .... 
+0001cb  8f b5 34 3e    37 86 67 5e   ..4>  7.g^ 
+0001d3  0c 54 e7 2c    6c 7c 61 13   .T.,  l|a. 
+0001db  45                           E          
+0001dc  02                           univ-prim: INTEGER
+0001dd  41                           Length: 65
+0001de  00 c9 97 3e    8d 6a 93 df   ...>  .j.. 
+0001e6  8e 11 ee 09    07 d9 6e ba   ....  ..n. 
+0001ee  af 8b 0c 43    ea 75 6b eb   ...C  .uk. 
+0001f6  97 4c de 55    d9 ab f8 85   .L.U  .... 
+0001fe  04 e5 ac bd    a1 b9 c3 2f   ....  .../ 
+000206  70 b8 76 03    6b 39 0f 2b   p.v.  k9.+ 
+00020e  d2 21 df fc    73 c2 8e 43   .!..  s..C 
+000216  e0 4f 81 0d    7f 1e 89 4e   .O..  ...N 
+00021e  d7                           .          
+00021f  02                           univ-prim: INTEGER
+000220  41                           Length: 65
+000221  00 b1 16 82    8b ce f8 c2   ....  .... 
+000229  9b 52 94 ae    2b 82 a2 10   .R..  +... 
+000231  56 d8 a5 bb    85 50 52 e7   V...  .PR. 
+000239  00 2b f8 cb    50 1c f1 c6   .+..  P... 
+000241  8a 5a c0 00    6f 7c 6d d3   .Z..  o|m. 
+000249  50 fc 96 a5    e6 ee 81 b8   P...  .... 
+000251  73 2e ff d4    4c 18 77 68   s...  L.wh 
+000259  7d 44 fd 8b    a6 fc eb 5a   }D..  ...Z 
+000261  14                           .          

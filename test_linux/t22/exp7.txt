@@ -1,0 +1,108 @@
+Reading from file f7.pem...
+000000  2f                           00 1 01111
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  15 -> (reserved)
+000001  2a                           0 0101010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 42
+000002  20                           00 1 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   0 -> EOC
+000003  64                           0 1100100
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 100
+000004  64                           01 1 00100
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   4 -> [ 4 ]
+000005  65                           0 1100101
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 101
+000006  72                           01 1 10010
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  18 -> [ 18 ]
+000007  2e                           0 0101110
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 46
+000008  63                           01 1 00011
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   3 -> [ 3 ]
+000009  20                           0 0100000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 32
+00000a  2a                           00 1 01010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  10 -> ENUMERATED
+00000b  2f                           0 0101111
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 47
+00000c  0a                           00 0 01010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:  10 -> ENUMERATED
+00000d  0a                           0 0001010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 10
+00000e  2f 2a 20 50    61 72 73 65   /* P  arse 
+000016  20 64                         d         
+000018  65                           01 1 00101
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   5 -> [ 5 ]
+000019  72                           0 1110010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 114
+00001a  20                           00 1 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   0 -> EOC
+00001b  66                           0 1100110
+         Error: inconsistent items length, position: 85
+                            ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 102
+00001c  69                           01 1 01001
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   9 -> [ 9 ]
+00001d  6c                           0 1101100
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 108
+00001e  65                           01 1 00101
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   5 -> [ 5 ]
+00001f  73                           0 1110011
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 115
+000020  20                           00 1 00000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:   0 -> EOC
+000021  2a                           0 0101010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 42
+000022  2f                           00 1 01111
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  15 -> (reserved)
+000023  0a                           0 0001010
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 10
+000024  0a                           00 0 01010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:  10 -> ENUMERATED
+000025  2f                           0 0101111
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 47
+000026  2a 20 53 c3    a9 62 61 73   * S.  .bas 
+00002e  74 69 65 6e    20 4d 69 6c   tien   Mil 
+000036  6c 65 74 2c    20 46 65 62   let,   Feb 
+00003e  72 75 61 72    79 20 32 30   ruar  y 20 
+000046  31 35 20 2a    2f 0a 0a 2f   15 *  /../ 
+00004e  2a 23 64 65    66 69 6e      *#de  fin  

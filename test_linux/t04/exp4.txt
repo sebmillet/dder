@@ -1,0 +1,17 @@
+Reading from file f4.der...
+000000  3f                           00 1 11111
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  31 -> (long form)
+000001  cd 48                        Tag number: 9928
+000003  81 06                        1 0000001
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 1, value: 6
+000005  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000006  04                           0 0000100
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 4
+000007  aa aa aa aa                  ....       
