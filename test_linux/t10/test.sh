@@ -1,4 +1,4 @@
 #!/bin/sh
 
-../generic_multiple.sh "" 5 "dder test RSA" "rsa" "tmp-o" "exp" ".der" ".txt" $1
+../generic_multiple.sh "-v -t -w 8" 5 "dder test RSA" "rsa" "tmp-o" "exp" ".der" ".txt" $1
 

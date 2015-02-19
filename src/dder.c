@@ -111,8 +111,9 @@ Program options from the command line
 */
 
 int opt_verbose = 0;
-int opt_hex = 0;
-long unsigned opt_width = 8;
+int opt_hex = 1;
+long unsigned opt_width = 16;
+int opt_compact = 1;
 
 
 /*
@@ -326,7 +327,12 @@ void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag
 	}
 }
 
-int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *tag_class, int *tag_PC, int *tag_number)
+	/* Includes the initial byte of number 31 */
+#define TAG_U_LONG_FORMAT_MAX_BYTES 6
+	/* Includes the initial byte that indicates the number of bytes used to encode length */
+#define LENGTH_MULTIBYTES_MAX_BYTES 7
+
+int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length, int *tag_class, int *tag_PC, int *tag_number, unsigned long *length)
 {
 	int c;
 	size_t old_offset = *offset;
@@ -344,9 +350,11 @@ int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *t
 	char tag_name[100];
 	get_tag_name(tag_name, sizeof(tag_name), *tag_class, *tag_number);
 
-	char s[1];
-	s[0] = (char)c;
-	out_sequence(old_offset, s, 1, 0);
+	char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];
+
+	buf[0] = (char)c;
+	if (!opt_compact)
+		out_sequence(old_offset, buf, 1, 0);
 
 	if (opt_verbose) {
 		char b[9];
@@ -358,13 +366,14 @@ int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *t
 		out("   ^       Tag type:   %3i -> %s\n", *tag_PC, PCs[*tag_PC]);
 		out_sequence(0, NULL, 0, 0);
 		out("     ^^^^^ Tag number: %3i -> %s\n", *tag_number, tag_name);
-	} else {
+	} else if (!opt_compact) {
 		out("%s-%s: %s\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name);
 	}
 
+	int pos = 0;
+
 	if (*tag_number == TAG_U_LONG_FORMAT) {
-		char buf[5];
-		int pos = 0;
+		pos = 1;
 
 		old_offset = *offset;
 		do {
@@ -372,7 +381,7 @@ int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *t
 				return 0;
 			buf[pos] = (char)c;
 			--(*remaining_length);
-		} while (buf[pos] & 0x80 && (unsigned)++pos < sizeof(buf));
+		} while (buf[pos] & 0x80 && ++pos < TAG_U_LONG_FORMAT_MAX_BYTES);
 		if (pos == sizeof(buf)) {
 			myfclose(F, "Tag number too big", old_offset);
 			return 0;
@@ -385,8 +394,8 @@ int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *t
 		unsigned bm1;
 		unsigned v0;
 		long unsigned value = 0;
-		for (rev = pos; rev >= 0; --rev) {
-			if (rev == 0)
+		for (rev = pos; rev >= 1; --rev) {
+			if (rev == 1)
 				bm1 = 0;
 			else
 				bm1 = (unsigned)buf[rev - 1];
@@ -399,51 +408,53 @@ int parse_identifier(FILE **F, size_t *offset, ssize_t *remaining_length, int *t
 			++shift;
 		}
 		*tag_number = (int)value;
-		out_sequence(old_offset, buf, (unsigned long)pos + 1, 0);
-		out("Tag number: %i\n", *tag_number);
+		if (!opt_compact) {
+			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0);
+			out("Tag number: %i\n", *tag_number);
+		}
 	}
 
 	--(*remaining_length);
 
-	return check_position(F, *offset, *remaining_length, 0);
-}
+	if (!check_position(F, *offset, *remaining_length, 0))
+		return 0;
 
-int parse_length(FILE **F, size_t *offset, ssize_t *remaining_length, unsigned long *length)
-{
-	char buf[7];
+/*  char bl[LENGTH_MULTIBYTES_MAX_BYTES];*/
+	char *bl = buf + pos + 1;
 
-	int c;
-	size_t old_offset = *offset;
-	if ((c = myfgetc(F, offset)) == EOF)
+	int cc;
+	size_t old_loffset = *offset;
+	if ((cc = myfgetc(F, offset)) == EOF)
 		return 0;
 	int n = 0;
-	buf[0] = (char)c;
-	*length = (unsigned long)c;
-	int length_type = ((c & 0x80) >> 7);
-	if (c & 0x80) {
-		n = (c & 0x7F);
-		if ((unsigned int)n > sizeof(buf) - 1) {
-			myfclose(F, "number of bytes to encode length exceeds maximum", old_offset);
+	bl[0] = (char)cc;
+	*length = (unsigned long)cc;
+	int length_type = ((cc & 0x80) >> 7);
+	if (cc & 0x80) {
+		n = (cc & 0x7F);
+		if (n > LENGTH_MULTIBYTES_MAX_BYTES - 1) {
+			myfclose(F, "number of bytes to encode length exceeds maximum", old_loffset);
 			return 0;
 		} else if (n == 0) {
-			myfclose(F, "number of bytes to encode length cannot be null", old_offset);
+			myfclose(F, "number of bytes to encode length cannot be null", old_loffset);
 			return 0;
 		}
 		*length = 0;
 		int i;
 		for (i = 1; i <= n; ++i) {
-			if ((c = myfgetc(F, offset)) == EOF)
+			if ((cc = myfgetc(F, offset)) == EOF)
 				return 0;
 			(*length) <<= 8;
-			(*length) += (unsigned int)c;
-			buf[i] = (char)c;
+			(*length) += (unsigned int)cc;
+			bl[i] = (char)cc;
 		}
 	}
-	out_sequence(old_offset, buf, (unsigned long)n + 1, 0);
+	if (!opt_compact)
+		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0);
 
 	if (opt_verbose) {
 		char b[9];
-		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)(buf[0]));
+		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)(bl[0]));
 		out("%c %c%c%c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
 		out_sequence(0, NULL, 0, 0);
 		out("^          Len type: %i -> %s\n", length_type, length_coding_types[length_type]);
@@ -454,8 +465,13 @@ int parse_length(FILE **F, size_t *offset, ssize_t *remaining_length, unsigned l
 			out("  ^^^^^^^  Len nb bytes: %i, value: %lu", n, *length);
 		}
 		out("\n");
-	} else {
+	} else if (!opt_compact) {
 		out("Length: %lu\n", *length);
+	}
+
+	if (opt_compact) {
+		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0);
+		out("%s-%s: %s, len: %lu\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name, *length);
 	}
 
 	*remaining_length -= (n + 1);
@@ -516,11 +532,9 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 	int tag_class;
 	int tag_PC;
 	int tag_number;
-
-	if (!parse_identifier(F, offset, remaining_length, &tag_class, &tag_PC, &tag_number))
-		return;
 	unsigned long length;
-	if (!parse_length(F, offset, remaining_length, &length))
+
+	if (!parse_identifier_length(F, offset, remaining_length, &tag_class, &tag_PC, &tag_number, &length))
 		return;
 
 	if (tag_PC == TAG_TYPE_CONSTRUCTED) {
@@ -584,7 +598,7 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 
 void opt_check(int n, const char *opt)
 {
-	static int defined_options[3] = {0, 0, 0};
+	static int defined_options[4] = {0, 0, 0};
 
 	if (defined_options[n]) {
 		out_err("Option %s already set\n", opt);
@@ -597,6 +611,10 @@ int main(int argc, char **argv)
 {
 	FILE *F = NULL;
 
+	int opt_v = 0;
+	int opt_vv = 0;
+	int opt_t = 0;
+
 	int a = 1;
 	while (a >= 1 && a < argc) {
 		if (!strcasecmp(argv[a], "-help")) {
@@ -605,13 +623,21 @@ int main(int argc, char **argv)
 			version();
 		} else if (!strcasecmp(argv[a], "-v")) {
 			opt_check(0, argv[a]);
-			opt_verbose = 1;
-			opt_hex = 1;
-		} else if (!strcasecmp(argv[a], "-hex")) {
+			opt_v = 1;
+			opt_verbose = 0;
+			opt_compact = 0;
+		} else if (!strcasecmp(argv[a], "-vv")) {
 			opt_check(1, argv[a]);
+			opt_vv = 1;
+			opt_verbose = 1;
+			opt_compact = 0;
 			opt_hex = 1;
-		} else if (!strcasecmp(argv[a], "-width")) {
+		} else if (!strcasecmp(argv[a], "-t")) {
 			opt_check(2, argv[a]);
+			opt_t = 1;
+			opt_hex = 0;
+		} else if (!strcasecmp(argv[a], "-w")) {
+			opt_check(3, argv[a]);
 			if (++a >= argc) {
 				a = -(a - 1);
 			} else {
@@ -644,6 +670,12 @@ int main(int argc, char **argv)
 		;
 	} else if (a < argc - 1) {
 		out_err("Trailing parameter(s)\n");
+		a = 0;
+	} else if (opt_vv && opt_t) {
+		out_err("incompatible options -vv and -t\n");
+		a = 0;
+	} else if (opt_v && opt_vv) {
+		out_err("incompatible options -vv and -v\n");
 		a = 0;
 	} else if (a >= argc) {
 		out("Reading from standard input...\n");
