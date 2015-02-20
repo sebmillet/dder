@@ -1,0 +1,6 @@
+Reading from file f3.der...
+000000  30 81 0e                     univ-cons: SEQUENCE, len: 14
+000003  30 00                        univ-cons: SEQUENCE, len: 0
+000005  02 09                        univ-prim: INTEGER, len: 9
+000007  .........  
+Error: unexpected end of file, position: 16

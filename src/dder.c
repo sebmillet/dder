@@ -56,42 +56,45 @@ const char *short_PCs[] = {
 
 struct t_tag_universal_class {
 	const char *name;
-	int pc;
+		/* Primitive or Constructed? => 0 for P only, 1 for C only, */
+		/* 2 for P or C, -1 for non applicable */
+	int p_or_c; 
+	int is_string;
 };
 
 struct t_tag_universal_class universal_class_tags[] = {
-	{"EOC", 0},
-	{"BOOLEAN", 0},
-	{"INTEGER", 0},
-	{"BIT STRING", 2},
-	{"OCTET STRING", 2},
-	{"NULL", 0},
-	{"OBJECT IDENTIFIER", 0}, /* TAG_U_OBJECT_IDENTIFIER */
-	{"OBJECT DESCRIPTOR", 2},
-	{"EXTERNAL", 1},
-	{"REAL", 0},
-	{"ENUMERATED", 0},
-	{"EMBEDDED PDV", 1},
-	{"UTF8String", 2},
-	{"RELATIVE-OID", 1},
-	{"(reserved)", -1},
-	{"(reserved)", -1},
-	{"SEQUENCE", 1},
-	{"SET", 1},
-	{"NUMERICSTRING", 2},
-	{"PRINTABLESTRING", 2},
-	{"T61STRING", 2},
-	{"VIDEOTEXSTRING", 2},
-	{"IA5String", 2},
-	{"UTCTime", 2},
-	{"GeneralizedTime", 2},
-	{"GraphicString", 2},
-	{"VisibleString", 2},
-	{"GeneralString", 2},
-	{"UniversalString", 2},
-	{"CHARACTER STRING", 2},
-	{"BMPString", 2},
-	{"(long form)", -1}       /* TAG_U_LONG_FORMAT */
+	{"EOC", 0, 0},
+	{"BOOLEAN", 0, 0},
+	{"INTEGER", 0, 0},
+	{"BIT STRING", 2, 0},
+	{"OCTET STRING", 2, 0},
+	{"NULL", 0, 0},
+	{"OBJECT IDENTIFIER", 0, 0}, /* TAG_U_OBJECT_IDENTIFIER */
+	{"OBJECT DESCRIPTOR", 2, 0},
+	{"EXTERNAL", 1, 0},
+	{"REAL", 0, 0},
+	{"ENUMERATED", 0, 0},
+	{"EMBEDDED PDV", 1, 0},
+	{"UTF8String", 2, 1},
+	{"RELATIVE-OID", 1, 0},
+	{"(reserved)", -1, 0},
+	{"(reserved)", -1, 0},
+	{"SEQUENCE", 1, 0},
+	{"SET", 1, 0},
+	{"NUMERICSTRING", 2, 0},
+	{"PRINTABLESTRING", 2, 1},
+	{"T61STRING", 2, 1},
+	{"VIDEOTEXSTRING", 2, 1},
+	{"IA5String", 2, 1},
+	{"UTCTime", 2, 0},
+	{"GeneralizedTime", 2, 0},
+	{"GraphicString", 2, 1},
+	{"VisibleString", 2, 1},
+	{"GeneralString", 2, 1},
+	{"UniversalString", 2, 1},
+	{"CHARACTER STRING", 2, 1},
+	{"BMPString", 2, 1},
+	{"(long form)", -1, 0}       /* TAG_U_LONG_FORMAT */
 };
 #define TAG_U_OBJECT_IDENTIFIER 6
 #define TAG_U_LONG_FORMAT       31
@@ -111,9 +114,14 @@ Program options from the command line
 */
 
 	/* OL stands for Out Level (no link with Olympic Lyonnais) */
-typedef enum {OL_NORMAL, OL_VERBOSE, OL_VERYVERBOSE} out_level_t;
+typedef enum {OL_NORMAL = 0, OL_VERBOSE = 1, OL_VERYVERBOSE = 2} out_level_t;
 out_level_t opt_ol = OL_NORMAL;
-int opt_hex = 1;
+
+	/* OD stands for Out Data */
+typedef enum {OD_UNDEF, OD_SMART, OD_ENFORCE_HEX, OD_ENFORCE_TEXT} out_data_t;
+out_data_t opt_od = OD_SMART;
+
+	/* Nb bytes output on each line. MUST be an even number */
 long unsigned opt_width = 16;
 
 
@@ -173,8 +181,9 @@ void usage()
 	out_err("  -help        print this help screen\n");
 	out_err("  -version     output version information and exit\n");
 	out_err("  -verbose     verbose output.\n");
-	out_err("  -veryverbose *very* verbose output. Incompatible with -text\n");
-	out_err("  -text        text output of data values (hexadecimal by default)\n");
+	out_err("  -veryverbose *very* verbose output. Implies -hex\n");
+	out_err("  -text        enforce text output of data values\n");
+	out_err("  -hex         enforce hex output of data values\n");
 	out_err("  -width       number of bytes per line, must be even\n");
 	out_err("  --           end of parameters, option that follows is a file name\n");
 	exit(-1);
@@ -246,7 +255,7 @@ int myfgetc(FILE **F, size_t *offset)
 	return r;
 }
 
-void out_sequence(size_t offset, char *buf, const unsigned long len, const int is_value)
+void out_sequence(size_t offset, char *buf, const unsigned long len, const int is_value, const out_data_t od)
 {
 
 	const unsigned long hbytes = opt_width / 2;
@@ -254,7 +263,7 @@ void out_sequence(size_t offset, char *buf, const unsigned long len, const int i
 	char *str = malloc(opt_width + 50);
 	int strpos = 0;
 
-	if (!is_value || opt_hex) {
+	if (!is_value || od == OD_ENFORCE_HEX) {
 		unsigned long i;
 		unsigned long lim = ((len + opt_width - 1) / opt_width) * opt_width;
 		if (!lim)
@@ -321,9 +330,10 @@ int check_position(FILE **F, const size_t offset, const ssize_t remaining_length
 
 void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag_number)
 {
-	if (tag_class == TAG_CLASS_UNIVERSAL) {
+	if (tag_class == TAG_CLASS_UNIVERSAL && (size_t)tag_number < sizeof(universal_class_tags) / sizeof(*universal_class_tags)) {
 		s_strncpy(s, universal_class_tags[tag_number].name, slen);
-		s[slen - 1] = '\0';
+	} else if (tag_class == TAG_CLASS_UNIVERSAL) {
+		snprintf(s, slen, "![ %i ]", tag_number);
 	} else {
 		snprintf(s, slen, "[ %i ]", tag_number);
 	}
@@ -344,8 +354,8 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 	*tag_class = (c & 0xc0) >> 6;
 	*tag_PC = (c & 0x20) >> 5;
 	*tag_number = (c & 0x1F);
-	int allowed_pc = universal_class_tags[*tag_number].pc;
-	if (tag_class == TAG_CLASS_UNIVERSAL && allowed_pc >= 0 && allowed_pc <= 1 && *tag_PC != allowed_pc) {
+	int p_or_c = universal_class_tags[*tag_number].p_or_c;
+	if (tag_class == TAG_CLASS_UNIVERSAL && p_or_c >= 0 && p_or_c <= 1 && *tag_PC != p_or_c) {
 		*tag_PC = TAG_TYPE_PRIMITIVE;
 		out_err("Warning: tag number does not match primitive/constructed bit\n");
 	}
@@ -356,17 +366,17 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 
 	buf[0] = (char)c;
 	if (opt_ol >= OL_VERBOSE)
-		out_sequence(old_offset, buf, 1, 0);
+		out_sequence(old_offset, buf, 1, 0, OD_UNDEF);
 
 	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)c);
 		out("%c%c %c %c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
-		out_sequence(0, NULL, 0, 0);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF);
 		out("^^         Tag class:  %3i -> %s\n", *tag_class, classes[*tag_class]);
-		out_sequence(0, NULL, 0, 0);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF);
 		out("   ^       Tag type:   %3i -> %s\n", *tag_PC, PCs[*tag_PC]);
-		out_sequence(0, NULL, 0, 0);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF);
 		out("     ^^^^^ Tag number: %3i -> %s\n", *tag_number, tag_name);
 	} else if (opt_ol >= OL_VERBOSE) {
 		out("%s-%s: %s\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name);
@@ -411,9 +421,15 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 		}
 		*tag_number = (int)value;
 		if (opt_ol >= OL_VERBOSE) {
-			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0);
+			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0, OD_UNDEF);
 			out("Tag number: %i\n", *tag_number);
 		}
+	}
+
+	get_tag_name(tag_name, sizeof(tag_name), *tag_class, *tag_number);
+
+	if (*tag_class == TAG_CLASS_UNIVERSAL && *tag_number >= 31) {
+		out_err("Warning: universal tag number above maximum allowed value (30)\n");
 	}
 
 	--(*remaining_length);
@@ -452,15 +468,15 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 		}
 	}
 	if (opt_ol >= OL_VERBOSE)
-		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0);
+		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0, OD_UNDEF);
 
 	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)(bl[0]));
 		out("%c %c%c%c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
-		out_sequence(0, NULL, 0, 0);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF);
 		out("^          Len type: %i -> %s\n", length_type, length_coding_types[length_type]);
-		out_sequence(0, NULL, 0, 0);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF);
 		if (length_type == LENGTH_CODE_TYPE_ONE) {
 			out("  ^^^^^^^  Len: %lu", *length);
 		} else {
@@ -472,7 +488,7 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 	}
 
 	if (opt_ol == OL_NORMAL) {
-		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0);
+		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0, OD_UNDEF);
 		out("%s-%s: %s, len: %lu\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name, *length);
 	}
 
@@ -558,8 +574,14 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 		*offset += nbread;
 		*remaining_length -= (ssize_t)nbread;
 
-		if (nbread >= 1)
-			out_sequence(old_offset, buf, nbread, 1);
+		if (nbread >= 1) {
+			out_data_t od = opt_od;
+			if (opt_od == OD_SMART && tag_class == TAG_CLASS_UNIVERSAL &&
+				(size_t)tag_number < sizeof(universal_class_tags) / sizeof(*universal_class_tags)) {
+				od = universal_class_tags[tag_number].is_string ? OD_ENFORCE_TEXT : OD_ENFORCE_HEX;
+			}
+			out_sequence(old_offset, buf, nbread, 1, od);
+		}
 
 		if (nbread != length) {
 			if (feof(*F)) {
@@ -602,7 +624,7 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 
 void opt_check(int n, const char *opt)
 {
-	static int defined_options[4] = {0, 0, 0};
+	static int defined_options[5] = {0, 0, 0};
 
 	if (defined_options[n]) {
 		out_err("Option %s already set\n", opt);
@@ -618,6 +640,7 @@ int main(int argc, char **argv)
 	int optset_verbose = 0;
 	int optset_veryverbose = 0;
 	int optset_text = 0;
+	int optset_hex = 0;
 
 	int a = 1;
 	while (a >= 1 && a < argc) {
@@ -633,13 +656,17 @@ int main(int argc, char **argv)
 			opt_check(1, argv[a]);
 			optset_veryverbose = 1;
 			opt_ol = OL_VERYVERBOSE;
-			opt_hex = 1;
+			opt_od = OD_ENFORCE_HEX;
 		} else if (!strcasecmp(argv[a], "-text")) {
 			opt_check(2, argv[a]);
 			optset_text = 1;
-			opt_hex = 0;
-		} else if (!strcasecmp(argv[a], "-width")) {
+			opt_od = OD_ENFORCE_TEXT;
+		} else if (!strcasecmp(argv[a], "-hex")) {
 			opt_check(3, argv[a]);
+			optset_hex = 1;
+			opt_od = OD_ENFORCE_HEX;
+		} else if (!strcasecmp(argv[a], "-width")) {
+			opt_check(4, argv[a]);
 			if (++a >= argc) {
 				a = -(a - 1);
 			} else {
@@ -675,6 +702,9 @@ int main(int argc, char **argv)
 		a = 0;
 	} else if (optset_veryverbose && optset_text) {
 		out_err("incompatible options -veryverbose and -text\n");
+		a = 0;
+	} else if (optset_hex && optset_text) {
+		out_err("incompatible options -text and -hex\n");
 		a = 0;
 	} else if (optset_verbose && optset_veryverbose) {
 		out_err("incompatible options -veryverbose and -verbose\n");
