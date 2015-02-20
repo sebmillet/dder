@@ -1,4 +1,3 @@
-Error: inconsistent items length, position: 79
 Reading from file f2.pem...
 000000  2d                           univ-cons: RELATIVE-OID
 000001  2d                           Length: 45
@@ -9,3 +8,4 @@ Reading from file f2.pem...
 000006  45                           appl-prim: [ 5 ]
 000007  47                           Length: 71
 000008  IN DSA PARAMETERS-----.MIIELAKCAgEAtuJvteHn75ALzcdM43ZoKHPaqXO75IRiXd0U  
+Error: inconsistent items length, position: 79

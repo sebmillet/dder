@@ -27,7 +27,6 @@ Reading from file abc10.der...
         OID: 1.3.14.3.2.26
 000637  05                           univ-prim: NULL
 000638  00                           Length: 0
-000639    
 000639  04                           univ-prim: OCTET STRING
 00063a  14                           Length: 20
 00063b  /...l2.g...?.....Lu.  

@@ -170,12 +170,13 @@ void usage()
 	out_err("  dder [OPTION]... [FILE]\n");
 	out_err("Parses FILE according to DER syntax\n");
 	out_err("Uses standard input if FILE is not specified\n");
-	out_err("  -help      print this help screen\n");
-	out_err("  -version   output version information and exit\n");
-	out_err("  -v         verbose output. Implies -hex\n");
-	out_err("  -hex       hexadecimal output of data values\n");
-	out_err("  -width     number of bytes per line (hexadecimal output)\n");
-	out_err("  --         end of parameters\n");
+	out_err("  -help        print this help screen\n");
+	out_err("  -version     output version information and exit\n");
+	out_err("  -verbose     verbose output.\n");
+	out_err("  -veryverbose *very* verbose output. Incompatible with -text\n");
+	out_err("  -text        text output of data values (hexadecimal by default)\n");
+	out_err("  -width       number of bytes per line, must be even\n");
+	out_err("  --           end of parameters, option that follows is a file name\n");
 	exit(-1);
 }
 
@@ -557,7 +558,8 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 		*offset += nbread;
 		*remaining_length -= (ssize_t)nbread;
 
-		out_sequence(old_offset, buf, nbread, 1);
+		if (nbread >= 1)
+			out_sequence(old_offset, buf, nbread, 1);
 
 		if (nbread != length) {
 			if (feof(*F)) {
@@ -592,7 +594,8 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 			return;
 		}
 		free(buf);
-		out("\n");
+		if (nbread >= 1)
+			out("\n");
 	}
 	return;
 }

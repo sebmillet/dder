@@ -60,7 +60,6 @@ Reading from file g3.der...
 00002d  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00002e  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
@@ -634,7 +633,6 @@ Reading from file g3.der...
 000218  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000219  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -940,7 +938,6 @@ Reading from file g3.der...
 0004cd  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 0004ce  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -979,5 +976,5 @@ Reading from file g3.der...
 0005b2  d8 f9 bd 04    09 d0 6d 03   ....  ..m. 
 0005ba  1d 3c 14 03    98 8e 43 b6   .<..  ..C. 
 0005c2  1e 29 5b ac    5b 77 67 0d   .)[.  [wg. 
-0005ca  c7 c9 eError: unexpected end of file, position: 1490
-5 f1    f7 66 d2 ce   ....  .f.. 
+0005ca  c7 c9 e5 f1    f7 66 d2 ce   ....  .f.. 
+Error: unexpected end of file, position: 1490

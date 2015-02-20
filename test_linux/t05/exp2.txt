@@ -19,7 +19,6 @@ Reading from file g2.der...
         OID: 1.2.840.113549.1.1.5
 00002c  05                           univ-prim: NULL
 00002d  00                           Length: 0
-00002e    
 00002e  30                           univ-cons: SEQUENCE
 00002f  81 be                        Length: 190
 000031  31                           univ-cons: SET
@@ -218,7 +217,6 @@ Reading from file g2.der...
         OID: 1.2.840.113549.1.1.1
 000217  05                           univ-prim: NULL
 000218  00                           Length: 0
-000219    
 000219  03                           univ-prim: BIT STRING
 00021a  82 01 0f                     Length: 271
 00021d  .0..................I..O.t....1<..;....e.....2.../>.....X......7..1@.A...$8....c...Y..c.....>.:O}x.z.......z...(...\BH5........0..g.......*...M.u.....C.Z..*...Y...../....-.h...,..Os..l.....{a.o...Vb...8...s..[1.......hsdh..@~....z.......c......:.f.......H.0.*....d.......  
@@ -266,8 +264,7 @@ Reading from file g2.der...
 00038e  21                           Length: 33
 00038f  0...+.........+.........`.H...B..  
 0003b0  30                           univ-cons: SEQUENCE
-0003b1  66                           Length: 10Error: trailing characters in file, position: 1491
-2
+0003b1  66                           Length: 102
 0003b2  06                           univ-prim: OBJECT IDENTIFIER
 0003b3  03                           Length: 3
 0003b4  U.   
@@ -310,7 +307,7 @@ Reading from file g2.der...
         OID: 1.2.840.113549.1.1.5
 0004cc  05                           univ-prim: NULL
 0004cd  00                           Length: 0
-0004ce    
 0004ce  03                           univ-prim: BIT STRING
 0004cf  82 01 01                     Length: 257
 0004d2  ....*4.t].....X.T...D"\hc*.>].....C..........6..Q'.e..?j......R+.,..+cGyq......EB..F..f...k...|......MH.......Nl9....f..f.v.T...rA.9..W.{::.!.@C.$|....p{.>B%@..Sz.#b.!..C.z.l.w....].J..Bp.......!W.........._c.y:..OF..4....(2......m..<....C..)[.[wg......f..[  
+Error: trailing characters in file, position: 1491

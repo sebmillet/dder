@@ -1,4 +1,3 @@
-Error: inconsistent items length, position: 101
 Reading from file f6.pem...
 000000  23                           00 1 00011
                                      ^^         Tag class:    0 -> Universal
@@ -27,3 +26,4 @@ Reading from file f6.pem...
 000054  47 53 20 3d    20 2d 57 61   GS =   -Wa 
 00005c  6c 6c 20 2d    57 65 78 74   ll -  Wext 
 000064  72                           r          
+Error: inconsistent items length, position: 101

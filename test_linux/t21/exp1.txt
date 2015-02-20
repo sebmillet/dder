@@ -1,4 +1,3 @@
-Error: inconsistent items length, position: 79
 Reading from file f1.pem...
 000000  2d                           univ-cons: RELATIVE-OID
 000001  2d                           Length: 45
@@ -17,3 +16,4 @@ Reading from file f1.pem...
 000038  35 75 45 71    35 69 6e 44   5uEq  5inD 
 000040  78 74 54 33    39 65 37 58   xtT3  9e7X 
 000048  5a 6f 45 4c    37 7a 76      ZoEL  7zv  
+Error: inconsistent items length, position: 79

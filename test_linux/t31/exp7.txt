@@ -20,7 +20,6 @@ Reading from file abc7.der...
         OID: 1.2.840.113549.1.1.5
 000024  05                           univ-prim: NULL
 000025  00                           Length: 0
-                                                
 000026  30                           univ-cons: SEQUENCE
 000027  49                           Length: 73
 000028  31                           univ-cons: SET
@@ -373,7 +372,6 @@ Reading from file abc7.der...
         OID: 1.2.840.113549.1.1.5
 0005c2  05                           univ-prim: NULL
 0005c3  00                           Length: 0
-                                                
 0005c4  03                           univ-prim: BIT STRING
 0005c5  82 01 01                     Length: 257
 0005c8  00 00 2f 92    05 9f 3e 31   ../.  ..>1 

@@ -261,7 +261,6 @@ Reading from file abc1.der...
 0000bf  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 0000c0  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

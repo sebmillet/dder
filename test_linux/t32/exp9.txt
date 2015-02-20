@@ -185,7 +185,6 @@ Reading from file abc9.der...
 000370  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000371  04                           00 0 00100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

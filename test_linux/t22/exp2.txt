@@ -1,4 +1,3 @@
-Error: inconsistent items length, position: 79
 Reading from file f2.pem...
 000000  2d                           00 1 01101
                                      ^^         Tag class:    0 -> Universal
@@ -37,3 +36,4 @@ Reading from file f2.pem...
 000038  63 64 4d 34    33 5a 6f 4b   cdM4  3ZoK 
 000040  48 50 61 71    58 4f 37 35   HPaq  XO75 
 000048  49 52 69 58    64 30 55      IRiX  d0U  
+Error: inconsistent items length, position: 79

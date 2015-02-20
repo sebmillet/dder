@@ -59,7 +59,6 @@ Reading from file abc7.der...
 000025  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000026  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
@@ -767,7 +766,6 @@ Reading from file abc7.der...
 0005c3  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 0005c4  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

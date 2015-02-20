@@ -22,7 +22,6 @@ Reading from file f5.pem...
 000008  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000009  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -30,7 +29,6 @@ Reading from file f5.pem...
 00000a  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00000b  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -38,7 +36,6 @@ Reading from file f5.pem...
 00000c  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00000d  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -46,7 +43,6 @@ Reading from file f5.pem...
 00000e  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00000f  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -70,7 +66,6 @@ Reading from file f5.pem...
 000017  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000018  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
@@ -85,7 +80,6 @@ Reading from file f5.pem...
 00001b  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00001c  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -93,7 +87,6 @@ Reading from file f5.pem...
 00001d  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00001e  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -101,7 +94,6 @@ Reading from file f5.pem...
 00001f  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000020  40                           01 0 00000
                                      ^^         Tag class:    1 -> Application
                                         ^       Tag type:     0 -> Primitive
@@ -109,7 +101,6 @@ Reading from file f5.pem...
 000021  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000022  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -117,7 +108,6 @@ Reading from file f5.pem...
 000023  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000024  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -125,17 +115,15 @@ Reading from file f5.pem...
 000025  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000026  00                           00 0 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
-                                          ^^Error: number of bytes to encode length exceeds maximum, position: 41
-^^^ Tag number:   0 -> EOC
+                                          ^^^^^ Tag number:   0 -> EOC
 000027  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000028  20                           00 1 00000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
                                           ^^^^^ Tag number:   0 -> EOC
+Error: number of bytes to encode length exceeds maximum, position: 41

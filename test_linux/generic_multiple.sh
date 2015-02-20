@@ -20,7 +20,14 @@ while [ $i -le $N ]; do
 	II="${INPUT}${i}${SUFFIXE1}"
 	OO="${OUTPUT}${i}${SUFFIXE2}"
 	RR="${REFERENCE}${i}${SUFFIXE2}"
-	$PRG $PRGARGS $II > $OO 2>&1
+
+# The sequence below ensures the stderr comes AFTER stdout, not
+# in-between at an uncontrolled location.
+	$PRG $PRGARGS $II > $OO 2>tmp-alpha.txt
+	cat $OO tmp-alpha.txt > beta
+	rm tmp-alpha.txt
+	mv beta $OO
+
 	if [ "$9" = "-batch" ]; then
 		cmp $RR $OO 2>&1 > /dev/null
 		if [ "$?" -ne "0" ]; then

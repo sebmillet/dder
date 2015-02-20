@@ -274,7 +274,6 @@ Reading from file abc10.der...
 000638  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000639  04                           00 0 00100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

@@ -1,4 +1,3 @@
-Error: inconsistent items length, position: 85
 Reading from file f7.pem...
 000000  2f                           univ-cons: (reserved)
 000001  2a                           Length: 42
@@ -30,3 +29,4 @@ Reading from file f7.pem...
 000024  0a                           univ-prim: ENUMERATED
 000025  2f                           Length: 47
 000026  * S..bastien Millet, February 2015 */../*#defin  
+Error: inconsistent items length, position: 85

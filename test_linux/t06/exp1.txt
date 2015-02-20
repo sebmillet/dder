@@ -21,7 +21,6 @@ Reading from file g1.der...
         OID: 1.2.840.113549.1.1.5
 00002c  05                           univ-prim: NULL
 00002d  00                           Length: 0
-                                                
 00002e  30                           univ-cons: SEQUENCE
 00002f  81 be                        Length: 190
 000031  31                           univ-cons: SET
@@ -247,7 +246,6 @@ Reading from file g1.der...
         OID: 1.2.840.113549.1.1.1
 000217  05                           univ-prim: NULL
 000218  00                           Length: 0
-                                                
 000219  03                           univ-prim: BIT STRING
 00021a  82 01 0f                     Length: 271
 00021d  00 30 82 01    0a 02 82 01   .0..  .... 
@@ -407,7 +405,6 @@ Reading from file g1.der...
         OID: 1.2.840.113549.1.1.5
 0004cc  05                           univ-prim: NULL
 0004cd  00                           Length: 0
-                                                
 0004ce  03                           univ-prim: BIT STRING
 0004cf  82 01 01                     Length: 257
 0004d2  00 8f b2 fb    2a 34 aa 74   ....  *4.t 

@@ -89,7 +89,6 @@ Reading from file abc1.der...
         OID: 1.2.840.113549.1.1.1
 0000be  05                           univ-prim: NULL
 0000bf  00                           Length: 0
-0000c0    
 0000c0  03                           univ-prim: BIT STRING
 0000c1  81 8d                        Length: 141
 0000c3  .0..............]G.P.....Z1W&T.YI.?.Lt........3...I-....D......Fb!jf...`.@e......!...e...p..a..@.e.&O.]....Z.....N.%......Al.5W...-..F.......  

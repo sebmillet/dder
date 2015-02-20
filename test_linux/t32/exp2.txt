@@ -151,7 +151,6 @@ Reading from file abc2.der...
 00005e  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00005f  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -207,7 +206,6 @@ Reading from file abc2.der...
 0000ff  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000100  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

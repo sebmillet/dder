@@ -51,7 +51,6 @@ Reading from file abc2.der...
         OID: 1.2.840.113549.1.1.1
 00005d  05                           univ-prim: NULL
 00005e  00                           Length: 0
-00005f    
 00005f  03                           univ-prim: BIT STRING
 000060  81 8d                        Length: 141
 000062  .0..............]G.P.....Z1W&T.YI.?.Lt........3...I-....D......Fb!jf...`.@e......!...e...p..a..@.e.&O.]....Z.....N.%......Al.5W...-..F.......  
@@ -65,7 +64,6 @@ Reading from file abc2.der...
         OID: 1.2.840.113549.1.1.11
 0000fe  05                           univ-prim: NULL
 0000ff  00                           Length: 0
-000100    
 000100  03                           univ-prim: BIT STRING
 000101  81 81                        Length: 129
 000103  ......F..|..g.W....'k.k.6.t.}G.B...$.}}<....'G.H.#KN..1?.......q....P.=..(.,v...$.....ZJW6.{........J5......U.-.5...L..Xl.e..u...  

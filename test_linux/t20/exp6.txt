@@ -1,7 +1,7 @@
-Error: inconsistent items length, position: 101
 Reading from file f6.pem...
 000000  23                           univ-cons: BIT STRING
 000001  20                           Length: 32
 000002  4d                           appl-prim: [ 13 ]
 000003  61                           Length: 97
 000004  kefile..# Makefile.# idpkcs..# S..bastien Millet, Februay 2015..CPP = gcc.CPPFLAGS = -Wall -Wextr  
+Error: inconsistent items length, position: 101

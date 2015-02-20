@@ -60,7 +60,6 @@ Reading from file g1.der...
 00002d  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 00002e  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
@@ -634,7 +633,6 @@ Reading from file g1.der...
 000218  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 000219  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -940,7 +938,6 @@ Reading from file g1.der...
 0004cd  00                           0 0000000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 0
-                                                
 0004ce  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
