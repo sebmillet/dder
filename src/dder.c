@@ -622,20 +622,20 @@ int main(int argc, char **argv)
 			usage();
 		} else if (!strcasecmp(argv[a], "-version")) {
 			version();
-		} else if (!strcasecmp(argv[a], "-v")) {
+		} else if (!strcasecmp(argv[a], "-verbose")) {
 			opt_check(0, argv[a]);
 			optset_verbose = 1;
 			opt_ol = OL_VERBOSE;
-		} else if (!strcasecmp(argv[a], "-vv")) {
+		} else if (!strcasecmp(argv[a], "-veryverbose")) {
 			opt_check(1, argv[a]);
 			optset_veryverbose = 1;
 			opt_ol = OL_VERYVERBOSE;
 			opt_hex = 1;
-		} else if (!strcasecmp(argv[a], "-t")) {
+		} else if (!strcasecmp(argv[a], "-text")) {
 			opt_check(2, argv[a]);
 			optset_text = 1;
 			opt_hex = 0;
-		} else if (!strcasecmp(argv[a], "-w")) {
+		} else if (!strcasecmp(argv[a], "-width")) {
 			opt_check(3, argv[a]);
 			if (++a >= argc) {
 				a = -(a - 1);
@@ -671,10 +671,10 @@ int main(int argc, char **argv)
 		out_err("Trailing parameter(s)\n");
 		a = 0;
 	} else if (optset_veryverbose && optset_text) {
-		out_err("incompatible options -vv and -t\n");
+		out_err("incompatible options -veryverbose and -text\n");
 		a = 0;
 	} else if (optset_verbose && optset_veryverbose) {
-		out_err("incompatible options -vv and -v\n");
+		out_err("incompatible options -veryverbose and -verbose\n");
 		a = 0;
 	} else if (a >= argc) {
 		out("Reading from standard input...\n");

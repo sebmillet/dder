@@ -12,7 +12,7 @@ if [ "$5" = "-batch" ]; then
   IS_BATCH=1
 fi
 
-$PRG -t -v -w 8 $INPUT > $OUTPUT 2>&1
+$PRG -text -verbose -width 8 $INPUT > $OUTPUT 2>&1
 
 REP=$(pwd | sed 's/.*\///')
 
