@@ -3,36 +3,18 @@ Reading from file f7.pem...
 000001  2a                           Length: 42
 000002  20                           univ-cons: EOC
 000003  64                           Length: 100
-000004  64                           appl-cons: [ 4 ]
-000005  65                           Length: 101
-000006  72                           appl-cons: [ 18 ]
-000007  2e                           Length: 46
-000008  63                           appl-cons: [ 3 ]
-000009  20                           Length: 32
-00000a  2a                           univ-cons: ENUMERATED
-00000b  2f                           Length: 47
-00000c  0a                           univ-prim: ENUMERATED
-00000d  0a                           Length: 10
-00000e  2f 2a 20 50    61 72 73 65   /* P  arse 
-000016  20 64                         d         
-000018  65                           appl-cons: [ 5 ]
-000019  72                           Length: 114
-00001a  20                           univ-cons: EOC
-00001b  66                           Length: 102
-00001c  69                           appl-cons: [ 9 ]
-00001d  6c                           Length: 108
-00001e  65                           appl-cons: [ 5 ]
-00001f  73                           Length: 115
-000020  20                           univ-cons: EOC
-000021  2a                           Length: 42
-000022  2f                           univ-cons: (reserved)
-000023  0a                           Length: 10
-000024  0a                           univ-prim: ENUMERATED
-000025  2f                           Length: 47
-000026  2a 20 53 c3    a9 62 61 73   * S.  .bas 
-00002e  74 69 65 6e    20 4d 69 6c   tien   Mil 
-000036  6c 65 74 2c    20 46 65 62   let,   Feb 
-00003e  72 75 61 72    79 20 32 30   ruar  y 20 
-000046  31 35 20 2a    2f 0a 0a 2f   15 *  /../ 
-00004e  2a 23 64 65    66 69 6e      *#de  fin  
-Error: inconsistent items length, position: 85
+000004  64 65 72 2e    63 20 2a 2f   der.  c */ 
+00000c  0a 0a 2f 2a    20 50 61 72   ../*   Par 
+000014  73 65 20 64    65 72 20 66   se d  er f 
+00001c  69 6c 65 73    20 2a 2f 0a   iles   */. 
+000024  0a 2f 2a 20    53 c3 a9 62   ./*   S..b 
+00002c  61 73 74 69    65 6e 20 4d   asti  en M 
+000034  69 6c 6c 65    74 2c 20 46   ille  t, F 
+00003c  65 62 72 75    61 72 79 20   ebru  ary  
+000044  32 30 31 35    20 2a 2f 0a   2015   */. 
+00004c  0a 2f 2a 23    64 65 66 69   ./*#  defi 
+000054  6e 65 20 44    45 42 55 47   ne D  EBUG 
+00005c  2a 2f 0a 0a    23 69 6e 63   */..  #inc 
+000064  6c 75 64 65                  lude       
+Warning: primitive/constructed bit mismatch, enforcing primitive
+Error: inconsistent items length, position: 104

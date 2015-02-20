@@ -38,4 +38,5 @@ Reading from file f5.pem...
 000026  00                           univ-prim: EOC
 000027  00                           Length: 0
 000028  20                           univ-cons: EOC
+Warning: primitive/constructed bit mismatch, enforcing primitive
 Error: number of bytes to encode length exceeds maximum, position: 41

@@ -126,4 +126,5 @@ Reading from file f5.pem...
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
                                           ^^^^^ Tag number:   0 -> EOC
+Warning: primitive/constructed bit mismatch, enforcing primitive
 Error: number of bytes to encode length exceeds maximum, position: 41

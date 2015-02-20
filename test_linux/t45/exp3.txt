@@ -1,0 +1,724 @@
+Reading from file dsa3.der...
+000000  30                           00 1 10000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  16 -> SEQUENCE
+000001  82 03 02                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 770
+##000004  30                           00 1 10000
+##                                     ^^         Tag class:    0 -> Universal
+##                                        ^       Tag type:     1 -> Constructed
+##                                          ^^^^^ Tag number:  16 -> SEQUENCE
+##000005  82 02 6b                     1 0000010
+##                                     ^          Len type: 1 -> MULTI BYTES
+##                                       ^^^^^^^  Len nb bytes: 2, value: 619
+####000008  a0                           10 1 00000
+####                                     ^^         Tag class:    2 -> Context-specific
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:   0 -> [ 0 ]
+####000009  03                           0 0000011
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 3
+######00000a  02                           00 0 00010
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     0 -> Primitive
+######                                          ^^^^^ Tag number:   2 -> INTEGER
+######00000b  01                           0 0000001
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 1
+######00000c  02                           .          
+####00000d  02                           00 0 00010
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     0 -> Primitive
+####                                          ^^^^^ Tag number:   2 -> INTEGER
+####00000e  09                           0 0001001
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 9
+####00000f  00 c5 39 d0    49 4d e4 3a   ..9.  IM.: 
+####000017  4f                           O          
+####000018  30                           00 1 10000
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:  16 -> SEQUENCE
+####000019  0d                           0 0001101
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 13
+######00001a  06                           00 0 00110
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     0 -> Primitive
+######                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+######00001b  09                           0 0001001
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 9
+######00001c  2a 86 48 86    f7 0d 01 01   *.H.  .... 
+######000024  0b                           .          OID: 1.2.840.113549.1.1.11
+######000025  05                           00 0 00101
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     0 -> Primitive
+######                                          ^^^^^ Tag number:   5 -> NULL
+######000026  00                           0 0000000
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 0
+####000027  30                           00 1 10000
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:  16 -> SEQUENCE
+####000028  81 99                        1 0000001
+####                                     ^          Len type: 1 -> MULTI BYTES
+####                                       ^^^^^^^  Len nb bytes: 1, value: 153
+######00002a  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######00002b  0b                           0 0001011
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 11
+########00002c  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00002d  09                           0 0001001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 9
+##########00002e  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########00002f  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########000030  55 04 06                     U..        OID: 2.5.4.6
+##########000033  13                           00 0 10011
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  19 -> PRINTABLESTRING
+##########000034  02                           0 0000010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 2
+##########000035  46 52                        FR         
+######000037  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000038  0f                           0 0001111
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 15
+########000039  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00003a  0d                           0 0001101
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 13
+##########00003b  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########00003c  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00003d  55 04 08                     U..        OID: 2.5.4.8
+##########000040  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########000041  06                           0 0000110
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 6
+##########000042  46 72 61 6e    63 65         Fran  ce   
+######000048  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000049  0e                           0 0001110
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 14
+########00004a  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00004b  0c                           0 0001100
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 12
+##########00004c  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########00004d  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00004e  55 04 07                     U..        OID: 2.5.4.7
+##########000051  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########000052  05                           0 0000101
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 5
+##########000053  43 6c 61 69    78            Clai  x    
+######000058  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000059  0b                           0 0001011
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 11
+########00005a  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00005b  09                           0 0001001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 9
+##########00005c  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########00005d  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00005e  55 04 0a                     U..        OID: 2.5.4.10
+##########000061  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########000062  02                           0 0000010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 2
+##########000063  49 54                        IT         
+######000065  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000066  14                           0 0010100
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 20
+########000067  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000068  12                           0 0010010
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 18
+##########000069  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########00006a  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00006b  55 04 0b                     U..        OID: 2.5.4.11
+##########00006e  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########00006f  0b                           0 0001011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 11
+##########000070  4c 61 70 69    6e 6f 75 20   Lapi  nou  
+##########000078  4c 74 64                     Ltd        
+######00007b  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######00007c  13                           0 0010011
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 19
+########00007d  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00007e  11                           0 0010001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 17
+##########00007f  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000080  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########000081  55 04 03                     U..        OID: 2.5.4.3
+##########000084  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########000085  0a                           0 0001010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 10
+##########000086  53 4d 54 20    44 45 56 20   SMT   DEV  
+##########00008e  43 41                        CA         
+######000090  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000091  31                           0 0110001
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 49
+########000092  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000093  2f                           0 0101111
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 47
+##########000094  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000095  09                           0 0001001
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 9
+##########000096  2a 86 48 86    f7 0d 01 09   *.H.  .... 
+##########00009e  01                           .          OID: 1.2.840.113549.1.9.1
+##########00009f  16                           00 0 10110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  22 -> IA5String
+##########0000a0  22                           0 0100010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 34
+##########0000a1  73 65 62 61    73 74 69 65   seba  stie 
+##########0000a9  6e 2e 6d 69    6c 6c 65 74   n.mi  llet 
+##########0000b1  31 40 63 6c    75 62 2d 69   1@cl  ub-i 
+##########0000b9  6e 74 65 72    6e 65 74 2e   nter  net. 
+##########0000c1  66 72                        fr         
+####0000c3  30                           00 1 10000
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:  16 -> SEQUENCE
+####0000c4  1e                           0 0011110
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 30
+######0000c5  17                           00 0 10111
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     0 -> Primitive
+######                                          ^^^^^ Tag number:  23 -> UTCTime
+######0000c6  0d                           0 0001101
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 13
+######0000c7  31 35 30 32    32 30 31 39   1502  2019 
+######0000cf  34 35 31 38    5a            4518  Z    
+######0000d4  17                           00 0 10111
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     0 -> Primitive
+######                                          ^^^^^ Tag number:  23 -> UTCTime
+######0000d5  0d                           0 0001101
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 13
+######0000d6  31 35 30 33    32 32 31 39   1503  2219 
+######0000de  34 35 31 38    5a            4518  Z    
+####0000e3  30                           00 1 10000
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:  16 -> SEQUENCE
+####0000e4  81 99                        1 0000001
+####                                     ^          Len type: 1 -> MULTI BYTES
+####                                       ^^^^^^^  Len nb bytes: 1, value: 153
+######0000e6  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######0000e7  0b                           0 0001011
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 11
+########0000e8  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########0000e9  09                           0 0001001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 9
+##########0000ea  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########0000eb  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########0000ec  55 04 06                     U..        OID: 2.5.4.6
+##########0000ef  13                           00 0 10011
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  19 -> PRINTABLESTRING
+##########0000f0  02                           0 0000010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 2
+##########0000f1  46 52                        FR         
+######0000f3  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######0000f4  0f                           0 0001111
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 15
+########0000f5  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########0000f6  0d                           0 0001101
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 13
+##########0000f7  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########0000f8  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########0000f9  55 04 08                     U..        OID: 2.5.4.8
+##########0000fc  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########0000fd  06                           0 0000110
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 6
+##########0000fe  46 72 61 6e    63 65         Fran  ce   
+######000104  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000105  0e                           0 0001110
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 14
+########000106  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000107  0c                           0 0001100
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 12
+##########000108  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000109  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00010a  55 04 07                     U..        OID: 2.5.4.7
+##########00010d  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########00010e  05                           0 0000101
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 5
+##########00010f  43 6c 61 69    78            Clai  x    
+######000114  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000115  0b                           0 0001011
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 11
+########000116  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000117  09                           0 0001001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 9
+##########000118  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000119  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00011a  55 04 0a                     U..        OID: 2.5.4.10
+##########00011d  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########00011e  02                           0 0000010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 2
+##########00011f  49 54                        IT         
+######000121  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000122  14                           0 0010100
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 20
+########000123  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000124  12                           0 0010010
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 18
+##########000125  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000126  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########000127  55 04 0b                     U..        OID: 2.5.4.11
+##########00012a  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########00012b  0b                           0 0001011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 11
+##########00012c  4c 61 70 69    6e 6f 75 20   Lapi  nou  
+##########000134  4c 74 64                     Ltd        
+######000137  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######000138  13                           0 0010011
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 19
+########000139  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00013a  11                           0 0010001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 17
+##########00013b  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########00013c  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########00013d  55 04 03                     U..        OID: 2.5.4.3
+##########000140  0c                           00 0 01100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  12 -> UTF8String
+##########000141  0a                           0 0001010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 10
+##########000142  53 4d 54 20    44 45 56 20   SMT   DEV  
+##########00014a  43 41                        CA         
+######00014c  31                           00 1 10001
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  17 -> SET
+######00014d  31                           0 0110001
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 49
+########00014e  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########00014f  2f                           0 0101111
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 47
+##########000150  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000151  09                           0 0001001
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 9
+##########000152  2a 86 48 86    f7 0d 01 09   *.H.  .... 
+##########00015a  01                           .          OID: 1.2.840.113549.1.9.1
+##########00015b  16                           00 0 10110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:  22 -> IA5String
+##########00015c  22                           0 0100010
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 34
+##########00015d  73 65 62 61    73 74 69 65   seba  stie 
+##########000165  6e 2e 6d 69    6c 6c 65 74   n.mi  llet 
+##########00016d  31 40 63 6c    75 62 2d 69   1@cl  ub-i 
+##########000175  6e 74 65 72    6e 65 74 2e   nter  net. 
+##########00017d  66 72                        fr         
+####00017f  30                           00 1 10000
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:  16 -> SEQUENCE
+####000180  81 9f                        1 0000001
+####                                     ^          Len type: 1 -> MULTI BYTES
+####                                       ^^^^^^^  Len nb bytes: 1, value: 159
+######000182  30                           00 1 10000
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  16 -> SEQUENCE
+######000183  0d                           0 0001101
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 13
+########000184  06                           00 0 00110
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     0 -> Primitive
+########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+########000185  09                           0 0001001
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 9
+########000186  2a 86 48 86    f7 0d 01 01   *.H.  .... 
+########00018e  01                           .          OID: 1.2.840.113549.1.1.1
+########00018f  05                           00 0 00101
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     0 -> Primitive
+########                                          ^^^^^ Tag number:   5 -> NULL
+########000190  00                           0 0000000
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 0
+######000191  03                           00 0 00011
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     0 -> Primitive
+######                                          ^^^^^ Tag number:   3 -> BIT STRING
+######000192  81 8d                        1 0000001
+######                                     ^          Len type: 1 -> MULTI BYTES
+######                                       ^^^^^^^  Len nb bytes: 1, value: 141
+######000194  00 30 81 89    02 81 81 00   .0..  .... 
+######00019c  dc c5 ed ac    4b db db 1b   ....  K... 
+######0001a4  f8 bf e3 33    4e 6c b9 b0   ...3  Nl.. 
+######0001ac  47 cf dc b2    38 17 31 db   G...  8.1. 
+######0001b4  d2 ee d9 35    40 19 ee 88   ...5  @... 
+######0001bc  31 00 27 bc    84 2b 2d b0   1.'.  .+-. 
+######0001c4  5d 33 65 d5    91 ca 22 ee   ]3e.  ..". 
+######0001cc  0a 66 cd 61    97 e9 3e 81   .f.a  ..>. 
+######0001d4  80 1c ce e8    69 12 88 86   ....  i... 
+######0001dc  ff e7 1b 68    92 df b0 5f   ...h  ..._ 
+######0001e4  b4 5a a7 86    15 b2 8e 85   .Z..  .... 
+######0001ec  ce 26 b8 ae    02 3c 4f 20   .&..  .<O  
+######0001f4  9e 21 8c a5    fe 68 1f 46   .!..  .h.F 
+######0001fc  51 01 d6 fd    35 eb 5b b5   Q...  5.[. 
+######000204  0f 8e b9 4f    92 8f 2e 33   ...O  ...3 
+######00020c  a4 40 f0 b0    fa 73 df 60   .@..  .s.` 
+######000214  cf dc 6e 7d    61 0a c9 95   ..n}  a... 
+######00021c  02 03 01 00    01            ....  .    
+####000221  a3                           10 1 00011
+####                                     ^^         Tag class:    2 -> Context-specific
+####                                        ^       Tag type:     1 -> Constructed
+####                                          ^^^^^ Tag number:   3 -> [ 3 ]
+####000222  50                           0 1010000
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 80
+######000223  30                           00 1 10000
+######                                     ^^         Tag class:    0 -> Universal
+######                                        ^       Tag type:     1 -> Constructed
+######                                          ^^^^^ Tag number:  16 -> SEQUENCE
+######000224  4e                           0 1001110
+######                                     ^          Len type: 0 -> ONE BYTE
+######                                       ^^^^^^^  Len: 78
+########000225  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000226  1d                           0 0011101
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 29
+##########000227  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000228  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########000229  55 1d 0e                     U..        OID: 2.5.29.14
+##########00022c  04                           00 0 00100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   4 -> OCTET STRING
+##########00022d  16                           0 0010110
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 22
+##########00022e  04 14 a3 ac    50 6e 99 80   ....  Pn.. 
+##########000236  27 17 04 df    62 43 b2 ae   '...  bC.. 
+##########00023e  92 e0 e4 33    06 3a         ...3  .:   
+########000244  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000245  1f                           0 0011111
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 31
+##########000246  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000247  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########000248  55 1d 23                     U.#        OID: 2.5.29.35
+##########00024b  04                           00 0 00100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   4 -> OCTET STRING
+##########00024c  18                           0 0011000
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 24
+##########00024d  30 16 80 14    a3 ac 50 6e   0...  ..Pn 
+##########000255  99 80 27 17    04 df 62 43   ..'.  ..bC 
+##########00025d  b2 ae 92 e0    e4 33 06 3a   ....  .3.: 
+########000265  30                           00 1 10000
+########                                     ^^         Tag class:    0 -> Universal
+########                                        ^       Tag type:     1 -> Constructed
+########                                          ^^^^^ Tag number:  16 -> SEQUENCE
+########000266  0c                           0 0001100
+########                                     ^          Len type: 0 -> ONE BYTE
+########                                       ^^^^^^^  Len: 12
+##########000267  06                           00 0 00110
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+##########000268  03                           0 0000011
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 3
+##########000269  55 1d 13                     U..        OID: 2.5.29.19
+##########00026c  04                           00 0 00100
+##########                                     ^^         Tag class:    0 -> Universal
+##########                                        ^       Tag type:     0 -> Primitive
+##########                                          ^^^^^ Tag number:   4 -> OCTET STRING
+##########00026d  05                           0 0000101
+##########                                     ^          Len type: 0 -> ONE BYTE
+##########                                       ^^^^^^^  Len: 5
+##########00026e  30 03 01 01    ff            0...  .    
+##000273  30                           00 1 10000
+##                                     ^^         Tag class:    0 -> Universal
+##                                        ^       Tag type:     1 -> Constructed
+##                                          ^^^^^ Tag number:  16 -> SEQUENCE
+##000274  0d                           0 0001101
+##                                     ^          Len type: 0 -> ONE BYTE
+##                                       ^^^^^^^  Len: 13
+####000275  06                           00 0 00110
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     0 -> Primitive
+####                                          ^^^^^ Tag number:   6 -> OBJECT IDENTIFIER
+####000276  09                           0 0001001
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 9
+####000277  2a 86 48 86    f7 0d 01 01   *.H.  .... 
+####00027f  0b                           .          OID: 1.2.840.113549.1.1.11
+####000280  05                           00 0 00101
+####                                     ^^         Tag class:    0 -> Universal
+####                                        ^       Tag type:     0 -> Primitive
+####                                          ^^^^^ Tag number:   5 -> NULL
+####000281  00                           0 0000000
+####                                     ^          Len type: 0 -> ONE BYTE
+####                                       ^^^^^^^  Len: 0
+##000282  03                           00 0 00011
+##                                     ^^         Tag class:    0 -> Universal
+##                                        ^       Tag type:     0 -> Primitive
+##                                          ^^^^^ Tag number:   3 -> BIT STRING
+##000283  81 81                        1 0000001
+##                                     ^          Len type: 1 -> MULTI BYTES
+##                                       ^^^^^^^  Len nb bytes: 1, value: 129
+##000285  00 21 d8 62    9f 52 a9 0e   .!.b  .R.. 
+##00028d  e8 83 f7 fd    33 06 2a e1   ....  3.*. 
+##000295  cc d6 b7 01    23 19 4f 53   ....  #.OS 
+##00029d  5c 26 96 5e    d4 54 d8 f0   \&.^  .T.. 
+##0002a5  f4 35 11 eb    27 be d8 89   .5..  '... 
+##0002ad  63 08 fe f9    d9 f0 4a c6   c...  ..J. 
+##0002b5  37 4a 21 2c    d5 82 95 74   7J!,  ...t 
+##0002bd  ef 51 42 c4    4d ab df 3a   .QB.  M..: 
+##0002c5  ef cf 5f 24    71 5f 77 9c   .._$  q_w. 
+##0002cd  0e 5f 87 7a    52 3a 1d 1c   ._.z  R:.. 
+##0002d5  27 65 fa 09    7c a6 16 4b   'e..  |..K 
+##0002dd  63 4e 66 f8    f0 d5 a8 45   cNf.  ...E 
+##0002e5  79 83 c1 fe    27 e2 1d 60   y...  '..` 
+##0002ed  48 b2 cc f8    5f 35 ac 9d   H...  _5.. 
+##0002f5  5d f8 8b 44    ef 77 3f 33   ]..D  .w?3 
+##0002fd  f7 55 e2 fe    11 4f cc 8e   .U..  .O.. 
+##000305  8b                           .          

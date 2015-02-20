@@ -1,0 +1,21 @@
+Reading from file dsa2.der...
+000000  30                           univ-cons: SEQUENCE
+000001  82 01 bb                     Length: 443
+..000004  02                           univ-prim: INTEGER
+..000005  01                           Length: 1
+000006  .  
+..000007  02                           univ-prim: INTEGER
+..000008  81 81                        Length: 129
+00000a  ...|B.>....r.9..BR....h.i..O......*...c..$.....t..o..o...jy..lnZ^......{.$P.>.."...'z...J.u..nLP.L..~3.....S.Q.asv......|c.k..E.!  
+..00008b  02                           univ-prim: INTEGER
+..00008c  15                           Length: 21
+00008d  ..B2.v..8&..-|{m...p.  
+..0000a2  02                           univ-prim: INTEGER
+..0000a3  81 80                        Length: 128
+0000a5  Z.&...*.`x+...Z.H...%%w......U")...].._1......l..Y.J;....S..~z..9........j..iG.., .Jl.E..-L....r.R^..ma|[UX..r.Q.....k......p..J  
+..000125  02                           univ-prim: INTEGER
+..000126  81 80                        Length: 128
+000128  =...5.>...zr.$t....l.e.. M....s..l.|......O.....;.....Ar.8D..5.c..c!.=e....*g..'.1;....N..R...\....s....do).3,bHY..<.....m......  
+..0001a8  02                           univ-prim: INTEGER
+..0001a9  15                           Length: 21
+0001aa  ..X....>\../em...e.r.  

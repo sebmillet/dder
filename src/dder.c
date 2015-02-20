@@ -26,6 +26,13 @@ DER Encoding information taken from:
 
 */
 
+typedef struct {
+	int class;
+	int p_or_c;
+	int number;
+	unsigned long length;
+} taglength_t;
+
 const char *classes[] = {
 	"Universal",        /* CLASS_UNIVERSAL */
 	"Application",      /* CLASS_APPLICATION */
@@ -58,7 +65,7 @@ struct t_tag_universal_class {
 	const char *name;
 		/* Primitive or Constructed? => 0 for P only, 1 for C only, */
 		/* 2 for P or C, -1 for non applicable */
-	int p_or_c; 
+	int p_or_c;
 	int is_string;
 };
 
@@ -113,6 +120,9 @@ Program options from the command line
 
 */
 
+	/* 200, c'est déjà pas mal ! */
+#define MAX_RECURSIVE_LEVELS 200
+
 	/* OL stands for Out Level (no link with Olympic Lyonnais) */
 typedef enum {OL_NORMAL = 0, OL_VERBOSE = 1, OL_VERYVERBOSE = 2} out_level_t;
 out_level_t opt_ol = OL_NORMAL;
@@ -123,6 +133,9 @@ out_data_t opt_od = OD_SMART;
 
 	/* Nb bytes output on each line. MUST be an even number */
 long unsigned opt_width = 16;
+
+	/* Prefix to add as many times as current recursive level */
+char opt_recursive_pattern[100];
 
 
 /*
@@ -255,7 +268,18 @@ int myfgetc(FILE **F, size_t *offset)
 	return r;
 }
 
-void out_sequence(size_t offset, char *buf, const unsigned long len, const int is_value, const out_data_t od)
+void prefix_recursive_level_out(const int recursive_level)
+{
+	/* Yes, we could check whether or not opt_recursive_pattern is empty.
+	   We could.
+	*/
+	int i;
+	for (i = 0; i < recursive_level; ++i) {
+		out(opt_recursive_pattern);
+	}
+}
+
+void out_sequence(size_t offset, char *buf, const unsigned long len, const int is_value, const out_data_t od, const int recursive_level)
 {
 
 	const unsigned long hbytes = opt_width / 2;
@@ -270,6 +294,7 @@ void out_sequence(size_t offset, char *buf, const unsigned long len, const int i
 			lim = (unsigned long)opt_width;
 		for (i = 0; i < lim; ++i) {
 			if (!(i % opt_width)) {
+				prefix_recursive_level_out(recursive_level);
 				strpos = 0;
 				if (len)
 					out("%06x  ", (unsigned int)offset);
@@ -339,52 +364,53 @@ void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag
 	}
 }
 
-	/* Includes the initial byte of number 31 */
+	/* Includes the initial byte of tag number 31 */
 #define TAG_U_LONG_FORMAT_MAX_BYTES 6
 	/* Includes the initial byte that indicates the number of bytes used to encode length */
 #define LENGTH_MULTIBYTES_MAX_BYTES 7
 
-int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length, int *tag_class, int *tag_PC, int *tag_number, unsigned long *length)
+int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level)
 {
 	int c;
 	size_t old_offset = *offset;
 	if ((c = myfgetc(F, offset)) == EOF)
 		return 0;
 
-	*tag_class = (c & 0xc0) >> 6;
-	*tag_PC = (c & 0x20) >> 5;
-	*tag_number = (c & 0x1F);
-	int p_or_c = universal_class_tags[*tag_number].p_or_c;
-	if (tag_class == TAG_CLASS_UNIVERSAL && p_or_c >= 0 && p_or_c <= 1 && *tag_PC != p_or_c) {
-		*tag_PC = TAG_TYPE_PRIMITIVE;
-		out_err("Warning: tag number does not match primitive/constructed bit\n");
+	tl->class = (c & 0xc0) >> 6;
+	tl->p_or_c = (c & 0x20) >> 5;
+	int old_tl_p_or_c = tl->p_or_c;
+	tl->number = (c & 0x1F);
+	int p_or_c = universal_class_tags[tl->number].p_or_c;
+	if (tl->class == TAG_CLASS_UNIVERSAL && p_or_c >= 0 && p_or_c <= 1 && tl->p_or_c != p_or_c) {
+		tl->p_or_c = TAG_TYPE_PRIMITIVE;
+		out_err("Warning: primitive/constructed bit mismatch, enforcing primitive\n");
 	}
 	char tag_name[100];
-	get_tag_name(tag_name, sizeof(tag_name), *tag_class, *tag_number);
+	get_tag_name(tag_name, sizeof(tag_name), tl->class, tl->number);
 
 	char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];
 
 	buf[0] = (char)c;
 	if (opt_ol >= OL_VERBOSE)
-		out_sequence(old_offset, buf, 1, 0, OD_UNDEF);
+		out_sequence(old_offset, buf, 1, 0, OD_UNDEF, recursive_level);
 
 	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)c);
 		out("%c%c %c %c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
-		out_sequence(0, NULL, 0, 0, OD_UNDEF);
-		out("^^         Tag class:  %3i -> %s\n", *tag_class, classes[*tag_class]);
-		out_sequence(0, NULL, 0, 0, OD_UNDEF);
-		out("   ^       Tag type:   %3i -> %s\n", *tag_PC, PCs[*tag_PC]);
-		out_sequence(0, NULL, 0, 0, OD_UNDEF);
-		out("     ^^^^^ Tag number: %3i -> %s\n", *tag_number, tag_name);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
+		out("^^         Tag class:  %3i -> %s\n", tl->class, classes[tl->class]);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
+		out("   ^       Tag type:   %3i -> %s\n", old_tl_p_or_c, PCs[old_tl_p_or_c]);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
+		out("     ^^^^^ Tag number: %3i -> %s\n", tl->number, tag_name);
 	} else if (opt_ol >= OL_VERBOSE) {
-		out("%s-%s: %s\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name);
+		out("%s-%s: %s\n", short_classes[tl->class], short_PCs[old_tl_p_or_c], tag_name);
 	}
 
 	int pos = 0;
 
-	if (*tag_number == TAG_U_LONG_FORMAT) {
+	if (tl->number == TAG_U_LONG_FORMAT) {
 		pos = 1;
 
 		old_offset = *offset;
@@ -419,16 +445,16 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 			multi *= 256;   /* Can be written <<8, but... */
 			++shift;
 		}
-		*tag_number = (int)value;
+		tl->number = (int)value;
 		if (opt_ol >= OL_VERBOSE) {
-			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0, OD_UNDEF);
-			out("Tag number: %i\n", *tag_number);
+			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0, OD_UNDEF, recursive_level);
+			out("Tag number: %i\n", tl->number);
 		}
 	}
 
-	get_tag_name(tag_name, sizeof(tag_name), *tag_class, *tag_number);
+	get_tag_name(tag_name, sizeof(tag_name), tl->class, tl->number);
 
-	if (*tag_class == TAG_CLASS_UNIVERSAL && *tag_number >= 31) {
+	if (tl->class == TAG_CLASS_UNIVERSAL && tl->number >= 31) {
 		out_err("Warning: universal tag number above maximum allowed value (30)\n");
 	}
 
@@ -437,7 +463,6 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 	if (!check_position(F, *offset, *remaining_length, 0))
 		return 0;
 
-/*  char bl[LENGTH_MULTIBYTES_MAX_BYTES];*/
 	char *bl = buf + pos + 1;
 
 	int cc;
@@ -446,7 +471,7 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 		return 0;
 	int n = 0;
 	bl[0] = (char)cc;
-	*length = (unsigned long)cc;
+	tl->length = (unsigned long)cc;
 	int length_type = ((cc & 0x80) >> 7);
 	if (cc & 0x80) {
 		n = (cc & 0x7F);
@@ -457,39 +482,39 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 			myfclose(F, "number of bytes to encode length cannot be null", old_loffset);
 			return 0;
 		}
-		*length = 0;
+		tl->length = 0;
 		int i;
 		for (i = 1; i <= n; ++i) {
 			if ((cc = myfgetc(F, offset)) == EOF)
 				return 0;
-			(*length) <<= 8;
-			(*length) += (unsigned int)cc;
+			tl->length <<= 8;
+			tl->length += (unsigned int)cc;
 			bl[i] = (char)cc;
 		}
 	}
 	if (opt_ol >= OL_VERBOSE)
-		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0, OD_UNDEF);
+		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0, OD_UNDEF, recursive_level);
 
 	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)(bl[0]));
 		out("%c %c%c%c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
-		out_sequence(0, NULL, 0, 0, OD_UNDEF);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		out("^          Len type: %i -> %s\n", length_type, length_coding_types[length_type]);
-		out_sequence(0, NULL, 0, 0, OD_UNDEF);
+		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		if (length_type == LENGTH_CODE_TYPE_ONE) {
-			out("  ^^^^^^^  Len: %lu", *length);
+			out("  ^^^^^^^  Len: %lu", tl->length);
 		} else {
-			out("  ^^^^^^^  Len nb bytes: %i, value: %lu", n, *length);
+			out("  ^^^^^^^  Len nb bytes: %i, value: %lu", n, tl->length);
 		}
 		out("\n");
 	} else if (opt_ol >= OL_VERBOSE) {
-		out("Length: %lu\n", *length);
+		out("Length: %lu\n", tl->length);
 	}
 
 	if (opt_ol == OL_NORMAL) {
-		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0, OD_UNDEF);
-		out("%s-%s: %s, len: %lu\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name, *length);
+		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0, OD_UNDEF, recursive_level);
+		out("%s-%s: %s, len: %lu\n", short_classes[tl->class], short_PCs[old_tl_p_or_c], tag_name, tl->length);
 	}
 
 	*remaining_length -= (n + 1);
@@ -545,45 +570,46 @@ int decode_oid(char *p, const size_t plen, const char *buf, const size_t buflen)
 	return 1;
 }
 
-void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
+void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recursive_level)
 {
-	int tag_class;
-	int tag_PC;
-	int tag_number;
-	unsigned long length;
+	taglength_t tl;
 
-	if (!parse_identifier_length(F, offset, remaining_length, &tag_class, &tag_PC, &tag_number, &length))
+	if (recursive_level > MAX_RECURSIVE_LEVELS) {
+		myfclose(F, "number of recursive calls limit reached, now stopping", *offset);
+	}
+
+	if (!parse_taglength(F, offset, remaining_length, &tl, recursive_level))
 		return;
 
-	if (tag_PC == TAG_TYPE_CONSTRUCTED) {
-		ssize_t inner_remaining_length = (ssize_t)length;
+	if (tl.p_or_c == TAG_TYPE_CONSTRUCTED) {
+		ssize_t inner_remaining_length = (ssize_t)tl.length;
 		while(inner_remaining_length >= 1 && *F != NULL) {
-			parse(F, offset, &inner_remaining_length);
+			parse(F, offset, &inner_remaining_length, recursive_level + 1);
 		}
 		if (inner_remaining_length && *F != NULL) {
 			myfclose(F, "contained data out of container boundaries", *offset);
 			return;
 		}
-		*remaining_length -= (ssize_t)length;
+		*remaining_length -= (ssize_t)tl.length;
 	} else {
 		char *buf;
-		buf = (char *)malloc(length);
+		buf = (char *)malloc(tl.length);
 		size_t nbread;
-		nbread = fread(buf, 1, (size_t)length, *F);
+		nbread = fread(buf, 1, (size_t)tl.length, *F);
 		size_t old_offset = *offset;
 		*offset += nbread;
 		*remaining_length -= (ssize_t)nbread;
 
 		if (nbread >= 1) {
 			out_data_t od = opt_od;
-			if (opt_od == OD_SMART && tag_class == TAG_CLASS_UNIVERSAL &&
-				(size_t)tag_number < sizeof(universal_class_tags) / sizeof(*universal_class_tags)) {
-				od = universal_class_tags[tag_number].is_string ? OD_ENFORCE_TEXT : OD_ENFORCE_HEX;
+			if (opt_od == OD_SMART && tl.class == TAG_CLASS_UNIVERSAL &&
+				(size_t)tl.number < sizeof(universal_class_tags) / sizeof(*universal_class_tags)) {
+				od = universal_class_tags[tl.number].is_string ? OD_ENFORCE_TEXT : OD_ENFORCE_HEX;
 			}
-			out_sequence(old_offset, buf, nbread, 1, od);
+			out_sequence(old_offset, buf, nbread, 1, od, recursive_level);
 		}
 
-		if (nbread != length) {
+		if (nbread != tl.length) {
 			if (feof(*F)) {
 				out("\n");
 				myfclose(F, "unexpected end of file", *offset);
@@ -596,17 +622,20 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 				free(buf);
 				return;
 			}
-			if (tag_class == TAG_CLASS_UNIVERSAL && tag_number == TAG_U_OBJECT_IDENTIFIER) {
+			if (tl.class == TAG_CLASS_UNIVERSAL && tl.number == TAG_U_OBJECT_IDENTIFIER) {
 				const size_t sizeof_printable = 200;
 				char *printable = malloc(sizeof_printable);
-				if (!decode_oid(printable, sizeof_printable, buf, length)) {
+				if (!decode_oid(printable, sizeof_printable, buf, tl.length)) {
 					out("\n");
 					myfclose(F, "unable to decode OID", *offset);
 				} else {
 					if (opt_ol == OL_VERYVERBOSE)
 						out("OID: %s", printable);
-					else
-						out("\n        OID: %s", printable);
+					else {
+						out("\n");
+						prefix_recursive_level_out(recursive_level);
+						out("        OID: %s", printable);
+					}
 				}
 				free(printable);
 			}
@@ -624,7 +653,7 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 
 void opt_check(int n, const char *opt)
 {
-	static int defined_options[5] = {0, 0, 0};
+	static int defined_options[6] = {0, 0, 0};
 
 	if (defined_options[n]) {
 		out_err("Option %s already set\n", opt);
@@ -641,6 +670,7 @@ int main(int argc, char **argv)
 	int optset_veryverbose = 0;
 	int optset_text = 0;
 	int optset_hex = 0;
+	s_strncpy(opt_recursive_pattern, "", sizeof(opt_recursive_pattern));
 
 	int a = 1;
 	while (a >= 1 && a < argc) {
@@ -665,8 +695,15 @@ int main(int argc, char **argv)
 			opt_check(3, argv[a]);
 			optset_hex = 1;
 			opt_od = OD_ENFORCE_HEX;
-		} else if (!strcasecmp(argv[a], "-width")) {
+		} else if (!strcasecmp(argv[a], "-recursive")) {
 			opt_check(4, argv[a]);
+			if (++a >= argc) {
+				a = -(a - 1);
+			} else {
+				s_strncpy(opt_recursive_pattern, argv[a], sizeof(opt_recursive_pattern));
+			}
+		} else if (!strcasecmp(argv[a], "-width")) {
+			opt_check(5, argv[a]);
 			if (++a >= argc) {
 				a = -(a - 1);
 			} else {
@@ -734,7 +771,7 @@ int main(int argc, char **argv)
 	}
 
 	size_t offset = 0;
-	parse(&F, &offset, &s);
+	parse(&F, &offset, &s, 0);
 	if (F != NULL && F != stdin) {
 		if (s != 0 || fgetc(F) != EOF) {
 			out_dbg("s = %li\n", s);
