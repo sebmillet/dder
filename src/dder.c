@@ -110,10 +110,11 @@ Program options from the command line
 
 */
 
-int opt_verbose = 0;
+	/* OL stands for Out Level (no link with Olympic Lyonnais) */
+typedef enum {OL_NORMAL, OL_VERBOSE, OL_VERYVERBOSE} out_level_t;
+out_level_t opt_ol = OL_NORMAL;
 int opt_hex = 1;
 long unsigned opt_width = 16;
-int opt_compact = 1;
 
 
 /*
@@ -353,10 +354,10 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 	char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];
 
 	buf[0] = (char)c;
-	if (!opt_compact)
+	if (opt_ol >= OL_VERBOSE)
 		out_sequence(old_offset, buf, 1, 0);
 
-	if (opt_verbose) {
+	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)c);
 		out("%c%c %c %c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
@@ -366,7 +367,7 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 		out("   ^       Tag type:   %3i -> %s\n", *tag_PC, PCs[*tag_PC]);
 		out_sequence(0, NULL, 0, 0);
 		out("     ^^^^^ Tag number: %3i -> %s\n", *tag_number, tag_name);
-	} else if (!opt_compact) {
+	} else if (opt_ol >= OL_VERBOSE) {
 		out("%s-%s: %s\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name);
 	}
 
@@ -408,7 +409,7 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 			++shift;
 		}
 		*tag_number = (int)value;
-		if (!opt_compact) {
+		if (opt_ol >= OL_VERBOSE) {
 			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0);
 			out("Tag number: %i\n", *tag_number);
 		}
@@ -449,10 +450,10 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 			bl[i] = (char)cc;
 		}
 	}
-	if (!opt_compact)
+	if (opt_ol >= OL_VERBOSE)
 		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0);
 
-	if (opt_verbose) {
+	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)(bl[0]));
 		out("%c %c%c%c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
@@ -465,11 +466,11 @@ int parse_identifier_length(FILE **F, size_t *offset, ssize_t *remaining_length,
 			out("  ^^^^^^^  Len nb bytes: %i, value: %lu", n, *length);
 		}
 		out("\n");
-	} else if (!opt_compact) {
+	} else if (opt_ol >= OL_VERBOSE) {
 		out("Length: %lu\n", *length);
 	}
 
-	if (opt_compact) {
+	if (opt_ol == OL_NORMAL) {
 		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0);
 		out("%s-%s: %s, len: %lu\n", short_classes[*tag_class], short_PCs[*tag_PC], tag_name, *length);
 	}
@@ -578,7 +579,7 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length)
 					out("\n");
 					myfclose(F, "unable to decode OID", *offset);
 				} else {
-					if (opt_verbose)
+					if (opt_ol == OL_VERYVERBOSE)
 						out("OID: %s", printable);
 					else
 						out("\n        OID: %s", printable);
@@ -611,9 +612,9 @@ int main(int argc, char **argv)
 {
 	FILE *F = NULL;
 
-	int opt_v = 0;
-	int opt_vv = 0;
-	int opt_t = 0;
+	int optset_verbose = 0;
+	int optset_veryverbose = 0;
+	int optset_text = 0;
 
 	int a = 1;
 	while (a >= 1 && a < argc) {
@@ -623,18 +624,16 @@ int main(int argc, char **argv)
 			version();
 		} else if (!strcasecmp(argv[a], "-v")) {
 			opt_check(0, argv[a]);
-			opt_v = 1;
-			opt_verbose = 0;
-			opt_compact = 0;
+			optset_verbose = 1;
+			opt_ol = OL_VERBOSE;
 		} else if (!strcasecmp(argv[a], "-vv")) {
 			opt_check(1, argv[a]);
-			opt_vv = 1;
-			opt_verbose = 1;
-			opt_compact = 0;
+			optset_veryverbose = 1;
+			opt_ol = OL_VERYVERBOSE;
 			opt_hex = 1;
 		} else if (!strcasecmp(argv[a], "-t")) {
 			opt_check(2, argv[a]);
-			opt_t = 1;
+			optset_text = 1;
 			opt_hex = 0;
 		} else if (!strcasecmp(argv[a], "-w")) {
 			opt_check(3, argv[a]);
@@ -671,10 +670,10 @@ int main(int argc, char **argv)
 	} else if (a < argc - 1) {
 		out_err("Trailing parameter(s)\n");
 		a = 0;
-	} else if (opt_vv && opt_t) {
+	} else if (optset_veryverbose && optset_text) {
 		out_err("incompatible options -vv and -t\n");
 		a = 0;
-	} else if (opt_v && opt_vv) {
+	} else if (optset_verbose && optset_veryverbose) {
 		out_err("incompatible options -vv and -v\n");
 		a = 0;
 	} else if (a >= argc) {
