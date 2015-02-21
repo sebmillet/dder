@@ -17,8 +17,7 @@ Reading from file dsa3.der...
 ......00001a  06                           univ-prim: OBJECT IDENTIFIER
 ......00001b  09                           Length: 9
 ......00001c  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-......000024  0b                           .          
-......        OID: 1.2.840.113549.1.1.11
+......000024  0b                           .          OID: 1.2.840.113549.1.1.11
 ......000025  05                           univ-prim: NULL
 ......000026  00                           Length: 0
 ....000027  30                           univ-cons: SEQUENCE
@@ -29,66 +28,60 @@ Reading from file dsa3.der...
 ........00002d  09                           Length: 9
 ..........00002e  06                           univ-prim: OBJECT IDENTIFIER
 ..........00002f  03                           Length: 3
-..........000030  55 04 06                     U..        
-..........        OID: 2.5.4.6
+..........000030  55 04 06                     U..        OID: 2.5.4.6
 ..........000033  13                           univ-prim: PRINTABLESTRING
 ..........000034  02                           Length: 2
-000035  FR  
+..........000035  FR  
 ......000037  31                           univ-cons: SET
 ......000038  0f                           Length: 15
 ........000039  30                           univ-cons: SEQUENCE
 ........00003a  0d                           Length: 13
 ..........00003b  06                           univ-prim: OBJECT IDENTIFIER
 ..........00003c  03                           Length: 3
-..........00003d  55 04 08                     U..        
-..........        OID: 2.5.4.8
+..........00003d  55 04 08                     U..        OID: 2.5.4.8
 ..........000040  0c                           univ-prim: UTF8String
 ..........000041  06                           Length: 6
-000042  France  
+..........000042  France  
 ......000048  31                           univ-cons: SET
 ......000049  0e                           Length: 14
 ........00004a  30                           univ-cons: SEQUENCE
 ........00004b  0c                           Length: 12
 ..........00004c  06                           univ-prim: OBJECT IDENTIFIER
 ..........00004d  03                           Length: 3
-..........00004e  55 04 07                     U..        
-..........        OID: 2.5.4.7
+..........00004e  55 04 07                     U..        OID: 2.5.4.7
 ..........000051  0c                           univ-prim: UTF8String
 ..........000052  05                           Length: 5
-000053  Claix  
+..........000053  Claix  
 ......000058  31                           univ-cons: SET
 ......000059  0b                           Length: 11
 ........00005a  30                           univ-cons: SEQUENCE
 ........00005b  09                           Length: 9
 ..........00005c  06                           univ-prim: OBJECT IDENTIFIER
 ..........00005d  03                           Length: 3
-..........00005e  55 04 0a                     U..        
-..........        OID: 2.5.4.10
+..........00005e  55 04 0a                     U..        OID: 2.5.4.10
 ..........000061  0c                           univ-prim: UTF8String
 ..........000062  02                           Length: 2
-000063  IT  
+..........000063  IT  
 ......000065  31                           univ-cons: SET
 ......000066  14                           Length: 20
 ........000067  30                           univ-cons: SEQUENCE
 ........000068  12                           Length: 18
 ..........000069  06                           univ-prim: OBJECT IDENTIFIER
 ..........00006a  03                           Length: 3
-..........00006b  55 04 0b                     U..        
-..........        OID: 2.5.4.11
+..........00006b  55 04 0b                     U..        OID: 2.5.4.11
 ..........00006e  0c                           univ-prim: UTF8String
 ..........00006f  0b                           Length: 11
-000070  Lapinou Ltd  
+..........000070  Lapinou Ltd  
 ......00007b  31                           univ-cons: SET
 ......00007c  13                           Length: 19
 ........00007d  30                           univ-cons: SEQUENCE
 ........00007e  11                           Length: 17
 ..........00007f  06                           univ-prim: OBJECT IDENTIFIER
 ..........000080  03                           Length: 3
-..........000081  55 04 03                     U..        
-..........        OID: 2.5.4.3
+..........000081  55 04 03                     U..        OID: 2.5.4.3
 ..........000084  0c                           univ-prim: UTF8String
 ..........000085  0a                           Length: 10
-000086  SMT DEV CA  
+..........000086  SMT DEV CA  
 ......000090  31                           univ-cons: SET
 ......000091  31                           Length: 49
 ........000092  30                           univ-cons: SEQUENCE
@@ -96,11 +89,10 @@ Reading from file dsa3.der...
 ..........000094  06                           univ-prim: OBJECT IDENTIFIER
 ..........000095  09                           Length: 9
 ..........000096  2a 86 48 86    f7 0d 01 09   *.H.  .... 
-..........00009e  01                           .          
-..........        OID: 1.2.840.113549.1.9.1
+..........00009e  01                           .          OID: 1.2.840.113549.1.9.1
 ..........00009f  16                           univ-prim: IA5String
 ..........0000a0  22                           Length: 34
-0000a1  sebastien.millet1@club-internet.fr  
+..........0000a1  sebastien.millet1@club-internet.fr  
 ....0000c3  30                           univ-cons: SEQUENCE
 ....0000c4  1e                           Length: 30
 ......0000c5  17                           univ-prim: UTCTime
@@ -119,66 +111,60 @@ Reading from file dsa3.der...
 ........0000e9  09                           Length: 9
 ..........0000ea  06                           univ-prim: OBJECT IDENTIFIER
 ..........0000eb  03                           Length: 3
-..........0000ec  55 04 06                     U..        
-..........        OID: 2.5.4.6
+..........0000ec  55 04 06                     U..        OID: 2.5.4.6
 ..........0000ef  13                           univ-prim: PRINTABLESTRING
 ..........0000f0  02                           Length: 2
-0000f1  FR  
+..........0000f1  FR  
 ......0000f3  31                           univ-cons: SET
 ......0000f4  0f                           Length: 15
 ........0000f5  30                           univ-cons: SEQUENCE
 ........0000f6  0d                           Length: 13
 ..........0000f7  06                           univ-prim: OBJECT IDENTIFIER
 ..........0000f8  03                           Length: 3
-..........0000f9  55 04 08                     U..        
-..........        OID: 2.5.4.8
+..........0000f9  55 04 08                     U..        OID: 2.5.4.8
 ..........0000fc  0c                           univ-prim: UTF8String
 ..........0000fd  06                           Length: 6
-0000fe  France  
+..........0000fe  France  
 ......000104  31                           univ-cons: SET
 ......000105  0e                           Length: 14
 ........000106  30                           univ-cons: SEQUENCE
 ........000107  0c                           Length: 12
 ..........000108  06                           univ-prim: OBJECT IDENTIFIER
 ..........000109  03                           Length: 3
-..........00010a  55 04 07                     U..        
-..........        OID: 2.5.4.7
+..........00010a  55 04 07                     U..        OID: 2.5.4.7
 ..........00010d  0c                           univ-prim: UTF8String
 ..........00010e  05                           Length: 5
-00010f  Claix  
+..........00010f  Claix  
 ......000114  31                           univ-cons: SET
 ......000115  0b                           Length: 11
 ........000116  30                           univ-cons: SEQUENCE
 ........000117  09                           Length: 9
 ..........000118  06                           univ-prim: OBJECT IDENTIFIER
 ..........000119  03                           Length: 3
-..........00011a  55 04 0a                     U..        
-..........        OID: 2.5.4.10
+..........00011a  55 04 0a                     U..        OID: 2.5.4.10
 ..........00011d  0c                           univ-prim: UTF8String
 ..........00011e  02                           Length: 2
-00011f  IT  
+..........00011f  IT  
 ......000121  31                           univ-cons: SET
 ......000122  14                           Length: 20
 ........000123  30                           univ-cons: SEQUENCE
 ........000124  12                           Length: 18
 ..........000125  06                           univ-prim: OBJECT IDENTIFIER
 ..........000126  03                           Length: 3
-..........000127  55 04 0b                     U..        
-..........        OID: 2.5.4.11
+..........000127  55 04 0b                     U..        OID: 2.5.4.11
 ..........00012a  0c                           univ-prim: UTF8String
 ..........00012b  0b                           Length: 11
-00012c  Lapinou Ltd  
+..........00012c  Lapinou Ltd  
 ......000137  31                           univ-cons: SET
 ......000138  13                           Length: 19
 ........000139  30                           univ-cons: SEQUENCE
 ........00013a  11                           Length: 17
 ..........00013b  06                           univ-prim: OBJECT IDENTIFIER
 ..........00013c  03                           Length: 3
-..........00013d  55 04 03                     U..        
-..........        OID: 2.5.4.3
+..........00013d  55 04 03                     U..        OID: 2.5.4.3
 ..........000140  0c                           univ-prim: UTF8String
 ..........000141  0a                           Length: 10
-000142  SMT DEV CA  
+..........000142  SMT DEV CA  
 ......00014c  31                           univ-cons: SET
 ......00014d  31                           Length: 49
 ........00014e  30                           univ-cons: SEQUENCE
@@ -186,11 +172,10 @@ Reading from file dsa3.der...
 ..........000150  06                           univ-prim: OBJECT IDENTIFIER
 ..........000151  09                           Length: 9
 ..........000152  2a 86 48 86    f7 0d 01 09   *.H.  .... 
-..........00015a  01                           .          
-..........        OID: 1.2.840.113549.1.9.1
+..........00015a  01                           .          OID: 1.2.840.113549.1.9.1
 ..........00015b  16                           univ-prim: IA5String
 ..........00015c  22                           Length: 34
-00015d  sebastien.millet1@club-internet.fr  
+..........00015d  sebastien.millet1@club-internet.fr  
 ....00017f  30                           univ-cons: SEQUENCE
 ....000180  81 9f                        Length: 159
 ......000182  30                           univ-cons: SEQUENCE
@@ -198,8 +183,7 @@ Reading from file dsa3.der...
 ........000184  06                           univ-prim: OBJECT IDENTIFIER
 ........000185  09                           Length: 9
 ........000186  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-........00018e  01                           .          
-........        OID: 1.2.840.113549.1.1.1
+........00018e  01                           .          OID: 1.2.840.113549.1.1.1
 ........00018f  05                           univ-prim: NULL
 ........000190  00                           Length: 0
 ......000191  03                           univ-prim: BIT STRING
@@ -230,8 +214,7 @@ Reading from file dsa3.der...
 ........000226  1d                           Length: 29
 ..........000227  06                           univ-prim: OBJECT IDENTIFIER
 ..........000228  03                           Length: 3
-..........000229  55 1d 0e                     U..        
-..........        OID: 2.5.29.14
+..........000229  55 1d 0e                     U..        OID: 2.5.29.14
 ..........00022c  04                           univ-prim: OCTET STRING
 ..........00022d  16                           Length: 22
 ..........00022e  04 14 a3 ac    50 6e 99 80   ....  Pn.. 
@@ -241,8 +224,7 @@ Reading from file dsa3.der...
 ........000245  1f                           Length: 31
 ..........000246  06                           univ-prim: OBJECT IDENTIFIER
 ..........000247  03                           Length: 3
-..........000248  55 1d 23                     U.#        
-..........        OID: 2.5.29.35
+..........000248  55 1d 23                     U.#        OID: 2.5.29.35
 ..........00024b  04                           univ-prim: OCTET STRING
 ..........00024c  18                           Length: 24
 ..........00024d  30 16 80 14    a3 ac 50 6e   0...  ..Pn 
@@ -252,8 +234,7 @@ Reading from file dsa3.der...
 ........000266  0c                           Length: 12
 ..........000267  06                           univ-prim: OBJECT IDENTIFIER
 ..........000268  03                           Length: 3
-..........000269  55 1d 13                     U..        
-..........        OID: 2.5.29.19
+..........000269  55 1d 13                     U..        OID: 2.5.29.19
 ..........00026c  04                           univ-prim: OCTET STRING
 ..........00026d  05                           Length: 5
 ..........00026e  30 03 01 01    ff            0...  .    
@@ -262,8 +243,7 @@ Reading from file dsa3.der...
 ....000275  06                           univ-prim: OBJECT IDENTIFIER
 ....000276  09                           Length: 9
 ....000277  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-....00027f  0b                           .          
-....        OID: 1.2.840.113549.1.1.11
+....00027f  0b                           .          OID: 1.2.840.113549.1.1.11
 ....000280  05                           univ-prim: NULL
 ....000281  00                           Length: 0
 ..000282  03                           univ-prim: BIT STRING

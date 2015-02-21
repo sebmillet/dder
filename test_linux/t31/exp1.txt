@@ -11,8 +11,7 @@ Reading from file abc1.der...
 000014  0a                           Length: 10
 000015  06                           univ-prim: OBJECT IDENTIFIER
 000016  08                           Length: 8
-000017  2a 86 48 ce    3d 04 03 02   *.H.  =... 
-        OID: 1.2.840.10045.4.3.2
+000017  2a 86 48 ce    3d 04 03 02   *.H.  =... OID: 1.2.840.10045.4.3.2
 00001f  30                           univ-cons: SEQUENCE
 000020  2a                           Length: 42
 000021  31                           univ-cons: SET
@@ -21,8 +20,7 @@ Reading from file abc1.der...
 000024  11                           Length: 17
 000025  06                           univ-prim: OBJECT IDENTIFIER
 000026  03                           Length: 3
-000027  55 04 0a                     U..        
-        OID: 2.5.4.10
+000027  55 04 0a                     U..        OID: 2.5.4.10
 00002a  0c                           univ-prim: UTF8String
 00002b  0a                           Length: 10
 00002c  4d 79 20 43    6f 6d 70 61   My C  ompa 
@@ -33,8 +31,7 @@ Reading from file abc1.der...
 000039  11                           Length: 17
 00003a  06                           univ-prim: OBJECT IDENTIFIER
 00003b  03                           Length: 3
-00003c  55 04 03                     U..        
-        OID: 2.5.4.3
+00003c  55 04 03                     U..        OID: 2.5.4.3
 00003f  0c                           univ-prim: UTF8String
 000040  0a                           Length: 10
 000041  53 4d 54 20    44 45 56 20   SMT   DEV  
@@ -57,8 +54,7 @@ Reading from file abc1.der...
 000070  12                           Length: 18
 000071  06                           univ-prim: OBJECT IDENTIFIER
 000072  03                           Length: 3
-000073  55 04 0a                     U..        
-        OID: 2.5.4.10
+000073  55 04 0a                     U..        OID: 2.5.4.10
 000076  0c                           univ-prim: UTF8String
 000077  0b                           Length: 11
 000078  4c 61 70 69    6e 6f 75 20   Lapi  nou  
@@ -69,8 +65,7 @@ Reading from file abc1.der...
 000086  09                           Length: 9
 000087  06                           univ-prim: OBJECT IDENTIFIER
 000088  03                           Length: 3
-000089  55 04 06                     U..        
-        OID: 2.5.4.6
+000089  55 04 06                     U..        OID: 2.5.4.6
 00008c  13                           univ-prim: PRINTABLESTRING
 00008d  02                           Length: 2
 00008e  46 52                        FR         
@@ -80,8 +75,7 @@ Reading from file abc1.der...
 000093  1a                           Length: 26
 000094  06                           univ-prim: OBJECT IDENTIFIER
 000095  03                           Length: 3
-000096  55 04 03                     U..        
-        OID: 2.5.4.3
+000096  55 04 03                     U..        OID: 2.5.4.3
 000099  0c                           univ-prim: UTF8String
 00009a  13                           Length: 19
 00009b  53 c3 83 c2    a9 62 61 73   S...  .bas 
@@ -94,8 +88,7 @@ Reading from file abc1.der...
 0000b3  06                           univ-prim: OBJECT IDENTIFIER
 0000b4  09                           Length: 9
 0000b5  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-0000bd  01                           .          
-        OID: 1.2.840.113549.1.1.1
+0000bd  01                           .          OID: 1.2.840.113549.1.1.1
 0000be  05                           univ-prim: NULL
 0000bf  00                           Length: 0
 0000c0  03                           univ-prim: BIT STRING
@@ -122,8 +115,7 @@ Reading from file abc1.der...
 000151  0a                           Length: 10
 000152  06                           univ-prim: OBJECT IDENTIFIER
 000153  08                           Length: 8
-000154  2a 86 48 ce    3d 04 03 02   *.H.  =... 
-        OID: 1.2.840.10045.4.3.2
+000154  2a 86 48 ce    3d 04 03 02   *.H.  =... OID: 1.2.840.10045.4.3.2
 00015c  03                           univ-prim: BIT STRING
 00015d  48                           Length: 72
 00015e  00 30 45 02    20 00 d9 e1   .0E.   ... 

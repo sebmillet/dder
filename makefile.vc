@@ -1,7 +1,6 @@
 # makefile.vc
 
-# dder.exe makefile for Microsoft Visual C
-# Tested on MSVC2013
+# dder.exe makefile for Microsoft Visual C++
 
 # Sébastien Millet, Februay 2015
 

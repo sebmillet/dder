@@ -15,8 +15,7 @@ Reading from file g1.der...
 000020  0d                           Length: 13
 000021  06                           univ-prim: OBJECT IDENTIFIER
 000022  09                           Length: 9
-000023  *.H......  
-        OID: 1.2.840.113549.1.1.5
+000023  *.H......  OID: 1.2.840.113549.1.1.5
 00002c  05                           univ-prim: NULL
 00002d  00                           Length: 0
 00002e  30                           univ-cons: SEQUENCE
@@ -27,8 +26,7 @@ Reading from file g1.der...
 000034  09                           Length: 9
 000035  06                           univ-prim: OBJECT IDENTIFIER
 000036  03                           Length: 3
-000037  U..  
-        OID: 2.5.4.6
+000037  U..  OID: 2.5.4.6
 00003a  13                           univ-prim: PRINTABLESTRING
 00003b  02                           Length: 2
 00003c  US  
@@ -38,8 +36,7 @@ Reading from file g1.der...
 000041  15                           Length: 21
 000042  06                           univ-prim: OBJECT IDENTIFIER
 000043  03                           Length: 3
-000044  U..  
-        OID: 2.5.4.10
+000044  U..  OID: 2.5.4.10
 000047  13                           univ-prim: PRINTABLESTRING
 000048  0e                           Length: 14
 000049  VeriSign, Inc.  
@@ -49,8 +46,7 @@ Reading from file g1.der...
 00005a  1d                           Length: 29
 00005b  06                           univ-prim: OBJECT IDENTIFIER
 00005c  03                           Length: 3
-00005d  U..  
-        OID: 2.5.4.11
+00005d  U..  OID: 2.5.4.11
 000060  13                           univ-prim: PRINTABLESTRING
 000061  16                           Length: 22
 000062  VeriSign Trust Network  
@@ -60,8 +56,7 @@ Reading from file g1.der...
 00007b  39                           Length: 57
 00007c  06                           univ-prim: OBJECT IDENTIFIER
 00007d  03                           Length: 3
-00007e  U..  
-        OID: 2.5.4.11
+00007e  U..  OID: 2.5.4.11
 000081  13                           univ-prim: PRINTABLESTRING
 000082  32                           Length: 50
 000083  Terms of use at https://www.verisign.com/rpa (c)06  
@@ -71,8 +66,7 @@ Reading from file g1.der...
 0000b8  36                           Length: 54
 0000b9  06                           univ-prim: OBJECT IDENTIFIER
 0000ba  03                           Length: 3
-0000bb  U..  
-        OID: 2.5.4.3
+0000bb  U..  OID: 2.5.4.3
 0000be  13                           univ-prim: PRINTABLESTRING
 0000bf  2f                           Length: 47
 0000c0  VeriSign Class 3 Extended Validation SSL SGC CA  
@@ -92,8 +86,7 @@ Reading from file g1.der...
 000115  11                           Length: 17
 000116  06                           univ-prim: OBJECT IDENTIFIER
 000117  0b                           Length: 11
-000118  +.....7<...  
-        OID: 1.3.6.1.4.1.311.60.2.1.3
+000118  +.....7<...  OID: 1.3.6.1.4.1.311.60.2.1.3
 000123  13                           univ-prim: PRINTABLESTRING
 000124  02                           Length: 2
 000125  FR  
@@ -103,8 +96,7 @@ Reading from file g1.der...
 00012a  1b                           Length: 27
 00012b  06                           univ-prim: OBJECT IDENTIFIER
 00012c  03                           Length: 3
-00012d  U..  
-        OID: 2.5.4.15
+00012d  U..  OID: 2.5.4.15
 000130  13                           univ-prim: PRINTABLESTRING
 000131  14                           Length: 20
 000132  Private Organization  
@@ -114,8 +106,7 @@ Reading from file g1.der...
 000149  12                           Length: 18
 00014a  06                           univ-prim: OBJECT IDENTIFIER
 00014b  03                           Length: 3
-00014c  U..  
-        OID: 2.5.4.5
+00014c  U..  OID: 2.5.4.5
 00014f  13                           univ-prim: PRINTABLESTRING
 000150  0b                           Length: 11
 000151  421 100 645  
@@ -125,8 +116,7 @@ Reading from file g1.der...
 00015f  09                           Length: 9
 000160  06                           univ-prim: OBJECT IDENTIFIER
 000161  03                           Length: 3
-000162  U..  
-        OID: 2.5.4.6
+000162  U..  OID: 2.5.4.6
 000165  13                           univ-prim: PRINTABLESTRING
 000166  02                           Length: 2
 000167  FR  
@@ -136,8 +126,7 @@ Reading from file g1.der...
 00016c  0c                           Length: 12
 00016d  06                           univ-prim: OBJECT IDENTIFIER
 00016e  03                           Length: 3
-00016f  U..  
-        OID: 2.5.4.17
+00016f  U..  OID: 2.5.4.17
 000172  14                           univ-prim: T61STRING
 000173  05                           Length: 5
 000174  75006  
@@ -147,8 +136,7 @@ Reading from file g1.der...
 00017c  0c                           Length: 12
 00017d  06                           univ-prim: OBJECT IDENTIFIER
 00017e  03                           Length: 3
-00017f  U..  
-        OID: 2.5.4.8
+00017f  U..  OID: 2.5.4.8
 000182  13                           univ-prim: PRINTABLESTRING
 000183  05                           Length: 5
 000184  PARIS  
@@ -158,8 +146,7 @@ Reading from file g1.der...
 00018c  0c                           Length: 12
 00018d  06                           univ-prim: OBJECT IDENTIFIER
 00018e  03                           Length: 3
-00018f  U..  
-        OID: 2.5.4.7
+00018f  U..  OID: 2.5.4.7
 000192  14                           univ-prim: T61STRING
 000193  05                           Length: 5
 000194  PARIS  
@@ -169,8 +156,7 @@ Reading from file g1.der...
 00019c  18                           Length: 24
 00019d  06                           univ-prim: OBJECT IDENTIFIER
 00019e  03                           Length: 3
-00019f  U..  
-        OID: 2.5.4.9
+00019f  U..  OID: 2.5.4.9
 0001a2  14                           univ-prim: T61STRING
 0001a3  11                           Length: 17
 0001a4  115 rue de Sevres  
@@ -180,8 +166,7 @@ Reading from file g1.der...
 0001b8  1b                           Length: 27
 0001b9  06                           univ-prim: OBJECT IDENTIFIER
 0001ba  03                           Length: 3
-0001bb  U..  
-        OID: 2.5.4.10
+0001bb  U..  OID: 2.5.4.10
 0001be  14                           univ-prim: T61STRING
 0001bf  14                           Length: 20
 0001c0  LA BANQUE POSTALE SA  
@@ -191,8 +176,7 @@ Reading from file g1.der...
 0001d7  0d                           Length: 13
 0001d8  06                           univ-prim: OBJECT IDENTIFIER
 0001d9  03                           Length: 3
-0001da  U..  
-        OID: 2.5.4.11
+0001da  U..  OID: 2.5.4.11
 0001dd  14                           univ-prim: T61STRING
 0001de  06                           Length: 6
 0001df  DISFE2  
@@ -202,8 +186,7 @@ Reading from file g1.der...
 0001e8  1d                           Length: 29
 0001e9  06                           univ-prim: OBJECT IDENTIFIER
 0001ea  03                           Length: 3
-0001eb  U..  
-        OID: 2.5.4.3
+0001eb  U..  OID: 2.5.4.3
 0001ee  14                           univ-prim: T61STRING
 0001ef  16                           Length: 22
 0001f0  www.labanquepostale.fr  
@@ -213,8 +196,7 @@ Reading from file g1.der...
 00020b  0d                           Length: 13
 00020c  06                           univ-prim: OBJECT IDENTIFIER
 00020d  09                           Length: 9
-00020e  *.H......  
-        OID: 1.2.840.113549.1.1.1
+00020e  *.H......  OID: 1.2.840.113549.1.1.1
 000217  05                           univ-prim: NULL
 000218  00                           Length: 0
 000219  03                           univ-prim: BIT STRING
@@ -228,8 +210,7 @@ Reading from file g1.der...
 000335  35                           Length: 53
 000336  06                           univ-prim: OBJECT IDENTIFIER
 000337  03                           Length: 3
-000338  U..  
-        OID: 2.5.29.17
+000338  U..  OID: 2.5.29.17
 00033b  04                           univ-prim: OCTET STRING
 00033c  2e                           Length: 46
 00033d  0,..labanquepostale.fr..www.labanquepostale.fr  
@@ -237,8 +218,7 @@ Reading from file g1.der...
 00036c  09                           Length: 9
 00036d  06                           univ-prim: OBJECT IDENTIFIER
 00036e  03                           Length: 3
-00036f  U..  
-        OID: 2.5.29.19
+00036f  U..  OID: 2.5.29.19
 000372  04                           univ-prim: OCTET STRING
 000373  02                           Length: 2
 000374  0.  
@@ -246,8 +226,7 @@ Reading from file g1.der...
 000377  0e                           Length: 14
 000378  06                           univ-prim: OBJECT IDENTIFIER
 000379  03                           Length: 3
-00037a  U..  
-        OID: 2.5.29.15
+00037a  U..  OID: 2.5.29.15
 00037d  01                           univ-prim: BOOLEAN
 00037e  01                           Length: 1
 00037f  .  
@@ -258,8 +237,7 @@ Reading from file g1.der...
 000387  28                           Length: 40
 000388  06                           univ-prim: OBJECT IDENTIFIER
 000389  03                           Length: 3
-00038a  U.%  
-        OID: 2.5.29.37
+00038a  U.%  OID: 2.5.29.37
 00038d  04                           univ-prim: OCTET STRING
 00038e  21                           Length: 33
 00038f  0...+.........+.........`.H...B..  
@@ -267,8 +245,7 @@ Reading from file g1.der...
 0003b1  66                           Length: 102
 0003b2  06                           univ-prim: OBJECT IDENTIFIER
 0003b3  03                           Length: 3
-0003b4  U.   
-        OID: 2.5.29.32
+0003b4  U.   OID: 2.5.29.32
 0003b7  04                           univ-prim: OCTET STRING
 0003b8  5f                           Length: 95
 0003b9  0]0[..`.H...E....0L0#..+.........https://d.symcb.com/cps0%..+.......0...https://d.symcb.com/rpa  
@@ -276,8 +253,7 @@ Reading from file g1.der...
 000419  1f                           Length: 31
 00041a  06                           univ-prim: OBJECT IDENTIFIER
 00041b  03                           Length: 3
-00041c  U.#  
-        OID: 2.5.29.35
+00041c  U.#  OID: 2.5.29.35
 00041f  04                           univ-prim: OCTET STRING
 000420  18                           Length: 24
 000421  0...NC..v.7SzO.Xo..8....  
@@ -285,8 +261,7 @@ Reading from file g1.der...
 00043a  2b                           Length: 43
 00043b  06                           univ-prim: OBJECT IDENTIFIER
 00043c  03                           Length: 3
-00043d  U..  
-        OID: 2.5.29.31
+00043d  U..  OID: 2.5.29.31
 000440  04                           univ-prim: OCTET STRING
 000441  24                           Length: 36
 000442  0"0 ......http://sb.symcb.com/sb.crl  
@@ -294,8 +269,7 @@ Reading from file g1.der...
 000467  57                           Length: 87
 000468  06                           univ-prim: OBJECT IDENTIFIER
 000469  08                           Length: 8
-00046a  +.......  
-        OID: 1.3.6.1.5.5.7.1.1
+00046a  +.......  OID: 1.3.6.1.5.5.7.1.1
 000472  04                           univ-prim: OCTET STRING
 000473  4b                           Length: 75
 000474  0I0...+.....0...http://sb.symcd.com0&..+.....0...http://sb.symcb.com/sb.crt  
@@ -303,8 +277,7 @@ Reading from file g1.der...
 0004c0  0d                           Length: 13
 0004c1  06                           univ-prim: OBJECT IDENTIFIER
 0004c2  09                           Length: 9
-0004c3  *.H......  
-        OID: 1.2.840.113549.1.1.5
+0004c3  *.H......  OID: 1.2.840.113549.1.1.5
 0004cc  05                           univ-prim: NULL
 0004cd  00                           Length: 0
 0004ce  03                           univ-prim: BIT STRING

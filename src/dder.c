@@ -69,7 +69,7 @@ struct t_tag_universal_class {
 	const char *name;
 		/* Primitive or Constructed? => 0 for P only, 1 for C only, */
 		/* 2 for P or C, -1 for non applicable */
-	int p_or_c;
+	int type;
 	int is_string;
 };
 
@@ -197,14 +197,27 @@ void usage()
 	out_err("  dder [OPTION]... [FILE]\n");
 	out_err("Parses FILE according to DER syntax\n");
 	out_err("Uses standard input if FILE is not specified\n");
+	out_err("\n");
+	out_err("FILE must be in der format. If it is in pem\n");
+	out_err("format you can use an openssl command to convert\n");
+	out_err("  If FILE is a private key:\n");
+	out_err("  openssl pley -in FILE -outform der -out out.der\n");
+	out_err("  If FILE is a certificate request:\n");
+	out_err("  openssl req -in FILE -outform der -out out.der\n");
+	out_err("  If FILE is a certificate:\n");
+	out_err("  openssl x509 -in FILE -outform der -out out.der\n");
+	out_err("\n");
+	out_err("Options are case insensitive. Options list:\n");
 	out_err("  -help        print this help screen\n");
 	out_err("  -version     output version information and exit\n");
 	out_err("  -verbose     verbose output.\n");
 	out_err("  -veryverbose *very* verbose output. Implies -hex\n");
 	out_err("  -text        enforce text output of data values\n");
 	out_err("  -hex         enforce hex output of data values\n");
-	out_err("  -width       number of bytes per line, must be even\n");
-	out_err("  --           end of parameters, option that follows is a file name\n");
+	out_err("  -width N     number of bytes per line, must be even\n");
+	out_err("  -recursive S string to add at the beginning of output lines,\n");
+	out_err("               one occurence of string for each level\n");
+	out_err("  --           end of parameters, next option is a file name\n");
 	exit(-1);
 }
 
@@ -332,6 +345,7 @@ void out_sequence(size_t offset, char *buf, const unsigned long len, const int i
 			}
 		}
 	} else {
+		prefix_recursive_level_out(recursive_level);
 		out("%06x  ", (unsigned int)offset);
 		char c;
 		unsigned i;
@@ -384,10 +398,10 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 
 	tl->class = (c & 0xc0) >> 6;
 	tl->p_or_c = (c & 0x20) >> 5;
-	int old_tl_p_or_c = tl->p_or_c;
+	int original_type = tl->p_or_c;
 	tl->number = (c & 0x1F);
-	int p_or_c = universal_class_tags[tl->number].p_or_c;
-	if (tl->class == TAG_CLASS_UNIVERSAL && p_or_c >= 0 && p_or_c <= 1 && tl->p_or_c != p_or_c) {
+	int type = universal_class_tags[tl->number].type;
+	if (tl->class == TAG_CLASS_UNIVERSAL && type >= 0 && type <= 1 && tl->p_or_c != type) {
 		tl->p_or_c = TAG_TYPE_PRIMITIVE;
 		out_err("Warning: primitive/constructed bit mismatch, enforcing primitive\n");
 	}
@@ -407,11 +421,11 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		out("^^         Tag class:  %3i -> %s\n", tl->class, classes[tl->class]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
-		out("   ^       Tag type:   %3i -> %s\n", old_tl_p_or_c, PCs[old_tl_p_or_c]);
+		out("   ^       Tag type:   %3i -> %s\n", original_type, PCs[original_type]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		out("     ^^^^^ Tag number: %3i -> %s\n", tl->number, tag_name);
 	} else if (opt_ol >= OL_VERBOSE) {
-		out("%s-%s: %s\n", short_classes[tl->class], short_PCs[old_tl_p_or_c], tag_name);
+		out("%s-%s: %s\n", short_classes[tl->class], short_PCs[original_type], tag_name);
 	}
 
 	int pos = 0;
@@ -520,7 +534,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 
 	if (opt_ol == OL_NORMAL) {
 		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0, OD_UNDEF, recursive_level);
-		out("%s-%s: %s, len: %lu\n", short_classes[tl->class], short_PCs[old_tl_p_or_c], tag_name, tl->length);
+		out("%s-%s: %s, len: %lu\n", short_classes[tl->class], short_PCs[original_type], tag_name, tl->length);
 	}
 
 	*remaining_length -= (n + 1);
@@ -635,13 +649,13 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 					out("\n");
 					myfclose(F, "unable to decode OID", *offset);
 				} else {
-					if (opt_ol == OL_VERYVERBOSE)
+/*          if (opt_ol == OL_VERYVERBOSE)*/
 						out("OID: %s", printable);
-					else {
-						out("\n");
-						prefix_recursive_level_out(recursive_level);
-						out("        OID: %s", printable);
-					}
+/*          else {*/
+/*            out("\n");*/
+/*            prefix_recursive_level_out(recursive_level);*/
+/*            out("        OID: %s", printable);*/
+/*          }*/
 				}
 				free(printable);
 			}

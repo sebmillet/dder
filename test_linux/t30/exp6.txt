@@ -11,8 +11,7 @@ Reading from file abc6.der...
 000028  0a                           Length: 10
 000029  06                           univ-prim: OBJECT IDENTIFIER
 00002a  08                           Length: 8
-00002b  *.H.=...  
-        OID: 1.2.840.10045.3.1.7
+00002b  *.H.=...  OID: 1.2.840.10045.3.1.7
 000033  a1                           cont-cons: [ 1 ]
 000034  44                           Length: 68
 000035  03                           univ-prim: BIT STRING

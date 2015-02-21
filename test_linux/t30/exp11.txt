@@ -18,8 +18,7 @@ Reading from file abc11.der...
 000033  2c                           Length: 44
 000034  06                           univ-prim: OBJECT IDENTIFIER
 000035  07                           Length: 7
-000036  *.H.=..  
-        OID: 1.2.840.10045.1.1
+000036  *.H.=..  OID: 1.2.840.10045.1.1
 00003d  02                           univ-prim: INTEGER
 00003e  21                           Length: 33
 00003f  .................................  

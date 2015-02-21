@@ -11,8 +11,7 @@ Reading from file abc4.der...
 000027  07                           Length: 7
 000028  06                           univ-prim: OBJECT IDENTIFIER
 000029  05                           Length: 5
-00002a  +....  
-        OID: 1.3.132.0.10
+00002a  +....  OID: 1.3.132.0.10
 00002f  a1                           cont-cons: [ 1 ]
 000030  44                           Length: 68
 000031  03                           univ-prim: BIT STRING
