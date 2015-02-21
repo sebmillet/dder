@@ -11,10 +11,14 @@
 #include <limits.h>
 #include <errno.h>
 #include <string.h>
-#include <strings.h>
 #include <stdarg.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+
+#ifdef _WIN32
+#define snprintf _snprintf
+#define strcasecmp _stricmp
+#endif
 
 
 /*
@@ -170,6 +174,8 @@ int out_err(const char *fmt, ...)
 	return r;
 }
 
+#define ssize_t long signed
+
 void out_errno(const ssize_t offset)
 {
 	if (offset >= 0)
@@ -179,10 +185,10 @@ void out_errno(const ssize_t offset)
 }
 
 #ifdef DEBUG
-#define out_dbg(args...) \
-	out(args)
+#define out_dbg(...) \
+	out(__VA_ARGS__)
 #else
-#define out_dbg(args...) ;
+#define out_dbg(...) ;
 #endif
 
 void usage()
