@@ -6,20 +6,18 @@
 # Sébastien Millet, Februay 2015
 
 CPP = cl.exe
-CPPFLAGS = -Wall
-LINKERFLAGS = -Wall
-OFLAG = -o
-
-.SUFFIXES : .obj .cpp .h
-.cpp.obj :
-	$(CPP) $(CPPFLAGS) -c $<
+CPPFLAGS = /Ox /W2
+LINKERFLAGS = /Ox /W2
 
 all : dder.exe
 
 dder.exe : dder.obj
-	$(CPP) $(LINKERFLAGS) $(OFLAG)dder dder.obj
+	$(CPP) $(LINKERFLAGS) dder.obj
 
-dder.obj : dder.c
+dder.obj : src\dder.c
+	$(CPP) $(CPPFLAGS) -c src\dder.c
+
+mrproper : clean
 
 clean :
 	del *.obj 2>NUL
