@@ -4,9 +4,9 @@
 
 # Sébastien Millet, Februay 2015
 
-FORTIFYFLAGS = -Wunreachable-code -Wformat=2 \
-	-D_FORTIFY_SOURCE=2 -fstack-protector --param ssp-buffer-size=4 \
-	-fPIE -pie -Wl,-z,relro,-z,now
+# FORTIFYFLAGS = -Wunreachable-code -Wformat=2 \
+#     -D_FORTIFY_SOURCE=2 -fstack-protector --param ssp-buffer-size=4 \
+#     -fPIE -pie -Wl,-z,relro,-z,now
 CPP = gcc
 CPPFLAGS = -O2 -Wall -Wextra -Wuninitialized $(FORTIFYFLAGS)
 LINKERFLAGS = -O2 -Wall -Wextra -Wuninitialized $(FORTIFYFLAGS)

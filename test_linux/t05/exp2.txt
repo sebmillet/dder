@@ -283,4 +283,5 @@ Reading from file g2.der...
 0004ce  03                           univ-prim: BIT STRING
 0004cf  82 01 01                     Length: 257
 0004d2  ....*4.t].....X.T...D"\hc*.>].....C..........6..Q'.e..?j......R+.,..+cGyq......EB..F..f...k...|......MH.......Nl9....f..f.v.T...rA.9..W.{::.!.@C.$|....p{.>B%@..Sz.#b.!..C.z.l.w....].J..Bp.......!W.........._c.y:..OF..4....(2......m..<....C..)[.[wg......f..[  
-Error: trailing characters in file, position: 1491
+0005d3  44                           appl-prim: [ 4 ]
+Error: unexpected end of file, position: 1492

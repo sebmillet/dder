@@ -978,4 +978,8 @@ Reading from file g2.der...
 0005c2  1e 29 5b ac    5b 77 67 0d   .)[.  [wg. 
 0005ca  c7 c9 e5 f1    f7 66 d2 ce   ....  .f.. 
 0005d2  5b                           [          
-Error: trailing characters in file, position: 1491
+0005d3  44                           01 0 00100
+                                     ^^         Tag class:    1 -> Application
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   4 -> [ 4 ]
+Error: unexpected end of file, position: 1492

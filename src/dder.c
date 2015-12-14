@@ -20,6 +20,8 @@
 #define strcasecmp _stricmp
 #endif
 
+#define FALSE	0
+#define TRUE	1
 
 /*
 
@@ -275,15 +277,20 @@ void myfclose(FILE **F, const char *err, size_t position)
 	*F = NULL;
 }
 
-int myfgetc(FILE **F, size_t *offset)
+int myfgetc(FILE **F, size_t *offset, int loose_read)
 {
 	if (*F == NULL)
 		return EOF;
 
 	++(*offset);
 	int r = fgetc(*F);
-	if (r == EOF)
-		myfclose(F, "unexpected end of file", *offset - 1);
+	if (r == EOF) {
+		if (!loose_read)
+			myfclose(F, "unexpected end of file", *offset - 1);
+		else
+			myfclose(F, NULL, *offset - 1);
+	}
+
 	return r;
 }
 
@@ -389,11 +396,12 @@ void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag
 	/* Includes the initial byte that indicates the number of bytes used to encode length */
 #define LENGTH_MULTIBYTES_MAX_BYTES 7
 
-int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level)
+int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level,
+					int loose_read)
 {
 	int c;
 	size_t old_offset = *offset;
-	if ((c = myfgetc(F, offset)) == EOF)
+	if ((c = myfgetc(F, offset, loose_read)) == EOF)
 		return 0;
 
 	tl->class = (c & 0xc0) >> 6;
@@ -435,7 +443,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 
 		old_offset = *offset;
 		do {
-			if ((c = myfgetc(F, offset)) == EOF)
+			if ((c = myfgetc(F, offset, FALSE)) == EOF)
 				return 0;
 			buf[pos] = (char)c;
 			--(*remaining_length);
@@ -487,7 +495,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 
 	int cc;
 	size_t old_loffset = *offset;
-	if ((cc = myfgetc(F, offset)) == EOF)
+	if ((cc = myfgetc(F, offset, FALSE)) == EOF)
 		return 0;
 	int n = 0;
 	bl[0] = (char)cc;
@@ -505,7 +513,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 		tl->length = 0;
 		int i;
 		for (i = 1; i <= n; ++i) {
-			if ((cc = myfgetc(F, offset)) == EOF)
+			if ((cc = myfgetc(F, offset, FALSE)) == EOF)
 				return 0;
 			tl->length <<= 8;
 			tl->length += (unsigned int)cc;
@@ -590,7 +598,7 @@ int decode_oid(char *p, const size_t plen, const char *buf, const size_t buflen)
 	return 1;
 }
 
-void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recursive_level)
+void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recursive_level, int loose_read)
 {
 	taglength_t tl;
 
@@ -598,13 +606,13 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 		myfclose(F, "number of recursive calls limit reached, now stopping", *offset);
 	}
 
-	if (!parse_taglength(F, offset, remaining_length, &tl, recursive_level))
+	if (!parse_taglength(F, offset, remaining_length, &tl, recursive_level, loose_read))
 		return;
 
 	if (tl.p_or_c == TAG_TYPE_CONSTRUCTED) {
 		ssize_t inner_remaining_length = (ssize_t)tl.length;
 		while(inner_remaining_length >= 1 && *F != NULL) {
-			parse(F, offset, &inner_remaining_length, recursive_level + 1);
+			parse(F, offset, &inner_remaining_length, recursive_level + 1, FALSE);
 		}
 		if (inner_remaining_length && *F != NULL) {
 			myfclose(F, "contained data out of container boundaries", *offset);
@@ -791,11 +799,13 @@ int main(int argc, char **argv)
 	}
 
 	size_t offset = 0;
-	parse(&F, &offset, &s, 0);
+	do {
+		parse(&F, &offset, &s, 0, TRUE);
+	} while (F != NULL);
 	if (F != NULL && F != stdin) {
 		if (s != 0 || fgetc(F) != EOF) {
 			out_dbg("s = %li\n", s);
-			myfclose(&F, "trailing characters in file", offset);
+			myfclose(&F, "TRailing characters in file", offset);
 			return -5;
 		} else {
 			myfclose(&F, NULL, 0);
