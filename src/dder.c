@@ -805,7 +805,7 @@ int main(int argc, char **argv)
 	if (F != NULL && F != stdin) {
 		if (s != 0 || fgetc(F) != EOF) {
 			out_dbg("s = %li\n", s);
-			myfclose(&F, "TRailing characters in file", offset);
+			myfclose(&F, "Trailing characters in file", offset);
 			return -5;
 		} else {
 			myfclose(&F, NULL, 0);
