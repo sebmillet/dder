@@ -1,0 +1,60 @@
+   dder, a portable der-encoded file display program
+   =================================================
+
+Date: 2015-12-23 14:12 +0100
+
+Contents:
+
+      I. WHAT IS DDER?
+     II. WHY DDER?
+    III. LICENCE
+     IV. COMPILATION AND INSTALLATION
+
+
+
+I.    WHAT IS DDER?
+
+It is a minimalistic program to display the content of DER (Distinguished
+Encoding Rules) encoded files.
+See URL
+    https://en.wikipedia.org/wiki/X.690#DER_encoding
+for details about DER encoding.
+
+
+
+II.   WHY DDER?
+
+It displays der content in a very detailed way. It is meant to be didactic.
+
+The command
+    openssl asn1parse
+does a perfect job but without displaying the low level file content (and it
+not its job to do that.)
+
+dder displays der content with low level file content in hexadecimal.
+
+
+
+III.  LICENCE
+
+See COPYING file that comes along with the package the program belongs to.
+
+
+
+IV.   COMPILATION AND INSTALLATION
+
+* LINUX
+
+To compile under Linux, execute in the extracted archive root:
+    ./configure
+    make
+    make install (or 'sudo make install')
+
+* WINDOWS
+
+To compile under Windows with Microsoft Visual C++ 2015, launch MSVC
+command-line and, in the extracted archive root, execute:
+    nmake -f makefile.vc
+
+Sébastien Millet, February-December 2015
+

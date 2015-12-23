@@ -1,1 +1,10 @@
 dder
+dder-0.1.tar.gz
+Makefile
+config.h
+stamp-h1
+config.log
+config.status
+src/.deps/
+site.exp
+build/
