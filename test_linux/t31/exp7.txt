@@ -16,7 +16,7 @@ Reading from file abc7.der...
 000019  06                           univ-prim: OBJECT IDENTIFIER
 00001a  09                           Length: 9
 00001b  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-000023  05                           .          OID: 1.2.840.113549.1.1.5
+000023  05                           .          OID: 1.2.840.113549.1.1.5 (RSA-SHA1)
 000024  05                           univ-prim: NULL
 000025  00                           Length: 0
 000026  30                           univ-cons: SEQUENCE
@@ -27,7 +27,7 @@ Reading from file abc7.der...
 00002b  09                           Length: 9
 00002c  06                           univ-prim: OBJECT IDENTIFIER
 00002d  03                           Length: 3
-00002e  55 04 06                     U..        OID: 2.5.4.6
+00002e  55 04 06                     U..        OID: 2.5.4.6 (C)
 000031  13                           univ-prim: PRINTABLESTRING
 000032  02                           Length: 2
 000033  55 53                        US         
@@ -37,7 +37,7 @@ Reading from file abc7.der...
 000038  11                           Length: 17
 000039  06                           univ-prim: OBJECT IDENTIFIER
 00003a  03                           Length: 3
-00003b  55 04 0a                     U..        OID: 2.5.4.10
+00003b  55 04 0a                     U..        OID: 2.5.4.10 (O)
 00003e  13                           univ-prim: PRINTABLESTRING
 00003f  0a                           Length: 10
 000040  47 6f 6f 67    6c 65 20 49   Goog  le I 
@@ -48,7 +48,7 @@ Reading from file abc7.der...
 00004d  23                           Length: 35
 00004e  06                           univ-prim: OBJECT IDENTIFIER
 00004f  03                           Length: 3
-000050  55 04 03                     U..        OID: 2.5.4.3
+000050  55 04 03                     U..        OID: 2.5.4.3 (CN)
 000053  13                           univ-prim: PRINTABLESTRING
 000054  1c                           Length: 28
 000055  47 6f 6f 67    6c 65 20 49   Goog  le I 
@@ -73,7 +73,7 @@ Reading from file abc7.der...
 000096  09                           Length: 9
 000097  06                           univ-prim: OBJECT IDENTIFIER
 000098  03                           Length: 3
-000099  55 04 06                     U..        OID: 2.5.4.6
+000099  55 04 06                     U..        OID: 2.5.4.6 (C)
 00009c  13                           univ-prim: PRINTABLESTRING
 00009d  02                           Length: 2
 00009e  55 53                        US         
@@ -83,7 +83,7 @@ Reading from file abc7.der...
 0000a3  11                           Length: 17
 0000a4  06                           univ-prim: OBJECT IDENTIFIER
 0000a5  03                           Length: 3
-0000a6  55 04 08                     U..        OID: 2.5.4.8
+0000a6  55 04 08                     U..        OID: 2.5.4.8 (ST)
 0000a9  0c                           univ-prim: UTF8String
 0000aa  0a                           Length: 10
 0000ab  43 61 6c 69    66 6f 72 6e   Cali  forn 
@@ -94,7 +94,7 @@ Reading from file abc7.der...
 0000b8  14                           Length: 20
 0000b9  06                           univ-prim: OBJECT IDENTIFIER
 0000ba  03                           Length: 3
-0000bb  55 04 07                     U..        OID: 2.5.4.7
+0000bb  55 04 07                     U..        OID: 2.5.4.7 (L)
 0000be  0c                           univ-prim: UTF8String
 0000bf  0d                           Length: 13
 0000c0  4d 6f 75 6e    74 61 69 6e   Moun  tain 
@@ -105,7 +105,7 @@ Reading from file abc7.der...
 0000d0  11                           Length: 17
 0000d1  06                           univ-prim: OBJECT IDENTIFIER
 0000d2  03                           Length: 3
-0000d3  55 04 0a                     U..        OID: 2.5.4.10
+0000d3  55 04 0a                     U..        OID: 2.5.4.10 (O)
 0000d6  0c                           univ-prim: UTF8String
 0000d7  0a                           Length: 10
 0000d8  47 6f 6f 67    6c 65 20 49   Goog  le I 
@@ -116,7 +116,7 @@ Reading from file abc7.der...
 0000e5  13                           Length: 19
 0000e6  06                           univ-prim: OBJECT IDENTIFIER
 0000e7  03                           Length: 3
-0000e8  55 04 03                     U..        OID: 2.5.4.3
+0000e8  55 04 03                     U..        OID: 2.5.4.3 (CN)
 0000eb  0c                           univ-prim: UTF8String
 0000ec  0c                           Length: 12
 0000ed  2a 2e 67 6f    6f 67 6c 65   *.go  ogle 
@@ -127,10 +127,10 @@ Reading from file abc7.der...
 0000fc  13                           Length: 19
 0000fd  06                           univ-prim: OBJECT IDENTIFIER
 0000fe  07                           Length: 7
-0000ff  2a 86 48 ce    3d 02 01      *.H.  =..  OID: 1.2.840.10045.2.1
+0000ff  2a 86 48 ce    3d 02 01      *.H.  =..  OID: 1.2.840.10045.2.1 (id-ecPublicKey)
 000106  06                           univ-prim: OBJECT IDENTIFIER
 000107  08                           Length: 8
-000108  2a 86 48 ce    3d 03 01 07   *.H.  =... OID: 1.2.840.10045.3.1.7
+000108  2a 86 48 ce    3d 03 01 07   *.H.  =... OID: 1.2.840.10045.3.1.7 (prime256v1)
 000110  03                           univ-prim: BIT STRING
 000111  42                           Length: 66
 000112  00 04 96 b0    fa 07 db 42   ....  ...B 
@@ -150,7 +150,7 @@ Reading from file abc7.der...
 00015d  1d                           Length: 29
 00015e  06                           univ-prim: OBJECT IDENTIFIER
 00015f  03                           Length: 3
-000160  55 1d 25                     U.%        OID: 2.5.29.37
+000160  55 1d 25                     U.%        OID: 2.5.29.37 (extendedKeyUsage)
 000163  04                           univ-prim: OCTET STRING
 000164  16                           Length: 22
 000165  30 14 06 08    2b 06 01 05   0...  +... 
@@ -160,7 +160,7 @@ Reading from file abc7.der...
 00017c  82 03 26                     Length: 806
 00017f  06                           univ-prim: OBJECT IDENTIFIER
 000180  03                           Length: 3
-000181  55 1d 11                     U..        OID: 2.5.29.17
+000181  55 1d 11                     U..        OID: 2.5.29.17 (subjectAltName)
 000184  04                           univ-prim: OCTET STRING
 000185  82 03 1d                     Length: 797
 000188  30 82 03 19    82 0c 2a 2e   0...  ..*. 
@@ -267,7 +267,7 @@ Reading from file abc7.der...
 0004a6  0b                           Length: 11
 0004a7  06                           univ-prim: OBJECT IDENTIFIER
 0004a8  03                           Length: 3
-0004a9  55 1d 0f                     U..        OID: 2.5.29.15
+0004a9  55 1d 0f                     U..        OID: 2.5.29.15 (keyUsage)
 0004ac  04                           univ-prim: OCTET STRING
 0004ad  04                           Length: 4
 0004ae  03 02 07 80                  ....       
@@ -275,7 +275,7 @@ Reading from file abc7.der...
 0004b3  68                           Length: 104
 0004b4  06                           univ-prim: OBJECT IDENTIFIER
 0004b5  08                           Length: 8
-0004b6  2b 06 01 05    05 07 01 01   +...  .... OID: 1.3.6.1.5.5.7.1.1
+0004b6  2b 06 01 05    05 07 01 01   +...  .... OID: 1.3.6.1.5.5.7.1.1 (authorityInfoAccess)
 0004be  04                           univ-prim: OCTET STRING
 0004bf  5c                           Length: 92
 0004c0  30 5a 30 2b    06 08 2b 06   0Z0+  ..+. 
@@ -294,7 +294,7 @@ Reading from file abc7.der...
 00051d  1d                           Length: 29
 00051e  06                           univ-prim: OBJECT IDENTIFIER
 00051f  03                           Length: 3
-000520  55 1d 0e                     U..        OID: 2.5.29.14
+000520  55 1d 0e                     U..        OID: 2.5.29.14 (subjectKeyIdentifier)
 000523  04                           univ-prim: OCTET STRING
 000524  16                           Length: 22
 000525  04 14 58 be    c5 75 00 c7   ..X.  .u.. 
@@ -304,7 +304,7 @@ Reading from file abc7.der...
 00053c  0c                           Length: 12
 00053d  06                           univ-prim: OBJECT IDENTIFIER
 00053e  03                           Length: 3
-00053f  55 1d 13                     U..        OID: 2.5.29.19
+00053f  55 1d 13                     U..        OID: 2.5.29.19 (basicConstraints)
 000542  01                           univ-prim: BOOLEAN
 000543  01                           Length: 1
 000544  ff                           .          
@@ -315,7 +315,7 @@ Reading from file abc7.der...
 00054a  1f                           Length: 31
 00054b  06                           univ-prim: OBJECT IDENTIFIER
 00054c  03                           Length: 3
-00054d  55 1d 23                     U.#        OID: 2.5.29.35
+00054d  55 1d 23                     U.#        OID: 2.5.29.35 (authorityKeyIdentifier)
 000550  04                           univ-prim: OCTET STRING
 000551  18                           Length: 24
 000552  30 16 80 14    4a dd 06 16   0...  J... 
@@ -325,7 +325,7 @@ Reading from file abc7.der...
 00056b  17                           Length: 23
 00056c  06                           univ-prim: OBJECT IDENTIFIER
 00056d  03                           Length: 3
-00056e  55 1d 20                     U.         OID: 2.5.29.32
+00056e  55 1d 20                     U.         OID: 2.5.29.32 (certificatePolicies)
 000571  04                           univ-prim: OCTET STRING
 000572  10                           Length: 16
 000573  30 0e 30 0c    06 0a 2b 06   0.0.  ..+. 
@@ -334,7 +334,7 @@ Reading from file abc7.der...
 000584  30                           Length: 48
 000585  06                           univ-prim: OBJECT IDENTIFIER
 000586  03                           Length: 3
-000587  55 1d 1f                     U..        OID: 2.5.29.31
+000587  55 1d 1f                     U..        OID: 2.5.29.31 (crlDistributionPoints)
 00058a  04                           univ-prim: OCTET STRING
 00058b  29                           Length: 41
 00058c  30 27 30 25    a0 23 a0 21   0'0%  .#.! 
@@ -348,7 +348,7 @@ Reading from file abc7.der...
 0005b7  06                           univ-prim: OBJECT IDENTIFIER
 0005b8  09                           Length: 9
 0005b9  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-0005c1  05                           .          OID: 1.2.840.113549.1.1.5
+0005c1  05                           .          OID: 1.2.840.113549.1.1.5 (RSA-SHA1)
 0005c2  05                           univ-prim: NULL
 0005c3  00                           Length: 0
 0005c4  03                           univ-prim: BIT STRING

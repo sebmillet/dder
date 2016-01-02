@@ -8,7 +8,7 @@ Reading from file abc8.der...
 000007  2c                           Length: 44
 000008  06                           univ-prim: OBJECT IDENTIFIER
 000009  07                           Length: 7
-00000a  2a 86 48 ce    3d 01 01      *.H.  =..  OID: 1.2.840.10045.1.1
+00000a  2a 86 48 ce    3d 01 01      *.H.  =..  OID: 1.2.840.10045.1.1 (prime-field)
 000011  02                           univ-prim: INTEGER
 000012  21                           Length: 33
 000013  00 ff ff ff    ff 00 00 00   ....  .... 

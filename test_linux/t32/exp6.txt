@@ -39,7 +39,7 @@ Reading from file abc6.der...
 00002a  08                           0 0001000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 8
-00002b  2a 86 48 ce    3d 03 01 07   *.H.  =... OID: 1.2.840.10045.3.1.7
+00002b  2a 86 48 ce    3d 03 01 07   *.H.  =... OID: 1.2.840.10045.3.1.7 (prime256v1)
 000033  a1                           10 1 00001
                                      ^^         Tag class:    2 -> Context-specific
                                         ^       Tag type:     1 -> Constructed

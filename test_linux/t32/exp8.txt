@@ -28,7 +28,7 @@ Reading from file abc8.der...
 000009  07                           0 0000111
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 7
-00000a  2a 86 48 ce    3d 01 01      *.H.  =..  OID: 1.2.840.10045.1.1
+00000a  2a 86 48 ce    3d 01 01      *.H.  =..  OID: 1.2.840.10045.1.1 (prime-field)
 000011  02                           00 0 00010
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

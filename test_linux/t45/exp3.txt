@@ -52,7 +52,7 @@ Reading from file dsa3.der...
 ######                                     ^          Len type: 0 -> ONE BYTE
 ######                                       ^^^^^^^  Len: 9
 ######00001c  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-######000024  0b                           .          OID: 1.2.840.113549.1.1.11
+######000024  0b                           .          OID: 1.2.840.113549.1.1.11 (RSA-SHA256)
 ######000025  05                           00 0 00101
 ######                                     ^^         Tag class:    0 -> Universal
 ######                                        ^       Tag type:     0 -> Primitive
@@ -88,7 +88,7 @@ Reading from file dsa3.der...
 ##########00002f  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########000030  55 04 06                     U..        OID: 2.5.4.6
+##########000030  55 04 06                     U..        OID: 2.5.4.6 (C)
 ##########000033  13                           00 0 10011
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -118,7 +118,7 @@ Reading from file dsa3.der...
 ##########00003c  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00003d  55 04 08                     U..        OID: 2.5.4.8
+##########00003d  55 04 08                     U..        OID: 2.5.4.8 (ST)
 ##########000040  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -148,7 +148,7 @@ Reading from file dsa3.der...
 ##########00004d  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00004e  55 04 07                     U..        OID: 2.5.4.7
+##########00004e  55 04 07                     U..        OID: 2.5.4.7 (L)
 ##########000051  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -178,7 +178,7 @@ Reading from file dsa3.der...
 ##########00005d  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00005e  55 04 0a                     U..        OID: 2.5.4.10
+##########00005e  55 04 0a                     U..        OID: 2.5.4.10 (O)
 ##########000061  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -208,7 +208,7 @@ Reading from file dsa3.der...
 ##########00006a  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00006b  55 04 0b                     U..        OID: 2.5.4.11
+##########00006b  55 04 0b                     U..        OID: 2.5.4.11 (OU)
 ##########00006e  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -239,7 +239,7 @@ Reading from file dsa3.der...
 ##########000080  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########000081  55 04 03                     U..        OID: 2.5.4.3
+##########000081  55 04 03                     U..        OID: 2.5.4.3 (CN)
 ##########000084  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -271,7 +271,7 @@ Reading from file dsa3.der...
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 9
 ##########000096  2a 86 48 86    f7 0d 01 09   *.H.  .... 
-##########00009e  01                           .          OID: 1.2.840.113549.1.9.1
+##########00009e  01                           .          OID: 1.2.840.113549.1.9.1 (emailAddress)
 ##########00009f  16                           00 0 10110
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -337,7 +337,7 @@ Reading from file dsa3.der...
 ##########0000eb  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########0000ec  55 04 06                     U..        OID: 2.5.4.6
+##########0000ec  55 04 06                     U..        OID: 2.5.4.6 (C)
 ##########0000ef  13                           00 0 10011
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -367,7 +367,7 @@ Reading from file dsa3.der...
 ##########0000f8  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########0000f9  55 04 08                     U..        OID: 2.5.4.8
+##########0000f9  55 04 08                     U..        OID: 2.5.4.8 (ST)
 ##########0000fc  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -397,7 +397,7 @@ Reading from file dsa3.der...
 ##########000109  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00010a  55 04 07                     U..        OID: 2.5.4.7
+##########00010a  55 04 07                     U..        OID: 2.5.4.7 (L)
 ##########00010d  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -427,7 +427,7 @@ Reading from file dsa3.der...
 ##########000119  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00011a  55 04 0a                     U..        OID: 2.5.4.10
+##########00011a  55 04 0a                     U..        OID: 2.5.4.10 (O)
 ##########00011d  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -457,7 +457,7 @@ Reading from file dsa3.der...
 ##########000126  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########000127  55 04 0b                     U..        OID: 2.5.4.11
+##########000127  55 04 0b                     U..        OID: 2.5.4.11 (OU)
 ##########00012a  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -488,7 +488,7 @@ Reading from file dsa3.der...
 ##########00013c  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########00013d  55 04 03                     U..        OID: 2.5.4.3
+##########00013d  55 04 03                     U..        OID: 2.5.4.3 (CN)
 ##########000140  0c                           00 0 01100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -520,7 +520,7 @@ Reading from file dsa3.der...
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 9
 ##########000152  2a 86 48 86    f7 0d 01 09   *.H.  .... 
-##########00015a  01                           .          OID: 1.2.840.113549.1.9.1
+##########00015a  01                           .          OID: 1.2.840.113549.1.9.1 (emailAddress)
 ##########00015b  16                           00 0 10110
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -555,7 +555,7 @@ Reading from file dsa3.der...
 ########                                     ^          Len type: 0 -> ONE BYTE
 ########                                       ^^^^^^^  Len: 9
 ########000186  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-########00018e  01                           .          OID: 1.2.840.113549.1.1.1
+########00018e  01                           .          OID: 1.2.840.113549.1.1.1 (rsaEncryption)
 ########00018f  05                           00 0 00101
 ########                                     ^^         Tag class:    0 -> Universal
 ########                                        ^       Tag type:     0 -> Primitive
@@ -616,7 +616,7 @@ Reading from file dsa3.der...
 ##########000228  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########000229  55 1d 0e                     U..        OID: 2.5.29.14
+##########000229  55 1d 0e                     U..        OID: 2.5.29.14 (subjectKeyIdentifier)
 ##########00022c  04                           00 0 00100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -641,7 +641,7 @@ Reading from file dsa3.der...
 ##########000247  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########000248  55 1d 23                     U.#        OID: 2.5.29.35
+##########000248  55 1d 23                     U.#        OID: 2.5.29.35 (authorityKeyIdentifier)
 ##########00024b  04                           00 0 00100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -666,7 +666,7 @@ Reading from file dsa3.der...
 ##########000268  03                           0 0000011
 ##########                                     ^          Len type: 0 -> ONE BYTE
 ##########                                       ^^^^^^^  Len: 3
-##########000269  55 1d 13                     U..        OID: 2.5.29.19
+##########000269  55 1d 13                     U..        OID: 2.5.29.19 (basicConstraints)
 ##########00026c  04                           00 0 00100
 ##########                                     ^^         Tag class:    0 -> Universal
 ##########                                        ^       Tag type:     0 -> Primitive
@@ -690,7 +690,7 @@ Reading from file dsa3.der...
 ####                                     ^          Len type: 0 -> ONE BYTE
 ####                                       ^^^^^^^  Len: 9
 ####000277  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-####00027f  0b                           .          OID: 1.2.840.113549.1.1.11
+####00027f  0b                           .          OID: 1.2.840.113549.1.1.11 (RSA-SHA256)
 ####000280  05                           00 0 00101
 ####                                     ^^         Tag class:    0 -> Universal
 ####                                        ^       Tag type:     0 -> Primitive

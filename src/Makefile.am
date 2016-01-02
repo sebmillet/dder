@@ -10,3 +10,7 @@ bin_PROGRAMS = dder
 dder_SOURCES = dder.c
 dder_LDFLAGS = 
 
+if WITH_OPENSSL
+dder_LDFLAGS += -lssl -lcrypto
+endif
+

@@ -625,6 +625,8 @@ ac_includes_default="\
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
+WITH_OPENSSL_FALSE
+WITH_OPENSSL_TRUE
 LIBOBJS
 EGREP
 GREP
@@ -716,6 +718,7 @@ ac_user_opts='
 enable_option_checking
 enable_silent_rules
 enable_dependency_tracking
+enable_ssl
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1346,6 +1349,7 @@ Optional Features:
                           do not reject slow dependency extractors
   --disable-dependency-tracking
                           speeds up one-time build
+  --disable-ssl           compile without the openssl library
 
 Some influential environment variables:
   CC          C compiler command
@@ -2227,7 +2231,7 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 ac_config_headers="$ac_config_headers config.h"
 
 
-am__api_version='1.15'
+am__api_version='1.14'
 
 # Find a good install program.  We prefer a C program (faster),
 # so one script is as good as another.  But avoid the broken or
@@ -2399,8 +2403,8 @@ test "$program_suffix" != NONE &&
 ac_script='s/[\\$]/&&/g;s/;s,x,x,$//'
 program_transform_name=`$as_echo "$program_transform_name" | sed "$ac_script"`
 
-# Expand $ac_aux_dir to an absolute path.
-am_aux_dir=`cd "$ac_aux_dir" && pwd`
+# expand $ac_aux_dir to an absolute path
+am_aux_dir=`cd $ac_aux_dir && pwd`
 
 if test x"${MISSING+set}" != xset; then
   case $am_aux_dir in
@@ -2419,7 +2423,7 @@ else
 $as_echo "$as_me: WARNING: 'missing' script is too old or missing" >&2;}
 fi
 
-if test x"${install_sh+set}" != xset; then
+if test x"${install_sh}" != xset; then
   case $am_aux_dir in
   *\ * | *\	*)
     install_sh="\${SHELL} '$am_aux_dir/install-sh'" ;;
@@ -2747,8 +2751,8 @@ MAKEINFO=${MAKEINFO-"${am_missing_run}makeinfo"}
 # <http://lists.gnu.org/archive/html/automake/2012-07/msg00014.html>
 mkdir_p='$(MKDIR_P)'
 
-# We need awk for the "check" target (and possibly the TAP driver).  The
-# system "awk" is bad on some platforms.
+# We need awk for the "check" target.  The system "awk" is bad on
+# some platforms.
 # Always define AMTAR for backward compatibility.  Yes, it's still used
 # in the wild :-(  We should find a proper way to deprecate it ...
 AMTAR='$${TAR-tar}'
@@ -4280,7 +4284,7 @@ fi
 done
 
 
-for ac_header in limits.h stdlib.h string.h
+for ac_header in limits.h stdlib.h string.h ssl.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
 ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
@@ -4397,6 +4401,119 @@ _ACEOF
 
 fi
 done
+
+
+# Check whether --enable-ssl was given.
+if test "${enable_ssl+set}" = set; then :
+  enableval=$enable_ssl;
+fi
+
+test -z "$enable_ssl" && enable_ssl="yes"
+if test "${enable_ssl}" = yes ; then
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SSL_library_init in -lssl" >&5
+$as_echo_n "checking for SSL_library_init in -lssl... " >&6; }
+if ${ac_cv_lib_ssl_SSL_library_init+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lssl  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char SSL_library_init ();
+int
+main ()
+{
+return SSL_library_init ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_ssl_SSL_library_init=yes
+else
+  ac_cv_lib_ssl_SSL_library_init=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_SSL_library_init" >&5
+$as_echo "$ac_cv_lib_ssl_SSL_library_init" >&6; }
+if test "x$ac_cv_lib_ssl_SSL_library_init" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBSSL 1
+_ACEOF
+
+  LIBS="-lssl $LIBS"
+
+else
+  as_fn_error $? "openssl dev lib not found, use --disable-ssl option if you wish to compile without openssl or install it (libssl-dev for deb, openssl-devel for rpm)" "$LINENO" 5
+fi
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for ERR_error_string_n in -lcrypto" >&5
+$as_echo_n "checking for ERR_error_string_n in -lcrypto... " >&6; }
+if ${ac_cv_lib_crypto_ERR_error_string_n+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcrypto  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char ERR_error_string_n ();
+int
+main ()
+{
+return ERR_error_string_n ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_crypto_ERR_error_string_n=yes
+else
+  ac_cv_lib_crypto_ERR_error_string_n=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_crypto_ERR_error_string_n" >&5
+$as_echo "$ac_cv_lib_crypto_ERR_error_string_n" >&6; }
+if test "x$ac_cv_lib_crypto_ERR_error_string_n" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBCRYPTO 1
+_ACEOF
+
+  LIBS="-lcrypto $LIBS"
+
+else
+  as_fn_error $? "openssl dev lib not found, use --disable-ssl option if you wish to compile without openssl or install it (libssl-dev for deb, openssl-devel for rpm)" "$LINENO" 5
+fi
+
+	CPPFLAGS="$CPPFLAGS -DHAS_LIB_OPENSSL"
+fi
+
+ if  test "${enable_ssl}" = yes ; then
+  WITH_OPENSSL_TRUE=
+  WITH_OPENSSL_FALSE='#'
+else
+  WITH_OPENSSL_TRUE='#'
+  WITH_OPENSSL_FALSE=
+fi
 
 
 ac_config_files="$ac_config_files Makefile src/Makefile"
@@ -4532,6 +4649,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${WITH_OPENSSL_TRUE}" && test -z "${WITH_OPENSSL_FALSE}"; then
+  as_fn_error $? "conditional \"WITH_OPENSSL\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 

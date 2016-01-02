@@ -15,7 +15,7 @@ Reading from file abc3.der...
 000019  0a                           Length: 10
 00001a  06                           univ-prim: OBJECT IDENTIFIER
 00001b  08                           Length: 8
-00001c  *.H.=...  OID: 1.2.840.10045.4.3.2
+00001c  *.H.=...  OID: 1.2.840.10045.4.3.2 (ecdsa-with-SHA256)
 000024  30                           univ-cons: SEQUENCE
 000025  2a                           Length: 42
 000026  31                           univ-cons: SET
@@ -24,7 +24,7 @@ Reading from file abc3.der...
 000029  11                           Length: 17
 00002a  06                           univ-prim: OBJECT IDENTIFIER
 00002b  03                           Length: 3
-00002c  U..  OID: 2.5.4.10
+00002c  U..  OID: 2.5.4.10 (O)
 00002f  0c                           univ-prim: UTF8String
 000030  0a                           Length: 10
 000031  My Company  
@@ -34,7 +34,7 @@ Reading from file abc3.der...
 00003e  11                           Length: 17
 00003f  06                           univ-prim: OBJECT IDENTIFIER
 000040  03                           Length: 3
-000041  U..  OID: 2.5.4.3
+000041  U..  OID: 2.5.4.3 (CN)
 000044  0c                           univ-prim: UTF8String
 000045  0a                           Length: 10
 000046  SMT DEV CA  
@@ -54,7 +54,7 @@ Reading from file abc3.der...
 000075  11                           Length: 17
 000076  06                           univ-prim: OBJECT IDENTIFIER
 000077  03                           Length: 3
-000078  U..  OID: 2.5.4.10
+000078  U..  OID: 2.5.4.10 (O)
 00007b  0c                           univ-prim: UTF8String
 00007c  0a                           Length: 10
 00007d  My Company  
@@ -64,7 +64,7 @@ Reading from file abc3.der...
 00008a  11                           Length: 17
 00008b  06                           univ-prim: OBJECT IDENTIFIER
 00008c  03                           Length: 3
-00008d  U..  OID: 2.5.4.3
+00008d  U..  OID: 2.5.4.3 (CN)
 000090  0c                           univ-prim: UTF8String
 000091  0a                           Length: 10
 000092  SMT DEV CA  
@@ -74,10 +74,10 @@ Reading from file abc3.der...
 00009f  10                           Length: 16
 0000a0  06                           univ-prim: OBJECT IDENTIFIER
 0000a1  07                           Length: 7
-0000a2  *.H.=..  OID: 1.2.840.10045.2.1
+0000a2  *.H.=..  OID: 1.2.840.10045.2.1 (id-ecPublicKey)
 0000a9  06                           univ-prim: OBJECT IDENTIFIER
 0000aa  05                           Length: 5
-0000ab  +....  OID: 1.3.132.0.10
+0000ab  +....  OID: 1.3.132.0.10 (secp256k1)
 0000b0  03                           univ-prim: BIT STRING
 0000b1  42                           Length: 66
 0000b2  ......V.L(._..>..Y.x..)..\a...^1............['|".&..6.7X..*...y...  
@@ -89,7 +89,7 @@ Reading from file abc3.der...
 0000f9  1d                           Length: 29
 0000fa  06                           univ-prim: OBJECT IDENTIFIER
 0000fb  03                           Length: 3
-0000fc  U..  OID: 2.5.29.14
+0000fc  U..  OID: 2.5.29.14 (subjectKeyIdentifier)
 0000ff  04                           univ-prim: OCTET STRING
 000100  16                           Length: 22
 000101  ..$..V...8...qB~.>....  
@@ -97,7 +97,7 @@ Reading from file abc3.der...
 000118  1f                           Length: 31
 000119  06                           univ-prim: OBJECT IDENTIFIER
 00011a  03                           Length: 3
-00011b  U.#  OID: 2.5.29.35
+00011b  U.#  OID: 2.5.29.35 (authorityKeyIdentifier)
 00011e  04                           univ-prim: OCTET STRING
 00011f  18                           Length: 24
 000120  0...$..V...8...qB~.>....  
@@ -105,7 +105,7 @@ Reading from file abc3.der...
 000139  0c                           Length: 12
 00013a  06                           univ-prim: OBJECT IDENTIFIER
 00013b  03                           Length: 3
-00013c  U..  OID: 2.5.29.19
+00013c  U..  OID: 2.5.29.19 (basicConstraints)
 00013f  04                           univ-prim: OCTET STRING
 000140  05                           Length: 5
 000141  0....  
@@ -113,7 +113,7 @@ Reading from file abc3.der...
 000147  0a                           Length: 10
 000148  06                           univ-prim: OBJECT IDENTIFIER
 000149  08                           Length: 8
-00014a  *.H.=...  OID: 1.2.840.10045.4.3.2
+00014a  *.H.=...  OID: 1.2.840.10045.4.3.2 (ecdsa-with-SHA256)
 000152  03                           univ-prim: BIT STRING
 000153  48                           Length: 72
 000154  .0E.!.......8.#..e..ko.T5.U%...~".t.... ..F.-c.^......$.qL:....h..(..f..  

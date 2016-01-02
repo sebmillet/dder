@@ -36,7 +36,7 @@ Reading from file abc1.der...
 000016  08                           0 0001000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 8
-000017  2a 86 48 ce    3d 04 03 02   *.H.  =... OID: 1.2.840.10045.4.3.2
+000017  2a 86 48 ce    3d 04 03 02   *.H.  =... OID: 1.2.840.10045.4.3.2 (ecdsa-with-SHA256)
 00001f  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
@@ -65,7 +65,7 @@ Reading from file abc1.der...
 000026  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000027  55 04 0a                     U..        OID: 2.5.4.10
+000027  55 04 0a                     U..        OID: 2.5.4.10 (O)
 00002a  0c                           00 0 01100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -96,7 +96,7 @@ Reading from file abc1.der...
 00003b  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-00003c  55 04 03                     U..        OID: 2.5.4.3
+00003c  55 04 03                     U..        OID: 2.5.4.3 (CN)
 00003f  0c                           00 0 01100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -159,7 +159,7 @@ Reading from file abc1.der...
 000072  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000073  55 04 0a                     U..        OID: 2.5.4.10
+000073  55 04 0a                     U..        OID: 2.5.4.10 (O)
 000076  0c                           00 0 01100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -190,7 +190,7 @@ Reading from file abc1.der...
 000088  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000089  55 04 06                     U..        OID: 2.5.4.6
+000089  55 04 06                     U..        OID: 2.5.4.6 (C)
 00008c  13                           00 0 10011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -220,7 +220,7 @@ Reading from file abc1.der...
 000095  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000096  55 04 03                     U..        OID: 2.5.4.3
+000096  55 04 03                     U..        OID: 2.5.4.3 (CN)
 000099  0c                           00 0 01100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -253,7 +253,7 @@ Reading from file abc1.der...
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 9
 0000b5  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-0000bd  01                           .          OID: 1.2.840.113549.1.1.1
+0000bd  01                           .          OID: 1.2.840.113549.1.1.1 (rsaEncryption)
 0000be  05                           00 0 00101
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -300,7 +300,7 @@ Reading from file abc1.der...
 000153  08                           0 0001000
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 8
-000154  2a 86 48 ce    3d 04 03 02   *.H.  =... OID: 1.2.840.10045.4.3.2
+000154  2a 86 48 ce    3d 04 03 02   *.H.  =... OID: 1.2.840.10045.4.3.2 (ecdsa-with-SHA256)
 00015c  03                           00 0 00011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive

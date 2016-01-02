@@ -8,7 +8,7 @@ Reading from file abc10.der...
 000008  82 06 1f                     Length: 1567
 00000b  06                           univ-prim: OBJECT IDENTIFIER
 00000c  09                           Length: 9
-00000d  *.H......  OID: 1.2.840.113549.1.7.1
+00000d  *.H......  OID: 1.2.840.113549.1.7.1 (pkcs7-data)
 000016  a0                           cont-cons: [ 0 ]
 000017  82 06 10                     Length: 1552
 00001a  04                           univ-prim: OCTET STRING
@@ -22,7 +22,7 @@ Reading from file abc10.der...
 00062f  09                           Length: 9
 000630  06                           univ-prim: OBJECT IDENTIFIER
 000631  05                           Length: 5
-000632  +....  OID: 1.3.14.3.2.26
+000632  +....  OID: 1.3.14.3.2.26 (SHA1)
 000637  05                           univ-prim: NULL
 000638  00                           Length: 0
 000639  04                           univ-prim: OCTET STRING

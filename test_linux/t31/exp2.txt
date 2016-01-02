@@ -14,7 +14,7 @@ Reading from file abc2.der...
 00000f  12                           Length: 18
 000010  06                           univ-prim: OBJECT IDENTIFIER
 000011  03                           Length: 3
-000012  55 04 0a                     U..        OID: 2.5.4.10
+000012  55 04 0a                     U..        OID: 2.5.4.10 (O)
 000015  0c                           univ-prim: UTF8String
 000016  0b                           Length: 11
 000017  4c 61 70 69    6e 6f 75 20   Lapi  nou  
@@ -25,7 +25,7 @@ Reading from file abc2.der...
 000025  09                           Length: 9
 000026  06                           univ-prim: OBJECT IDENTIFIER
 000027  03                           Length: 3
-000028  55 04 06                     U..        OID: 2.5.4.6
+000028  55 04 06                     U..        OID: 2.5.4.6 (C)
 00002b  13                           univ-prim: PRINTABLESTRING
 00002c  02                           Length: 2
 00002d  46 52                        FR         
@@ -35,7 +35,7 @@ Reading from file abc2.der...
 000032  1a                           Length: 26
 000033  06                           univ-prim: OBJECT IDENTIFIER
 000034  03                           Length: 3
-000035  55 04 03                     U..        OID: 2.5.4.3
+000035  55 04 03                     U..        OID: 2.5.4.3 (CN)
 000038  0c                           univ-prim: UTF8String
 000039  13                           Length: 19
 00003a  53 c3 83 c2    a9 62 61 73   S...  .bas 
@@ -48,7 +48,7 @@ Reading from file abc2.der...
 000052  06                           univ-prim: OBJECT IDENTIFIER
 000053  09                           Length: 9
 000054  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-00005c  01                           .          OID: 1.2.840.113549.1.1.1
+00005c  01                           .          OID: 1.2.840.113549.1.1.1 (rsaEncryption)
 00005d  05                           univ-prim: NULL
 00005e  00                           Length: 0
 00005f  03                           univ-prim: BIT STRING
@@ -78,7 +78,7 @@ Reading from file abc2.der...
 0000f3  06                           univ-prim: OBJECT IDENTIFIER
 0000f4  09                           Length: 9
 0000f5  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-0000fd  0b                           .          OID: 1.2.840.113549.1.1.11
+0000fd  0b                           .          OID: 1.2.840.113549.1.1.11 (RSA-SHA256)
 0000fe  05                           univ-prim: NULL
 0000ff  00                           Length: 0
 000100  03                           univ-prim: BIT STRING

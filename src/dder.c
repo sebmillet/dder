@@ -15,6 +15,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#ifdef HAS_LIB_OPENSSL
+#include <openssl/objects.h>
+#endif
+
 #ifdef _WIN32
 #define snprintf _snprintf
 #define strcasecmp _stricmp
@@ -32,11 +36,18 @@ DER Encoding information taken from:
 
 */
 
+	/* Includes the initial byte of tag number 31 */
+#define TAG_U_LONG_FORMAT_MAX_BYTES 6
+	/* Includes the initial byte that indicates the number of bytes used to encode length */
+#define LENGTH_MULTIBYTES_MAX_BYTES 7
+
 typedef struct {
 	int class;
 	int p_or_c;
 	int number;
 	unsigned long length;
+	char hbytes[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES + 1];
+	int hlen;
 } taglength_t;
 
 const char *classes[] = {
@@ -391,11 +402,6 @@ void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag
 	}
 }
 
-	/* Includes the initial byte of tag number 31 */
-#define TAG_U_LONG_FORMAT_MAX_BYTES 6
-	/* Includes the initial byte that indicates the number of bytes used to encode length */
-#define LENGTH_MULTIBYTES_MAX_BYTES 7
-
 int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level,
 					int loose_read)
 {
@@ -404,6 +410,8 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	if ((c = myfgetc(F, offset, loose_read)) == EOF)
 		return 0;
 
+	tl->hbytes[0] = c;
+	tl->hlen = 0;
 	tl->class = (c & 0xc0) >> 6;
 	tl->p_or_c = (c & 0x20) >> 5;
 	int original_type = tl->p_or_c;
@@ -416,11 +424,11 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	char tag_name[100];
 	get_tag_name(tag_name, sizeof(tag_name), tl->class, tl->number);
 
-	char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];
+/*    char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];*/
 
-	buf[0] = (char)c;
+/*    buf[0] = (char)c;*/
 	if (opt_ol >= OL_VERBOSE)
-		out_sequence(old_offset, buf, 1, 0, OD_UNDEF, recursive_level);
+		out_sequence(old_offset, tl->hbytes, 1, 0, OD_UNDEF, recursive_level);
 
 	if (opt_ol == OL_VERYVERBOSE) {
 		char b[9];
@@ -445,10 +453,11 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 		do {
 			if ((c = myfgetc(F, offset, FALSE)) == EOF)
 				return 0;
-			buf[pos] = (char)c;
+			tl->hbytes[pos] = c;
 			--(*remaining_length);
-		} while (buf[pos] & 0x80 && ++pos < TAG_U_LONG_FORMAT_MAX_BYTES);
-		if (pos == sizeof(buf)) {
+			++(tl->hlen);
+		} while (tl->hbytes[pos] & 0x80 && ++pos < TAG_U_LONG_FORMAT_MAX_BYTES);
+		if (pos == sizeof(tl->hbytes)) {
 			myfclose(F, "Tag number too big", old_offset);
 			return 0;
 		}
@@ -464,10 +473,10 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 			if (rev == 1)
 				bm1 = 0;
 			else
-				bm1 = (unsigned)buf[rev - 1];
+				bm1 = (unsigned)tl->hbytes[rev - 1];
 			rmask = (0x7Fu >> shift);
 			lmask = (0xFFu << (7 - shift)) & 0xFFu;
-			v0 = (long unsigned)(((bm1 << (7 - shift)) & lmask) | (((unsigned)buf[rev] >> shift) & rmask));
+			v0 = (long unsigned)(((bm1 << (7 - shift)) & lmask) | (((unsigned)tl->hbytes[rev] >> shift) & rmask));
 
 			value += v0 * multi;
 			multi *= 256;   /* Can be written <<8, but... */
@@ -475,7 +484,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 		}
 		tl->number = (int)value;
 		if (opt_ol >= OL_VERBOSE) {
-			out_sequence(old_offset, buf + 1, (unsigned long)pos, 0, OD_UNDEF, recursive_level);
+			out_sequence(old_offset, tl->hbytes + 1, (unsigned long)pos, 0, OD_UNDEF, recursive_level);
 			out("Tag number: %i\n", tl->number);
 		}
 	}
@@ -487,11 +496,12 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	}
 
 	--(*remaining_length);
+	++(tl->hlen);
 
 	if (!check_position(F, *offset, *remaining_length, 0))
 		return 0;
 
-	char *bl = buf + pos + 1;
+	char *bl = tl->hbytes + pos + 1;
 
 	int cc;
 	size_t old_loffset = *offset;
@@ -541,11 +551,12 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	}
 
 	if (opt_ol == OL_NORMAL) {
-		out_sequence(old_offset, buf, (size_t)(pos + n + 2), 0, OD_UNDEF, recursive_level);
+		out_sequence(old_offset, tl->hbytes, (size_t)(pos + n + 2), 0, OD_UNDEF, recursive_level);
 		out("%s-%s: %s, len: %lu\n", short_classes[tl->class], short_PCs[original_type], tag_name, tl->length);
 	}
 
 	*remaining_length -= (n + 1);
+	tl->hlen += (n + 1);
 
 	return check_position(F, *offset, *remaining_length, 0);
 }
@@ -653,17 +664,32 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 			if (tl.class == TAG_CLASS_UNIVERSAL && tl.number == TAG_U_OBJECT_IDENTIFIER) {
 				const size_t sizeof_printable = 200;
 				char *printable = malloc(sizeof_printable);
+
+#ifdef HAS_LIB_OPENSSL
+				unsigned char *tmp = malloc(tl.hlen + tl.length);
+				memcpy(tmp, tl.hbytes, tl.hlen);
+				memcpy(tmp + tl.hlen, buf, tl.length);
+				ASN1_OBJECT *oid = NULL;
+				const unsigned char *tt = tmp;
+				const char *sn = "";
+				if (d2i_ASN1_OBJECT(&oid, &tt, tl.hlen + tl.length) != NULL) {
+					const char *soid;
+					soid = OBJ_nid2sn(OBJ_obj2nid(oid));
+					sn = (const char *)soid;
+					ASN1_OBJECT_free(oid);
+				}
+				free(tmp);
+#endif
+
 				if (!decode_oid(printable, sizeof_printable, buf, tl.length)) {
 					out("\n");
 					myfclose(F, "unable to decode OID", *offset);
 				} else {
-/*          if (opt_ol == OL_VERYVERBOSE)*/
-						out("OID: %s", printable);
-/*          else {*/
-/*            out("\n");*/
-/*            prefix_recursive_level_out(recursive_level);*/
-/*            out("        OID: %s", printable);*/
-/*          }*/
+#ifdef HAS_LIB_OPENSSL
+					out("OID: %s (%s)", printable, sn);
+#else
+					out("OID: %s", printable);
+#endif
 				}
 				free(printable);
 			}

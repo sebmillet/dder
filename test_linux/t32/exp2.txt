@@ -49,7 +49,7 @@ Reading from file abc2.der...
 000011  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000012  55 04 0a                     U..        OID: 2.5.4.10
+000012  55 04 0a                     U..        OID: 2.5.4.10 (O)
 000015  0c                           00 0 01100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -80,7 +80,7 @@ Reading from file abc2.der...
 000027  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000028  55 04 06                     U..        OID: 2.5.4.6
+000028  55 04 06                     U..        OID: 2.5.4.6 (C)
 00002b  13                           00 0 10011
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -110,7 +110,7 @@ Reading from file abc2.der...
 000034  03                           0 0000011
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 3
-000035  55 04 03                     U..        OID: 2.5.4.3
+000035  55 04 03                     U..        OID: 2.5.4.3 (CN)
 000038  0c                           00 0 01100
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -143,7 +143,7 @@ Reading from file abc2.der...
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 9
 000054  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-00005c  01                           .          OID: 1.2.840.113549.1.1.1
+00005c  01                           .          OID: 1.2.840.113549.1.1.1 (rsaEncryption)
 00005d  05                           00 0 00101
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
@@ -198,7 +198,7 @@ Reading from file abc2.der...
                                      ^          Len type: 0 -> ONE BYTE
                                        ^^^^^^^  Len: 9
 0000f5  2a 86 48 86    f7 0d 01 01   *.H.  .... 
-0000fd  0b                           .          OID: 1.2.840.113549.1.1.11
+0000fd  0b                           .          OID: 1.2.840.113549.1.1.11 (RSA-SHA256)
 0000fe  05                           00 0 00101
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     0 -> Primitive
