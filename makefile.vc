@@ -2,23 +2,39 @@
 
 # dder.exe makefile for Microsoft Visual C++
 
-# Sébastien Millet, Februay 2015
+# Sébastien Millet, Februay 2015, January 2016
 
-CPP = cl.exe
-CPPFLAGS = /Ox /W2
-LINKERFLAGS = /Ox /W2
+BUILD = build
 
-all : dder.exe
+!if "$(DEBUG)" == "0"
+DEBCPP = /Ox
+DEBLD =
+!endif
+!if "$(DEBUG)" == "1"
+DEBCPP = /MDd /Od /Zi /D_DEBUG /DDEBUG
+DEBLD = /DEBUG
+!endif
 
-dder.exe : dder.obj
-	$(CPP) $(LINKERFLAGS) dder.obj
+CPPFLAGS = /nologo /Ox /W2 $(DEBCPP)
+LDFLAGS = /nologo $(DEBLD)
 
-dder.obj : src\dder.c
-	$(CPP) $(CPPFLAGS) -c src\dder.c
+all : $(BUILD)
+all : $(BUILD)\dder.exe
+
+$(BUILD) :
+	-if not exist $(BUILD) mkdir $(BUILD)
+
+OBJS = $(BUILD)\dder.obj
+
+$(BUILD)\dder.exe : $(OBJS)
+	link $(LDFLAGS) $(OBJS) /OUT:$@
+
+$(BUILD)\dder.obj : src\dder.c
+	cl $(CPPFLAGS) /Fo$@ /c src\dder.c
 
 mrproper : clean
 
 clean :
-	del *.obj 2>NUL
-	del dder.exe 2>NUL
+	-if exist $(BUILD)\*.obj del $(BUILD)\*.obj
+	-if exist $(BUILD)\dder.exe del $(BUILD)\dder.exe
 
