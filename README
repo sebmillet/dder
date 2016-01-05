@@ -1,7 +1,7 @@
    dder, a portable der-encoded file display program
    =================================================
 
-Date: 2015-12-23 14:12 +0100
+Date: 2016-01-05 22:07 +0100
 
 Contents:
 
@@ -29,7 +29,7 @@ It displays der content in a very detailed way. It is meant to be didactic.
 The command
     openssl asn1parse
 does a perfect job but without displaying the low level file content (and it
-not its job to do that.)
+is not its job to do that.)
 
 dder displays der content with low level file content in hexadecimal.
 
@@ -43,6 +43,10 @@ See COPYING file that comes along with the package the program belongs to.
 
 IV.   COMPILATION AND INSTALLATION
 
+By default the generation is done with linking against openssl library.
+This allows dder to display the object names after their OID.
+Under Linux the link is dynamic, under Windows it is static.
+
 * LINUX
 
 To compile under Linux, execute in the extracted archive root:
@@ -50,11 +54,85 @@ To compile under Linux, execute in the extracted archive root:
     make
     make install (or 'sudo make install')
 
+  Note about SSL
+  The SSL feature requires SSL development library to be available on the
+  system you compile on. The package name is libssl-dev for DEB packages and
+  openssl-devel (not tested) in RPM ones. For example under Ubuntu, execute:
+    sudo apt-get install libssl-dev
+
 * WINDOWS
+
+1) Generation with Microsoft Visual C++
+
+This generation was checked with msvc version 2015, 32-bit compilation.
+
+1.1) Compilation of the openssl library with msvc
+
+See
+    http://developer.covenanteyes.com/building-openssl-for-visual-studio/
+
+As compilation is done from MSVC command-line shell, you need a PERL
+interpreter installed on Windows to proceed.
+ActiveState or Strawberry are fine while ActiveState is said by the URL above
+to be more stable.
+
+From msvc command-line and after CDing to the extracted openssl archive, run
+(for 32-bit)
+
+perl Configure VC-WIN32 --prefix=C:\openssl-msvc
+    or (for 64-bit)
+perl Configure VC-WIN64 --prefix=C:\openssl-msvc
+
+Then
+ms\do_ms (for 32-bit) or ms\do_win64a (for 64-bit)
+
+Then
+nmake -f ms\nt.mak
+nmake -f ms\nt.mak install
+
+1.2) dder.exe generation
 
 To compile under Windows with Microsoft Visual C++ 2015, launch MSVC
 command-line and, in the extracted archive root, execute:
     nmake -f makefile.vc
 
-Sébastien Millet, February-December 2015
+You may need to update makefile.vc depending on where you built openssl lib
+in.
+
+2) Generation with Mingw
+
+This generation was checked using Mingw 32-bit.
+
+2.1) Compiling the openssl library with mingw
+
+To build a static version of openssl with mingw, see the following URLs:
+    http://stackoverflow.com/questions/9379363/how-to-build-openssl-with-mingw-in-windows
+    http://www.wagner.pp.ru/~vitus/articles/openssl-mingw.html
+    http://lists.pjsip.org/pipermail/pjsip_lists.pjsip.org/2008-February/001644.html
+
+  Instructions:
+
+  1. Download the source from there and extract it:
+     http://www.openssl.org/source/openssl-1.0.2e.tar.gz
+     (select the last version ; as of January 5th, 2016, it is 1.0.2e)
+  2. Open a MSYS window (from MinGW\msys\1.0\msys.bat)
+  3. Run the command (32 bits)
+     perl Configure mingw no-shared no-asm --prefix=/c/openssl
+     Or (64 bits)
+     perl Configure mingw64 no-shared no-asm --prefix=/c/openssl-x64
+  4. Run
+     make
+     make install
+  5. Under the directory you built openssl in, you will find the libraries, example:
+     C:\openssl\lib\libcrypto.a
+
+2.2) dder.exe generation
+
+To compile under Windows with mingw, in the extracted archive root, execute:
+    mingw32-make -f makefile.mingw
+
+You may need to update makefile.mingw depending on where you built openssl lib
+in.
+
+Sébastien Millet, February 2015-January 2016
 

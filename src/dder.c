@@ -236,7 +236,11 @@ void usage()
 
 void version()
 {
-	out("dder version 0.1\n");
+	out("dder version 0.1");
+#ifdef DEBUG
+	out("d");
+#endif
+	out("\n");
 	exit(0);
 }
 
@@ -410,7 +414,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	if ((c = myfgetc(F, offset, loose_read)) == EOF)
 		return 0;
 
-	tl->hbytes[0] = c;
+	tl->hbytes[0] = (char)c;
 	tl->hlen = 0;
 	tl->class = (c & 0xc0) >> 6;
 	tl->p_or_c = (c & 0x20) >> 5;
@@ -453,7 +457,7 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 		do {
 			if ((c = myfgetc(F, offset, FALSE)) == EOF)
 				return 0;
-			tl->hbytes[pos] = c;
+			tl->hbytes[pos] = (char)c;
 			--(*remaining_length);
 			++(tl->hlen);
 		} while (tl->hbytes[pos] & 0x80 && ++pos < TAG_U_LONG_FORMAT_MAX_BYTES);

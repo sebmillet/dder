@@ -1,42 +1,37 @@
-# makefile.vc
+# makefile.mingw
 
-# dder.exe makefile for Microsoft Visual C++
+# dder.exe makefile for Mingw
+# Tested with Mingw 32-bit
 
 # Sébastien Millet, Februay 2015, January 2016
 
+ifeq ($(DEBUG), 1)
+DEBCPP = -g -DDEBUG
+endif
+
+GCC = gcc.exe
 BUILD = build
 
-INCSSL= c:\openssl-msvc\include
-LIBSSL= c:\openssl-msvc\lib
+INCSSL= c:\openssl-mingw\include
+LIBSSL= c:\openssl-mingw\lib
 
-SSLCPP = /DHAS_LIB_OPENSSL -I$(INCSSL)
-SSLLD = /LIBPATH:$(LIBSSL)
-SSLLDE = libeay32.lib
-!if "$(NOSSL)" == "1"
-SSLCPP = /Ox
+SSLCPP = -DHAS_LIB_OPENSSL -I$(INCSSL)
+SSLLD = -L$(LIBSSL) -lcrypto
+
+ifeq ($(NOSSL), 1)
+SSLCPP =
 SSLLD =
-SSLLDE =
-!endif
+endif
 
-!if "$(DEBUG)" != "1"
-DEBCPP = /Ox
-DEBLD =
-!endif
-!if "$(DEBUG)" == "1"
-DEBCPP = /Od /Zi /D_DEBUG /DDEBUG
-DEBLD = /DEBUG
-!endif
+CPPFLAGS = -Wall $(DEBCPP) $(SSLCPP)
+LDFLAGS = -Wall $(DEBLD) $(SSLLD)
 
-CPPFLAGS = /nologo /W4 /D_CRT_SECURE_NO_WARNINGS $(DEBCPP) $(SSLCPP)
-LDFLAGS = /nologo $(DEBLD) $(SSLLD)
-
-!if "$(NOSSL)" != "1"
+ifneq ($(NOSSL), 1)
 all : libsslwarning
-!endif
+endif
+
 all : $(BUILD)
 all : $(BUILD)\dder.exe
-
-OBJS = $(BUILD)\dder.obj
 
 libsslwarning :
 	@echo "******************************************************"
@@ -49,14 +44,14 @@ libsslwarning :
 	@echo " Therefore to compile successfully, the following     "
 	@echo " files should exist:                                  "
 	@echo "   $(INCSSL)\openssl\objects.h
-	@echo "   $(LIBSSL)\libeay32.lib
+	@echo "   $(LIBSSL)\libcrypto.a
 	@echo " Note the compilation is done with static linking     "
 	@echo " to openssl.                                          "
 	@echo "******************************************************"
 	@echo "                                                      "
 	@echo " If you wish to compile dder.exe without support      "
 	@echo " of openssl library, execute the following:           "
-	@echo "   nmake -f makefile.vc NOSSL=1                       "
+	@echo "   mingw32-make -f makefile.mingw NOSSL=1             "
 	@echo "                                                      "
 	@echo "******************************************************"
 	@echo The openssl library is used to display the name of
@@ -65,15 +60,15 @@ libsslwarning :
 $(BUILD) :
 	-if not exist $(BUILD) mkdir $(BUILD)
 
-$(BUILD)\dder.exe : $(OBJS)
-	link $(LDFLAGS) $(OBJS) $(SSLLDE) User32.lib /OUT:$@
+$(BUILD)\dder.exe : $(BUILD)\dder.o
+	$(GCC) $(BUILD)\dder.o -o $(BUILD)\dder.exe $(LDFLAGS)
 
-$(BUILD)\dder.obj : src\dder.c
-	cl $(CPPFLAGS) /Fo$@ /c src\dder.c
+$(BUILD)\dder.o : src\dder.c
+	$(GCC) -c $< -o $@ $(CPPFLAGS)
 
 mrproper : clean
 
 clean :
-	-if exist $(BUILD)\*.obj del $(BUILD)\*.obj
+	-if exist $(BUILD)\*.o del $(BUILD)\*.o
 	-if exist $(BUILD)\dder.exe del $(BUILD)\dder.exe
 
