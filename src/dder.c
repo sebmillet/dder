@@ -36,6 +36,9 @@ DER Encoding information taken from:
 
 */
 
+	/* Arbitrary limit. Just to avoid crazy values that'd eat up all available memory. */
+#define MAX_DATA_BLOCK_LEN 104857600
+
 	/* Includes the initial byte of tag number 31 */
 #define TAG_U_LONG_FORMAT_MAX_BYTES 6
 	/* Includes the initial byte that indicates the number of bytes used to encode length */
@@ -623,6 +626,10 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 
 	if (!parse_taglength(F, offset, remaining_length, &tl, recursive_level, loose_read))
 		return;
+	if (tl.length > MAX_DATA_BLOCK_LEN) {
+		myfclose(F, "data length too big", *offset);
+		return;
+	}
 
 	if (tl.p_or_c == TAG_TYPE_CONSTRUCTED) {
 		ssize_t inner_remaining_length = (ssize_t)tl.length;
