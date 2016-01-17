@@ -1,3 +1,4 @@
 #!/bin/sh
 
-../generic_simple.sh "dder test hits max data block length" "tmp-output.txt" "expected-output.txt" z7bis.der $1
+../generic_multiple.sh "" 1 "dder test hits max data block length" "z7bis" "tmp" "exp" ".der" ".txt" $1
+
