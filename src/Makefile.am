@@ -11,6 +11,7 @@ dder_SOURCES = dder.c
 dder_LDFLAGS = 
 
 if WITH_OPENSSL
+dder_SOURCES += ppem.h ppem.c
 dder_LDFLAGS += -lssl -lcrypto
 endif
 

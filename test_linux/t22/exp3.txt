@@ -1,39 +1,134 @@
 Reading from file f3.pem...
-000000  2d                           00 1 01101
+Trying to parse input data against PEM rules
+PEM block: [DSA PARAMETERS]
+PEM block: [DSA PRIVATE KEY]
+Will use pem decoded/decrypted data as pk input
+000000  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
-                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
-000001  2d                           0 0101101
-                                     ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 45
-000002  2d                           00 1 01101
+                                          ^^^^^ Tag number:  16 -> SEQUENCE
+000001  81 9c                        1 0000001
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 1, value: 156
+000003  02                           00 0 00010
                                      ^^         Tag class:    0 -> Universal
-                                        ^       Tag type:     1 -> Constructed
-                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
-000003  2d                           0 0101101
-                                     ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 45
-000004  2d                           00 1 01101
-                                     ^^         Tag class:    0 -> Universal
-                                        ^       Tag type:     1 -> Constructed
-                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
-000005  42                           0 1000010
-                                     ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 66
-000006  45                           01 0 00101
-                                     ^^         Tag class:    1 -> Application
                                         ^       Tag type:     0 -> Primitive
-                                          ^^^^^ Tag number:   5 -> [ 5 ]
-000007  47                           0 1000111
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000004  41                           0 1000001
                                      ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 71
-000008  49 4e 20 44    53 41 20 50   IN D  SA P 
-000010  41 52 41 4d    45 54 45 52   ARAM  ETER 
-000018  53 2d 2d 2d    2d 2d 0a 4d   S---  --.M 
-000020  49 47 63 41    6b 45 41 6a   IGcA  kEAj 
-000028  59 5a 35 66    63 50 74 4b   YZ5f  cPtK 
-000030  30 30 73 70    4b 31 36 53   00sp  K16S 
-000038  67 75 34 37    63 46 69 70   gu47  cFip 
-000040  72 44 68 33    45 32 4b 42   rDh3  E2KB 
-000048  56 59 6f 44    46 51 76      VYoD  FQv  
-Error: inconsistent items length, position: 79
+                                       ^^^^^^^  Len: 65
+000005  00 8d 86 79    7d c3 ed 2b   ...y  }..+ 
+00000d  4d 2c a4 ad    7a 4a 0b b8   M,..  zJ.. 
+000015  ed c1 62 a6    b0 e1 dc 4d   ..b.  ...M 
+00001d  8a 05 56 28    0c 54 2f 39   ..V(  .T/9 
+000025  5e 11 87 92    70 d0 fe dc   ^...  p... 
+00002d  f1 9a 64 c6    8e 65 dc e7   ..d.  .e.. 
+000035  98 b9 fb 20    6f 26 9c 5b   ...   o&.[ 
+00003d  ba 6f 2e d2    b7 a7 4a 52   .o..  ..JR 
+000045  57                           W          
+000046  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000047  15                           0 0010101
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 21
+000048  00 c0 24 c7    0b 7c d5 8c   ..$.  .|.. 
+000050  0d c6 55 de    ee fa da 1f   ..U.  .... 
+000058  9f 60 1b 68    a3            .`.h  .    
+00005d  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+00005e  40                           0 1000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 64
+00005f  7c ba c5 81    e1 54 85 c0   |...  .T.. 
+000067  c1 f9 55 87    c8 64 01 a9   ..U.  .d.. 
+00006f  ab e4 7a 8d    00 33 1e d1   ..z.  .3.. 
+000077  d3 b8 83 4c    a3 ad b6 30   ...L  ...0 
+00007f  50 e0 6d 90    89 e8 6e 0e   P.m.  ..n. 
+000087  0f 52 75 ef    63 6d 2a 63   .Ru.  cm*c 
+00008f  a4 dc ff a3    0f 1d c1 8c   ....  .... 
+000097  a8 c1 66 b5    a5 2d fa 74   ..f.  .-.t 
+00009f  30                           00 1 10000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  16 -> SEQUENCE
+0000a0  81 f7                        1 0000001
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 1, value: 247
+0000a2  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+0000a3  01                           0 0000001
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 1
+0000a4  00                           .          
+0000a5  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+0000a6  41                           0 1000001
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 65
+0000a7  00 8d 86 79    7d c3 ed 2b   ...y  }..+ 
+0000af  4d 2c a4 ad    7a 4a 0b b8   M,..  zJ.. 
+0000b7  ed c1 62 a6    b0 e1 dc 4d   ..b.  ...M 
+0000bf  8a 05 56 28    0c 54 2f 39   ..V(  .T/9 
+0000c7  5e 11 87 92    70 d0 fe dc   ^...  p... 
+0000cf  f1 9a 64 c6    8e 65 dc e7   ..d.  .e.. 
+0000d7  98 b9 fb 20    6f 26 9c 5b   ...   o&.[ 
+0000df  ba 6f 2e d2    b7 a7 4a 52   .o..  ..JR 
+0000e7  57                           W          
+0000e8  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+0000e9  15                           0 0010101
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 21
+0000ea  00 c0 24 c7    0b 7c d5 8c   ..$.  .|.. 
+0000f2  0d c6 55 de    ee fa da 1f   ..U.  .... 
+0000fa  9f 60 1b 68    a3            .`.h  .    
+0000ff  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000100  40                           0 1000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 64
+000101  7c ba c5 81    e1 54 85 c0   |...  .T.. 
+000109  c1 f9 55 87    c8 64 01 a9   ..U.  .d.. 
+000111  ab e4 7a 8d    00 33 1e d1   ..z.  .3.. 
+000119  d3 b8 83 4c    a3 ad b6 30   ...L  ...0 
+000121  50 e0 6d 90    89 e8 6e 0e   P.m.  ..n. 
+000129  0f 52 75 ef    63 6d 2a 63   .Ru.  cm*c 
+000131  a4 dc ff a3    0f 1d c1 8c   ....  .... 
+000139  a8 c1 66 b5    a5 2d fa 74   ..f.  .-.t 
+000141  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000142  40                           0 1000000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 64
+000143  22 58 77 13    35 54 f2 17   "Xw.  5T.. 
+00014b  11 2e bb e7    c2 bd a8 8e   ....  .... 
+000153  be 5c 39 ba    09 cd 5b cf   .\9.  ..[. 
+00015b  8d a4 8a eb    fa 84 7b c5   ....  ..{. 
+000163  7b 86 25 29    6c c3 1b 76   {.%)  l..v 
+00016b  41 40 80 52    31 dd 64 b4   A@.R  1.d. 
+000173  7b 35 df 54    b4 d8 8d 85   {5.T  .... 
+00017b  31 d1 c4 85    52 19 a4 88   1...  R... 
+000183  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000184  14                           0 0010100
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 20
+000185  26 ac 1d 67    3d fd ec 8b   &..g  =... 
+00018d  d9 fb d0 26    c5 6b 7a d7   ...&  .kz. 
+000195  f4 36 8a 59                  .6.Y       

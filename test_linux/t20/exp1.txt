@@ -1,11 +1,36 @@
 Reading from file f1.pem...
-000000  2d                           univ-cons: RELATIVE-OID
-000001  2d                           Length: 45
-000002  2d                           univ-cons: RELATIVE-OID
-000003  2d                           Length: 45
-000004  2d                           univ-cons: RELATIVE-OID
-000005  42                           Length: 66
-000006  45                           appl-prim: [ 5 ]
-000007  47                           Length: 71
-000008  IN DSA PARAMETERS-----.MIICLQKCAQEAojLe9QMP/4Itk5uEq5inDxtT39e7XZoEL7zv  
-Error: inconsistent items length, position: 79
+Trying to parse input data against PEM rules
+PEM block: [DSA PARAMETERS]
+PEM block: [DSA PRIVATE KEY]
+Will use pem decoded/decrypted data as pk input
+000000  30                           univ-cons: SEQUENCE
+000001  82 02 2d                     Length: 557
+000004  02                           univ-prim: INTEGER
+000005  82 01 01                     Length: 257
+000008  ..2......-........S...]../...08..V..J......X5.>..WQD...|)..-.p..3..x.5E..-a...0c*.....}$^..%.K..CY...vf...Pm.......!XG*Q..k........=y....Z...V+..........v.. \.......Q...X.....4..d'23..5.H2/.M...A.......(x.....q:..o..V={x.'..,F..J..'.Y[h9..9A.Ue..0...*..v.q.  
+000109  02                           univ-prim: INTEGER
+00010a  21                           Length: 33
+00010b  ..d.j....Izf?.%-..n....1.wT9...:.  
+00012c  02                           univ-prim: INTEGER
+00012d  82 01 01                     Length: 257
+000130  ....m.N3~[....~.r..7....V_..-.*...;H...y.b...8..1.#...Z%..H)......,.sc.x4....t.3...+....&.Kb.539HD.z..A(G...r<.fg..%..zQ.$...&....V:Z./..?......./..w.7...6.....|a.5.0k.....3.._.....8....M..V.y#B.j./.t..IY.mq@53...<Sk....^..e#x.....q=h4....B[..X.+=..........  
+000231  30                           univ-cons: SEQUENCE
+000232  82 03 58                     Length: 856
+000235  02                           univ-prim: INTEGER
+000236  01                           Length: 1
+000237  .  
+000238  02                           univ-prim: INTEGER
+000239  82 01 01                     Length: 257
+00023c  ..2......-........S...]../...08..V..J......X5.>..WQD...|)..-.p..3..x.5E..-a...0c*.....}$^..%.K..CY...vf...Pm.......!XG*Q..k........=y....Z...V+..........v.. \.......Q...X.....4..d'23..5.H2/.M...A.......(x.....q:..o..V={x.'..,F..J..'.Y[h9..9A.Ue..0...*..v.q.  
+00033d  02                           univ-prim: INTEGER
+00033e  21                           Length: 33
+00033f  ..d.j....Izf?.%-..n....1.wT9...:.  
+000360  02                           univ-prim: INTEGER
+000361  82 01 01                     Length: 257
+000364  ....m.N3~[....~.r..7....V_..-.*...;H...y.b...8..1.#...Z%..H)......,.sc.x4....t.3...+....&.Kb.539HD.z..A(G...r<.fg..%..zQ.$...&....V:Z./..?......./..w.7...6.....|a.5.0k.....3.._.....8....M..V.y#B.j./.t..IY.mq@53...<Sk....^..e#x.....q=h4....B[..X.+=..........  
+000465  02                           univ-prim: INTEGER
+000466  82 01 01                     Length: 257
+000469  ....%..?....5.|)`7.z..zx..P.)..[.7..r.G.....1K.H...b.........b.Yf...58~.a.....T..)_7.v{.....;....-...i~.^...i........ql80...YD$..S.......@..,VFR....+..z.B.^.....a.......87h.t..7....K...{NQ.8I..^........&i-.GY.4.T.d.^......;....!..x...:..K!...`...N$.........  
+00056a  02                           univ-prim: INTEGER
+00056b  21                           Length: 33
+00056c  ..\...e......#6...).PK..X}.....=.  

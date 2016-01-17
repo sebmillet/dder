@@ -1,11 +1,36 @@
 Reading from file f3.pem...
-000000  2d                           univ-cons: RELATIVE-OID
-000001  2d                           Length: 45
-000002  2d                           univ-cons: RELATIVE-OID
-000003  2d                           Length: 45
-000004  2d                           univ-cons: RELATIVE-OID
-000005  42                           Length: 66
-000006  45                           appl-prim: [ 5 ]
-000007  47                           Length: 71
-000008  IN DSA PARAMETERS-----.MIGcAkEAjYZ5fcPtK00spK16Sgu47cFiprDh3E2KBVYoDFQv  
-Error: inconsistent items length, position: 79
+Trying to parse input data against PEM rules
+PEM block: [DSA PARAMETERS]
+PEM block: [DSA PRIVATE KEY]
+Will use pem decoded/decrypted data as pk input
+000000  30                           univ-cons: SEQUENCE
+000001  81 9c                        Length: 156
+000003  02                           univ-prim: INTEGER
+000004  41                           Length: 65
+000005  ...y}..+M,..zJ....b....M..V(.T/9^...p.....d..e..... o&.[.o....JRW  
+000046  02                           univ-prim: INTEGER
+000047  15                           Length: 21
+000048  ..$..|....U......`.h.  
+00005d  02                           univ-prim: INTEGER
+00005e  40                           Length: 64
+00005f  |....T....U..d....z..3.....L...0P.m...n..Ru.cm*c..........f..-.t  
+00009f  30                           univ-cons: SEQUENCE
+0000a0  81 f7                        Length: 247
+0000a2  02                           univ-prim: INTEGER
+0000a3  01                           Length: 1
+0000a4  .  
+0000a5  02                           univ-prim: INTEGER
+0000a6  41                           Length: 65
+0000a7  ...y}..+M,..zJ....b....M..V(.T/9^...p.....d..e..... o&.[.o....JRW  
+0000e8  02                           univ-prim: INTEGER
+0000e9  15                           Length: 21
+0000ea  ..$..|....U......`.h.  
+0000ff  02                           univ-prim: INTEGER
+000100  40                           Length: 64
+000101  |....T....U..d....z..3.....L...0P.m...n..Ru.cm*c..........f..-.t  
+000141  02                           univ-prim: INTEGER
+000142  40                           Length: 64
+000143  "Xw.5T...........\9...[.......{.{.%)l..vA@.R1.d.{5.T....1...R...  
+000183  02                           univ-prim: INTEGER
+000184  14                           Length: 20
+000185  &..g=......&.kz..6.Y  

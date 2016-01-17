@@ -1,19 +1,37 @@
 Reading from file f4.pem...
-000000  2d                           univ-cons: RELATIVE-OID
-000001  2d                           Length: 45
-000002  2d                           univ-cons: RELATIVE-OID
-000003  2d                           Length: 45
-000004  2d                           univ-cons: RELATIVE-OID
-000005  42                           Length: 66
-000006  45                           appl-prim: [ 5 ]
-000007  47                           Length: 71
-000008  49 4e 20 45    43 20 50 41   IN E  C PA 
-000010  52 41 4d 45    54 45 52 53   RAME  TERS 
-000018  2d 2d 2d 2d    2d 0a 42 67   ----  -.Bg 
-000020  67 71 68 6b    6a 4f 50 51   gqhk  jOPQ 
-000028  4d 42 42 77    3d 3d 0a 2d   MBBw  ==.- 
-000030  2d 2d 2d 2d    45 4e 44 20   ----  END  
-000038  45 43 20 50    41 52 41 4d   EC P  ARAM 
-000040  45 54 45 52    53 2d 2d 2d   ETER  S--- 
-000048  2d 2d 0a 2d    2d 2d 2d      --.-  ---  
-Error: inconsistent items length, position: 79
+Trying to parse input data against PEM rules
+PEM block: [EC PARAMETERS]
+PEM block: [EC PRIVATE KEY]
+Will use pem decoded/decrypted data as pk input
+000000  06                           univ-prim: OBJECT IDENTIFIER
+000001  08                           Length: 8
+000002  2a 86 48 ce    3d 03 01 07   *.H.  =... OID: 1.2.840.10045.3.1.7 (prime256v1)
+00000a  30                           univ-cons: SEQUENCE
+00000b  77                           Length: 119
+00000c  02                           univ-prim: INTEGER
+00000d  01                           Length: 1
+00000e  01                           .          
+00000f  04                           univ-prim: OCTET STRING
+000010  20                           Length: 32
+000011  48 43 db 54    55 99 b2 e0   HC.T  U... 
+000019  95 52 58 7f    64 7d 57 4d   .RX.  d}WM 
+000021  1b 2a d6 04    00 bc 33 ec   .*..  ..3. 
+000029  86 90 65 4e    a1 0f 8a 86   ..eN  .... 
+000031  a0                           cont-cons: [ 0 ]
+000032  0a                           Length: 10
+000033  06                           univ-prim: OBJECT IDENTIFIER
+000034  08                           Length: 8
+000035  2a 86 48 ce    3d 03 01 07   *.H.  =... OID: 1.2.840.10045.3.1.7 (prime256v1)
+00003d  a1                           cont-cons: [ 1 ]
+00003e  44                           Length: 68
+00003f  03                           univ-prim: BIT STRING
+000040  42                           Length: 66
+000041  00 04 62 0b    3e 5d 7d e2   ..b.  >]}. 
+000049  c8 27 6b e4    46 a9 1f 53   .'k.  F..S 
+000051  52 48 ca d6    7c f4 d5 e9   RH..  |... 
+000059  ca 69 f6 6a    99 80 c8 ac   .i.j  .... 
+000061  83 fd 36 18    89 4c 66 ab   ..6.  .Lf. 
+000069  62 8f d5 bb    99 d5 ef b8   b...  .... 
+000071  0d ba db 98    20 38 6e 30   ....   8n0 
+000079  72 aa 65 37    b9 b0 0c df   r.e7  .... 
+000081  c5 57                        .W         

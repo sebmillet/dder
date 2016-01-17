@@ -89,7 +89,8 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 bin_PROGRAMS = dder$(EXEEXT)
-@WITH_OPENSSL_TRUE@am__append_1 = -lssl -lcrypto
+@WITH_OPENSSL_TRUE@am__append_1 = ppem.h ppem.c
+@WITH_OPENSSL_TRUE@am__append_2 = -lssl -lcrypto
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -102,7 +103,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_dder_OBJECTS = dder.$(OBJEXT)
+am__dder_SOURCES_DIST = dder.c ppem.h ppem.c
+@WITH_OPENSSL_TRUE@am__objects_1 = ppem.$(OBJEXT)
+am_dder_OBJECTS = dder.$(OBJEXT) $(am__objects_1)
 dder_OBJECTS = $(am_dder_OBJECTS)
 dder_LDADD = $(LDADD)
 dder_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(dder_LDFLAGS) $(LDFLAGS) \
@@ -136,7 +139,7 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(dder_SOURCES)
-DIST_SOURCES = $(dder_SOURCES)
+DIST_SOURCES = $(am__dder_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -253,8 +256,8 @@ top_srcdir = @top_srcdir@
 SUFFIXES = .c .h
 AM_CFLAGS = @CFLAGS@ -Wshadow -Wall -I$(srcdir)
 AM_LDFLAGS = @LDFLAGS@
-dder_SOURCES = dder.c
-dder_LDFLAGS = $(am__append_1)
+dder_SOURCES = dder.c $(am__append_1)
+dder_LDFLAGS = $(am__append_2)
 all: all-am
 
 .SUFFIXES:
@@ -342,6 +345,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dder.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ppem.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\

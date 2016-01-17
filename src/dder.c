@@ -19,6 +19,8 @@
 #include <openssl/objects.h>
 #endif
 
+#include "ppem.h"
+
 #ifdef _WIN32
 #define snprintf _snprintf
 #define strcasecmp _stricmp
@@ -144,8 +146,8 @@ Program options from the command line
 #define MAX_RECURSIVE_LEVELS 200
 
 	/* OL stands for Out Level (no link with Olympic Lyonnais) */
-typedef enum {OL_NORMAL = 0, OL_VERBOSE = 1, OL_VERYVERBOSE = 2} out_level_t;
-out_level_t opt_ol = OL_NORMAL;
+typedef enum {L_ENFORCE = 0, L_NORMAL = 1, L_VERBOSE = 2, L_VERYVERBOSE = 3} out_level_t;
+out_level_t opt_ol = L_NORMAL;
 
 	/* OD stands for Out Data */
 typedef enum {OD_UNDEF, OD_SMART, OD_ENFORCE_HEX, OD_ENFORCE_TEXT} out_data_t;
@@ -156,6 +158,10 @@ long unsigned opt_width = 16;
 
 	/* Prefix to add as many times as current recursive level */
 char opt_recursive_pattern[100];
+
+int opt_der = FALSE;
+
+const char *opt_password = NULL;
 
 
 /*
@@ -172,11 +178,27 @@ if (!(b)) { \
 	exit(-999); \
 }
 
-int out(const char *fmt, ...)
+int out(out_level_t l, const char *fmt, ...)
 {
+	if (l > opt_ol)
+		return 0;
+
 	va_list args;
 	va_start(args, fmt);
 	int r = vprintf(fmt, args);
+	va_end(args);
+	return r;
+}
+
+int outln(out_level_t l, const char *fmt, ...)
+{
+	if (l > opt_ol)
+		return 0;
+
+	va_list args;
+	va_start(args, fmt);
+	int r = vprintf(fmt, args);
+	r = printf("\n");
 	va_end(args);
 	return r;
 }
@@ -207,51 +229,153 @@ void out_errno(const ssize_t offset)
 #define out_dbg(...) ;
 #endif
 
+enum {VF_UNINITIALIZED, VF_FILE, VF_MEM};
+
+typedef struct vf_t vf_t;
+struct vf_t {
+	int type;
+
+/* type = VF_FILE */
+
+	FILE *FILE_f;
+
+/* type = VF_MEM */
+
+	const unsigned char *MEM_data;
+	size_t MEM_data_len;
+	size_t MEM_idx;
+};
+
+vf_t *vf_construct()
+{
+	vf_t *vf = (vf_t *)malloc(sizeof(vf_t));
+	vf->type = VF_UNINITIALIZED;
+	return vf;
+}
+
+void vf_destruct(vf_t *vf)
+{
+	free(vf);
+}
+
+int vf_is_initialized(vf_t *vf)
+{
+	return (vf->type != VF_UNINITIALIZED);
+}
+
+void vf_init_FILE(vf_t *vf, FILE *f)
+{
+	assert(vf && !vf_is_initialized(vf));
+	vf->type = VF_FILE;
+	vf->FILE_f = f;
+}
+
+void vf_init_MEM(vf_t *vf, const unsigned char *data, size_t data_len)
+{
+	assert(vf && !vf_is_initialized(vf));
+	vf->type = VF_MEM;
+	vf->MEM_data = data;
+	vf->MEM_data_len = data_len;
+	vf->MEM_idx = 0;
+}
+
+int vf_fgetc(vf_t *vf)
+{
+	if (!vf_is_initialized(vf))
+		return EOF;
+
+	if (vf->type == VF_FILE) {
+		return fgetc(vf->FILE_f);
+	} else if (vf->type == VF_MEM) {
+		if (vf->MEM_idx >= vf->MEM_data_len) {
+			if (vf->MEM_idx == vf->MEM_data_len)
+				vf->MEM_idx++;
+			return EOF;
+		} else {
+			return vf->MEM_data[vf->MEM_idx++];
+		}
+	} else
+		assert(FALSE);
+}
+
+size_t vf_fread(void *ptr, size_t size, size_t nmemb, vf_t *vf)
+{
+	if (!vf_is_initialized(vf))
+		return 0;
+
+	if (vf->type == VF_FILE) {
+		return fread(ptr, size, nmemb, vf->FILE_f);
+	} else if (vf->type == VF_MEM) {
+		if (vf->MEM_idx >= vf->MEM_data_len)
+			return 0;
+
+			/* We are certain that 'remaining' is '>= 1' */
+		size_t remaining = vf->MEM_data_len - vf->MEM_idx;
+
+		size_t nb_bytes = size * nmemb;
+		int flag1 = 0;
+		if (nb_bytes > remaining) {
+			flag1 = 1;
+			nb_bytes = remaining;
+		}
+
+		memcpy(ptr, &vf->MEM_data[vf->MEM_idx], nb_bytes);
+		vf->MEM_idx += nb_bytes + flag1;
+		return nb_bytes;
+	} else
+		assert(FALSE);
+}
+
+int vf_feof(vf_t *vf)
+{
+	if (!vf_is_initialized(vf))
+		return TRUE;
+
+	if (vf->type == VF_FILE) {
+		return feof(vf->FILE_f);
+	} else if (vf->type == VF_MEM) {
+		return (vf->MEM_idx > vf->MEM_data_len);
+	} else
+		assert(FALSE);
+}
+
 void usage()
 {
-	out_err("Usage:\n");
-	out_err("  dder [OPTION]... [FILE]\n");
-	out_err("Parses FILE according to DER syntax\n");
-	out_err("Uses standard input if FILE is not specified\n");
-	out_err("\n");
-	out_err("FILE must be in der format. If it is in pem\n");
-	out_err("format you can use an openssl command to convert\n");
-	out_err("  If FILE is a private key:\n");
-	out_err("  openssl pley -in FILE -outform der -out out.der\n");
-	out_err("  If FILE is a certificate request:\n");
-	out_err("  openssl req -in FILE -outform der -out out.der\n");
-	out_err("  If FILE is a certificate:\n");
-	out_err("  openssl x509 -in FILE -outform der -out out.der\n");
-	out_err("\n");
-	out_err("Options are case insensitive. Options list:\n");
-	out_err("  -help        print this help screen\n");
-	out_err("  -version     output version information and exit\n");
-	out_err("  -verbose     verbose output.\n");
-	out_err("  -veryverbose *very* verbose output. Implies -hex\n");
-	out_err("  -text        enforce text output of data values\n");
-	out_err("  -hex         enforce hex output of data values\n");
-	out_err("  -width N     number of bytes per line, must be even\n");
-	out_err("  -recursive S string to add at the beginning of output lines,\n");
-	out_err("               one occurence of string for each level\n");
-	out_err("  --           end of parameters, next option is a file name\n");
+	fprintf(stderr, "Usage:\n"
+		"  dder [OPTION]... [FILE]\n"
+		"Parses FILE according to DER syntax\n"
+		"Uses standard input if FILE is not specified\n"
+		"\n"
+		"dder will automatically detect whether input data is\n"
+		"DER encoded or PEM encoded, unless you specify -der option.\n"
+		"\n"
+		"Options are case insensitive. Options list:\n"
+		"  -help        print this help screen\n"
+		"  -version     output version information and exit\n"
+		"  -verbose     verbose output.\n"
+		"  -veryverbose *very* verbose output. Implies -hex\n"
+		"  -text        enforce text output of data values\n"
+		"  -hex         enforce hex output of data values\n"
+		"  -width N     number of bytes per line, must be even\n"
+		"  -password p  use password 'p' to decrypt data (PEM encoding)\n"
+		"  -der         input data encoding is DER\n"
+		"  -recursive S string to add at the beginning of output lines,\n"
+		"               one occurence of string for each level\n"
+		"  --           end of parameters, next option is a file name\n"
+	);
 	exit(-1);
 }
 
 void version()
 {
-	out("dder version 0.1");
+	out(L_ENFORCE, "dder version 0.1");
 #ifdef DEBUG
-	out("d");
+	out(L_ENFORCE, "d");
 #endif
-	out("\n");
+	outln(L_ENFORCE, "");
+	outln(L_ENFORCE, "Copyright 2015 Sébastien Millet.");
+	outln(L_ENFORCE, "This is free software with ABSOLUTELY NO WARRANTY.");
 	exit(0);
-}
-
-ssize_t get_file_size(const char* filename)
-{
-	struct stat st;
-	stat(filename, &st);
-	return st.st_size;
 }
 
 char *s_strncpy(char *dest, const char *src, size_t n)
@@ -265,12 +389,35 @@ char *s_strncpy(char *dest, const char *src, size_t n)
 
 char *s_strncat(char *dest, const char *src, size_t n)
 {
-	strncat(dest, src, n);
+	strncat(dest, src, n - 1);
 	dest[n - 1] = '\0';
 	return dest;
 }
 	/* The define below triggers an error if usual strncat is used */
 #define strncat(a, b, c) ErrorDontUse_strncat_Use_s_strncat_Instead
+
+	/*
+	 * Returns a copied, allocated string. Uses s_strncpy for the string
+	 * copy (see comment above).
+	 * dst can be null, in which case the new string is to be retrieved
+	 * by the function return value.
+	 */
+char *s_alloc_and_copy(char **dst, const char *src)
+{
+	unsigned int s = strlen(src) + 1;
+	char *target = (char *)malloc(s);
+	s_strncpy(target, src, s);
+	if (dst)
+		*dst = target;
+	return target;
+}
+
+ssize_t file_get_size(const char* filename)
+{
+	struct stat st;
+	stat(filename, &st);
+	return st.st_size;
+}
 
 char *char_8bit_to_bin_str(char *b, const size_t blen, unsigned char c)
 {
@@ -286,27 +433,30 @@ char *char_8bit_to_bin_str(char *b, const size_t blen, unsigned char c)
 	return b;
 }
 
-void myfclose(FILE **F, const char *err, size_t position)
+void myfclose(vf_t *vf, const char *err, size_t position)
 {
 	if (err != NULL)
 		out_err("Error: %s, position: %u\n", err, (unsigned int)position);
-	if (*F != stdin)
-		fclose(*F);
-	*F = NULL;
+	if (vf->type == VF_FILE) {
+		if (vf->FILE_f != stdin)
+			fclose(vf->FILE_f);
+		vf->FILE_f = NULL;
+	}
+	vf->type = VF_UNINITIALIZED;
 }
 
-int myfgetc(FILE **F, size_t *offset, int loose_read)
+int myfgetc(vf_t *vf, size_t *offset, int loose_read)
 {
-	if (*F == NULL)
+	if (!vf_is_initialized(vf))
 		return EOF;
 
 	++(*offset);
-	int r = fgetc(*F);
+	int r = vf_fgetc(vf);
 	if (r == EOF) {
 		if (!loose_read)
-			myfclose(F, "unexpected end of file", *offset - 1);
+			myfclose(vf, "unexpected end of file", *offset - 1);
 		else
-			myfclose(F, NULL, *offset - 1);
+			myfclose(vf, NULL, *offset - 1);
 	}
 
 	return r;
@@ -319,7 +469,7 @@ void prefix_recursive_level_out(const int recursive_level)
 	*/
 	int i;
 	for (i = 0; i < recursive_level; ++i) {
-		out(opt_recursive_pattern);
+		out(L_ENFORCE, opt_recursive_pattern);
 	}
 }
 
@@ -341,58 +491,58 @@ void out_sequence(size_t offset, char *buf, const unsigned long len, const int i
 				prefix_recursive_level_out(recursive_level);
 				strpos = 0;
 				if (len)
-					out("%06x  ", (unsigned int)offset);
+					out(L_ENFORCE, "%06x  ", (unsigned int)offset);
 				else
-					out("        ");
+					out(L_ENFORCE, "        ");
 			}
 			if (!((i + hbytes) % opt_width)) {
-				out("   ");
+				out(L_ENFORCE, "   ");
 				str[strpos++] = ' ';
 				str[strpos++] = ' ';
 			}
 			if (i < len) {
-				out("%02x ", (unsigned char)buf[i]);
+				out(L_ENFORCE, "%02x ", (unsigned char)buf[i]);
 				str[strpos++] = (buf[i] < ' ' || buf[i] == 127 ? '.' : buf[i]);
 			} else {
-				out("   ");
+				out(L_ENFORCE, "   ");
 				str[strpos++] = ' ';
 			}
 			if (!((i + 1) % opt_width)) {
-				out("  ");
+				out(L_ENFORCE, "  ");
 				if (is_value) {
 					str[strpos] = '\0';
-					out("%s ", str);
+					out(L_ENFORCE, "%s ", str);
 				}
 				if (i + 1 < lim) {
-					out("\n");
+					outln(L_ENFORCE, "");
 					offset += opt_width;
 				}
 			}
 		}
 	} else {
 		prefix_recursive_level_out(recursive_level);
-		out("%06x  ", (unsigned int)offset);
+		out(L_ENFORCE, "%06x  ", (unsigned int)offset);
 		char c;
 		unsigned i;
 		for (i = 0; i < len; ++i) {
 			c = buf[i];
 			if (c < ' ' || c == 127)
 				c = '.';
-			out("%c", c);
+			out(L_ENFORCE, "%c", c);
 		}
-		out("  ");
+		out(L_ENFORCE, "  ");
 	}
 	free(str);
 }
 
-int check_position(FILE **F, const size_t offset, const ssize_t remaining_length, const int insert_newline)
+int check_position(vf_t *vf, const size_t offset, const ssize_t remaining_length, const int insert_newline)
 {
-	if (*F == NULL)
+	if (!vf_is_initialized(vf))
 		return 0;
 	if (remaining_length < 0) {
 		if (insert_newline)
-			out("\n");
-		myfclose(F, "inconsistent items length", offset);
+			outln(L_ENFORCE, "");
+		myfclose(vf, "inconsistent items length", offset);
 		return 0;
 	}
 	return 1;
@@ -409,12 +559,12 @@ void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag
 	}
 }
 
-int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level,
+int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level,
 					int loose_read)
 {
 	int c;
 	size_t old_offset = *offset;
-	if ((c = myfgetc(F, offset, loose_read)) == EOF)
+	if ((c = myfgetc(vf, offset, loose_read)) == EOF)
 		return 0;
 
 	tl->hbytes[0] = (char)c;
@@ -434,21 +584,21 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 /*    char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];*/
 
 /*    buf[0] = (char)c;*/
-	if (opt_ol >= OL_VERBOSE)
+	if (opt_ol >= L_VERBOSE)
 		out_sequence(old_offset, tl->hbytes, 1, 0, OD_UNDEF, recursive_level);
 
-	if (opt_ol == OL_VERYVERBOSE) {
+	if (opt_ol == L_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)c);
-		out("%c%c %c %c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
+		outln(L_ENFORCE, "%c%c %c %c%c%c%c%c", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
-		out("^^         Tag class:  %3i -> %s\n", tl->class, classes[tl->class]);
+		outln(L_ENFORCE, "^^         Tag class:  %3i -> %s", tl->class, classes[tl->class]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
-		out("   ^       Tag type:   %3i -> %s\n", original_type, PCs[original_type]);
+		outln(L_ENFORCE, "   ^       Tag type:   %3i -> %s", original_type, PCs[original_type]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
-		out("     ^^^^^ Tag number: %3i -> %s\n", tl->number, tag_name);
-	} else if (opt_ol >= OL_VERBOSE) {
-		out("%s-%s: %s\n", short_classes[tl->class], short_PCs[original_type], tag_name);
+		outln(L_ENFORCE, "     ^^^^^ Tag number: %3i -> %s", tl->number, tag_name);
+	} else if (opt_ol >= L_VERBOSE) {
+		outln(L_ENFORCE, "%s-%s: %s", short_classes[tl->class], short_PCs[original_type], tag_name);
 	}
 
 	int pos = 0;
@@ -458,14 +608,14 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 
 		old_offset = *offset;
 		do {
-			if ((c = myfgetc(F, offset, FALSE)) == EOF)
+			if ((c = myfgetc(vf, offset, FALSE)) == EOF)
 				return 0;
 			tl->hbytes[pos] = (char)c;
 			--(*remaining_length);
 			++(tl->hlen);
 		} while (tl->hbytes[pos] & 0x80 && ++pos < TAG_U_LONG_FORMAT_MAX_BYTES);
 		if (pos == sizeof(tl->hbytes)) {
-			myfclose(F, "Tag number too big", old_offset);
+			myfclose(vf, "Tag number too big", old_offset);
 			return 0;
 		}
 		int rev;
@@ -490,9 +640,9 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 			++shift;
 		}
 		tl->number = (int)value;
-		if (opt_ol >= OL_VERBOSE) {
+		if (opt_ol >= L_VERBOSE) {
 			out_sequence(old_offset, tl->hbytes + 1, (unsigned long)pos, 0, OD_UNDEF, recursive_level);
-			out("Tag number: %i\n", tl->number);
+			outln(L_ENFORCE, "Tag number: %i", tl->number);
 		}
 	}
 
@@ -505,14 +655,14 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	--(*remaining_length);
 	++(tl->hlen);
 
-	if (!check_position(F, *offset, *remaining_length, 0))
+	if (!check_position(vf, *offset, *remaining_length, 0))
 		return 0;
 
 	char *bl = tl->hbytes + pos + 1;
 
 	int cc;
 	size_t old_loffset = *offset;
-	if ((cc = myfgetc(F, offset, FALSE)) == EOF)
+	if ((cc = myfgetc(vf, offset, FALSE)) == EOF)
 		return 0;
 	int n = 0;
 	bl[0] = (char)cc;
@@ -521,51 +671,51 @@ int parse_taglength(FILE **F, size_t *offset, ssize_t *remaining_length, tagleng
 	if (cc & 0x80) {
 		n = (cc & 0x7F);
 		if (n > LENGTH_MULTIBYTES_MAX_BYTES - 1) {
-			myfclose(F, "number of bytes to encode length exceeds maximum", old_loffset);
+			myfclose(vf, "number of bytes to encode length exceeds maximum", old_loffset);
 			return 0;
 		} else if (n == 0) {
-			myfclose(F, "number of bytes to encode length cannot be null", old_loffset);
+			myfclose(vf, "number of bytes to encode length cannot be null", old_loffset);
 			return 0;
 		}
 		tl->length = 0;
 		int i;
 		for (i = 1; i <= n; ++i) {
-			if ((cc = myfgetc(F, offset, FALSE)) == EOF)
+			if ((cc = myfgetc(vf, offset, FALSE)) == EOF)
 				return 0;
 			tl->length <<= 8;
 			tl->length += (unsigned int)cc;
 			bl[i] = (char)cc;
 		}
 	}
-	if (opt_ol >= OL_VERBOSE)
+	if (opt_ol >= L_VERBOSE)
 		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0, OD_UNDEF, recursive_level);
 
-	if (opt_ol == OL_VERYVERBOSE) {
+	if (opt_ol == L_VERYVERBOSE) {
 		char b[9];
 		char_8bit_to_bin_str(b, sizeof(b), (unsigned char)(bl[0]));
-		out("%c %c%c%c%c%c%c%c\n", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
+		outln(L_ENFORCE, "%c %c%c%c%c%c%c%c", b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
-		out("^          Len type: %i -> %s\n", length_type, length_coding_types[length_type]);
+		outln(L_ENFORCE, "^          Len type: %i -> %s", length_type, length_coding_types[length_type]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		if (length_type == LENGTH_CODE_TYPE_ONE) {
-			out("  ^^^^^^^  Len: %lu", tl->length);
+			out(L_ENFORCE, "  ^^^^^^^  Len: %lu", tl->length);
 		} else {
-			out("  ^^^^^^^  Len nb bytes: %i, value: %lu", n, tl->length);
+			out(L_ENFORCE, "  ^^^^^^^  Len nb bytes: %i, value: %lu", n, tl->length);
 		}
-		out("\n");
-	} else if (opt_ol >= OL_VERBOSE) {
-		out("Length: %lu\n", tl->length);
+		outln(L_ENFORCE, "");
+	} else if (opt_ol >= L_VERBOSE) {
+		outln(L_ENFORCE, "Length: %lu", tl->length);
 	}
 
-	if (opt_ol == OL_NORMAL) {
+	if (opt_ol == L_NORMAL) {
 		out_sequence(old_offset, tl->hbytes, (size_t)(pos + n + 2), 0, OD_UNDEF, recursive_level);
-		out("%s-%s: %s, len: %lu\n", short_classes[tl->class], short_PCs[original_type], tag_name, tl->length);
+		outln(L_ENFORCE, "%s-%s: %s, len: %lu", short_classes[tl->class], short_PCs[original_type], tag_name, tl->length);
 	}
 
 	*remaining_length -= (n + 1);
 	tl->hlen += (n + 1);
 
-	return check_position(F, *offset, *remaining_length, 0);
+	return check_position(vf, *offset, *remaining_length, 0);
 }
 
 int decode_oid(char *p, const size_t plen, const char *buf, const size_t buflen)
@@ -616,28 +766,28 @@ int decode_oid(char *p, const size_t plen, const char *buf, const size_t buflen)
 	return 1;
 }
 
-void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recursive_level, int loose_read)
+void parse(vf_t *vf, size_t *offset, ssize_t *remaining_length, const int recursive_level, int loose_read)
 {
 	taglength_t tl;
 
 	if (recursive_level > MAX_RECURSIVE_LEVELS) {
-		myfclose(F, "number of recursive calls limit reached, now stopping", *offset);
+		myfclose(vf, "number of recursive calls limit reached, now stopping", *offset);
 	}
 
-	if (!parse_taglength(F, offset, remaining_length, &tl, recursive_level, loose_read))
+	if (!parse_taglength(vf, offset, remaining_length, &tl, recursive_level, loose_read))
 		return;
 	if (tl.length > MAX_DATA_BLOCK_LEN) {
-		myfclose(F, "data length too big", *offset);
+		myfclose(vf, "data length too big", *offset);
 		return;
 	}
 
 	if (tl.p_or_c == TAG_TYPE_CONSTRUCTED) {
 		ssize_t inner_remaining_length = (ssize_t)tl.length;
-		while(inner_remaining_length >= 1 && *F != NULL) {
-			parse(F, offset, &inner_remaining_length, recursive_level + 1, FALSE);
+		while(inner_remaining_length >= 1 && vf_is_initialized(vf)) {
+			parse(vf, offset, &inner_remaining_length, recursive_level + 1, FALSE);
 		}
-		if (inner_remaining_length && *F != NULL) {
-			myfclose(F, "contained data out of container boundaries", *offset);
+		if (inner_remaining_length && vf_is_initialized(vf)) {
+			myfclose(vf, "contained data out of container boundaries", *offset);
 			return;
 		}
 		*remaining_length -= (ssize_t)tl.length;
@@ -645,7 +795,7 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 		char *buf;
 		buf = (char *)malloc(tl.length);
 		size_t nbread;
-		nbread = fread(buf, 1, (size_t)tl.length, *F);
+		nbread = vf_fread(buf, 1, (size_t)tl.length, vf);
 		size_t old_offset = *offset;
 		*offset += nbread;
 		*remaining_length -= (ssize_t)nbread;
@@ -660,15 +810,15 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 		}
 
 		if (nbread != tl.length) {
-			if (feof(*F)) {
-				out("\n");
-				myfclose(F, "unexpected end of file", *offset);
+			if (vf_feof(vf)) {
+				outln(L_ENFORCE, "");
+				myfclose(vf, "unexpected end of file", *offset);
 			} else {
 				out_errno((ssize_t)*offset);
-				myfclose(F, NULL, 0);
+				myfclose(vf, NULL, 0);
 			}
 		} else {
-			if (!check_position(F, *offset, *remaining_length, 1)) {
+			if (!check_position(vf, *offset, *remaining_length, 1)) {
 				free(buf);
 				return;
 			}
@@ -693,32 +843,104 @@ void parse(FILE **F, size_t *offset, ssize_t *remaining_length, const int recurs
 #endif
 
 				if (!decode_oid(printable, sizeof_printable, buf, tl.length)) {
-					out("\n");
-					myfclose(F, "unable to decode OID", *offset);
+					outln(L_ENFORCE, "");
+					myfclose(vf, "unable to decode OID", *offset);
 				} else {
 #ifdef HAS_LIB_OPENSSL
-					out("OID: %s (%s)", printable, sn);
+					out(L_ENFORCE, "OID: %s (%s)", printable, sn);
 #else
-					out("OID: %s", printable);
+					out(L_ENFORCE, "OID: %s", printable);
 #endif
 				}
 				free(printable);
 			}
 		}
-		if (*F == NULL) {
+		if (!vf_is_initialized(vf)) {
 			free(buf);
 			return;
 		}
 		free(buf);
 		if (nbread >= 1)
-			out("\n");
+			outln(L_ENFORCE, "");
 	}
 	return;
 }
 
+#ifdef HAS_LIB_OPENSSL
+
+char *cb_password_pre()
+{
+/* FIXME */
+#define PASSWORD_MAX_BYTES 200
+
+	char *password;
+
+	if (!opt_password) {
+		fprintf(stderr, "Please type in the password:\n");
+		char *readpwd = malloc(PASSWORD_MAX_BYTES);
+		if (!fgets(readpwd, PASSWORD_MAX_BYTES, stdin)) {
+			free(readpwd);
+			return NULL;
+		}
+		readpwd[PASSWORD_MAX_BYTES - 1] = '\0';
+		password = readpwd;
+	} else {
+		password = s_alloc_and_copy(NULL, opt_password);
+	}
+
+	int i;
+	for (i = 0; i < 2; ++i) {
+		int n = strlen(password);
+		if (n >= 1 && (password[n - 1] == '\n' || password[n - 1] == '\r'))
+			password[n - 1] = '\0';
+	}
+
+/*    DBG("Password: '%s'", password)*/
+
+	return password;
+}
+
+void cb_password_post(char *password)
+{
+	if (password)
+		free(password);
+}
+
+void print_hexa(out_level_t l, const unsigned char *buf, int buf_len) {
+	int i; for (i = 0; i < buf_len; ++i) out(l, "%02X", (unsigned char)buf[i]);
+}
+
+void cb_loop_top(const pem_ctrl_t *ctrl)
+{
+	if (!pem_has_data(ctrl)) {
+		outln(L_VERBOSE, "PEM block: [%s] (skipped: %s)", pem_header(ctrl), pem_errorstring(pem_status(ctrl)));
+		return;
+	}
+
+	if (pem_has_encrypted_data(ctrl)) {
+		out(L_VERBOSE, "PEM block: [%s] (encrypted with %s", pem_header(ctrl), pem_cipher(ctrl));
+		if (!pem_salt(ctrl)) {
+			outln(L_VERBOSE, ", no salt)");
+		} else {
+			out(L_VERBOSE, ", salt: ");
+			print_hexa(L_VERBOSE, pem_salt(ctrl), pem_salt_len(ctrl));
+			outln(L_VERBOSE, ")");
+		}
+	} else {
+		outln(L_VERBOSE, "PEM block: [%s]", pem_header(ctrl));
+	}
+}
+
+void cb_loop_decrypt(int decrypt_ok, const char *errmsg)
+{
+	if (!decrypt_ok)
+		out_err("%s\n", errmsg);
+}
+
+#endif /* #ifdef HAS_LIB_OPENSSL */
 void opt_check(int n, const char *opt)
 {
-	static int defined_options[6] = {0, 0, 0};
+	static int defined_options[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 	if (defined_options[n]) {
 		out_err("Option %s already set\n", opt);
@@ -729,8 +951,6 @@ void opt_check(int n, const char *opt)
 
 int main(int argc, char **argv)
 {
-	FILE *F = NULL;
-
 	int optset_verbose = 0;
 	int optset_veryverbose = 0;
 	int optset_text = 0;
@@ -746,11 +966,11 @@ int main(int argc, char **argv)
 		} else if (!strcasecmp(argv[a], "-verbose")) {
 			opt_check(0, argv[a]);
 			optset_verbose = 1;
-			opt_ol = OL_VERBOSE;
+			opt_ol = L_VERBOSE;
 		} else if (!strcasecmp(argv[a], "-veryverbose")) {
 			opt_check(1, argv[a]);
 			optset_veryverbose = 1;
-			opt_ol = OL_VERYVERBOSE;
+			opt_ol = L_VERYVERBOSE;
 			opt_od = OD_ENFORCE_HEX;
 		} else if (!strcasecmp(argv[a], "-text")) {
 			opt_check(2, argv[a]);
@@ -781,6 +1001,16 @@ int main(int argc, char **argv)
 					a = 0;
 				}
 			}
+		} else if (!strcasecmp(argv[a], "-der")) {
+			opt_check(6, argv[a]);
+			opt_der = TRUE;
+		} else if (!strcasecmp(argv[a], "-password")) {
+			opt_check(7, argv[a]);
+			if (++a >= argc) {
+				a = -(a - 1);
+			} else {
+				opt_password = argv[a];
+			}
 		} else if (argv[a][0] == '-') {
 			if (strcmp(argv[a], "--")) {
 				out_err("Unknown option %s\n", argv[a]);
@@ -795,6 +1025,8 @@ int main(int argc, char **argv)
 		if (a >= 1)
 			++a;
 	}
+
+	char *fname = NULL;
 	if (a <= -1) {
 		out_err("Option %s: missing value\n", argv[-a]);
 	} else if (a == 0) {
@@ -811,45 +1043,150 @@ int main(int argc, char **argv)
 	} else if (optset_verbose && optset_veryverbose) {
 		out_err("incompatible options -veryverbose and -verbose\n");
 		a = 0;
-	} else if (a >= argc) {
-		out("Reading from standard input...\n");
-		F = stdin;
+	} else if (a >= 1 && a < argc) {
+		fname = argv[a];
 	}
 	if (a <= 0)
 		usage();
 
-	ssize_t s = INT_MAX;
-	if (F == NULL) {
-		char *f = argv[a];
+	if (!fname)
+		outln(L_ENFORCE, "Reading from standard input...");
+	else
+		outln(L_ENFORCE, "Reading from file %s...", fname);
 
-		s = get_file_size(f);
-		if (s < 0) {
-			out_errno(-1);
-			exit(-3);
-		}
-		if ((F = fopen(f, "rb")) == NULL) {
-			out_errno(-1);
-			exit(-2);
+	vf_t *vf = NULL;
+	int return_code = 1;
+	unsigned char *data_in = NULL;
+	ssize_t data_in_size = 0;
+	unsigned char *data_out = NULL;
+	size_t data_out_len = 0;
+	int data_in_is_pem = FALSE;
+
+#ifdef HAS_LIB_OPENSSL
+const size_t STDIN_BUFSIZE = 1024;
+
+	if (!opt_der) {
+		if (!fname) {
+			while (!feof(stdin)) {
+				size_t next_size = data_in_size + STDIN_BUFSIZE;
+				data_in = realloc(data_in, next_size);
+				size_t nr = fread(&data_in[data_in_size], 1, STDIN_BUFSIZE, stdin);
+				if (nr != STDIN_BUFSIZE) {
+					if (ferror(stdin) || !feof(stdin)) {
+						out_err("reading input\n");
+						goto main_terminate;
+					}
+				}
+				data_in_size += nr;
+			}
+			data_in = realloc(data_in, data_in_size);
+		} else {
+			FILE *fin;
+			if ((data_in_size = file_get_size(fname)) < 0) {
+				out_errno(-1);
+				goto main_terminate;
+			}
+			if (!(fin = fopen(fname, "rb"))) {
+				out_errno(-1);
+				goto main_terminate;
+			}
+			data_in = malloc(data_in_size + 1);
+			if ((ssize_t)fread(data_in, 1, data_in_size, fin) != data_in_size) {
+				out_errno(-1);
+				goto main_terminate;
+			}
+			fclose(fin);
 		}
 
-		out("Reading from file %s...\n", f);
+		if (data_in) {
+				/* *VERY IMPORTANT* */
+				/* WARNING
+				 * This character is used to mark end of buffer in the case the input
+				 * is PEM format. */
+			data_in[data_in_size] = '\0';
+		}
+
+		outln(L_VERBOSE, "Trying to parse input data against PEM rules");
+		pem_ctrl_t *pem = pem_construct_pem_ctrl(data_in);
+		pem_regcb_password(pem, cb_password_pre, cb_password_post);
+		pem_regcb_loop_top(pem, cb_loop_top);
+		pem_regcb_loop_decrypt(pem, cb_loop_decrypt);
+		data_in_is_pem = pem_walker(pem, &data_out, &data_out_len);
+		pem_destruct_pem_ctrl(pem);
+
 	}
+	int assume_der = opt_der;
+#else  /* !HAS_LIB_OPENSSL */
+	int assume_der = TRUE;
+#endif /* HAS_LIB_OPENSSL */
+
+	vf = vf_construct();
+
+	const unsigned char *pkdata = NULL;
+	size_t pkdata_len;
+
+	ssize_t s;
+
+	if (assume_der) {
+		FILE *ff;
+		if (fname) {
+			if ((s = file_get_size(fname)) < 0) {
+				out_errno(-1);
+				goto main_terminate;
+			}
+			if (!(ff = fopen(fname, "rb"))) {
+				out_errno(-1);
+				goto main_terminate;
+			}
+		} else {
+			ff = stdin;
+			s = INT_MAX;
+		}
+		vf_init_FILE(vf, ff);
+	} else if (!data_in_is_pem) {
+		outln(L_VERBOSE, "Will use original data as pk input (assuming der-encoded content)");
+		pkdata = data_in;
+		pkdata_len = data_in_size;
+		s = pkdata_len;
+	} else {
+		outln(L_VERBOSE, "Will use pem decoded/decrypted data as pk input");
+		pkdata = data_out;
+		pkdata_len = data_out_len;
+		if (!pkdata || data_out_len == 0) {
+			out_err("No PEM data available\n");
+			goto main_terminate;
+		}
+		s = pkdata_len;
+	}
+	if (!assume_der && pkdata)
+		vf_init_MEM(vf, pkdata, pkdata_len);
 
 	size_t offset = 0;
 	do {
-		parse(&F, &offset, &s, 0, TRUE);
-	} while (F != NULL);
-	if (F != NULL && F != stdin) {
-		if (s != 0 || fgetc(F) != EOF) {
+		parse(vf, &offset, &s, 0, TRUE);
+	} while (vf_is_initialized(vf));
+	if (vf_is_initialized(vf) && fname) {
+		if (s != 0 || vf_fgetc(vf) != EOF) {
 			out_dbg("s = %li\n", s);
-			myfclose(&F, "Trailing characters in file", offset);
-			return -5;
+			myfclose(vf, "Trailing characters in file", offset);
+			goto main_terminate;
 		} else {
-			myfclose(&F, NULL, 0);
+			myfclose(vf, NULL, 0);
 		}
 	} else {
-		return -99;
+		goto main_terminate;
 	}
-	return 0;
+
+	return_code = 0;
+
+main_terminate:
+
+	if (vf)
+		vf_destruct(vf);
+	if (data_in)
+		free(data_in);
+	if (data_out)
+		free(data_out);
+	return return_code;
 }
 

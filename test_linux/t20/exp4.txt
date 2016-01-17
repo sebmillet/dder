@@ -1,11 +1,26 @@
 Reading from file f4.pem...
-000000  2d                           univ-cons: RELATIVE-OID
-000001  2d                           Length: 45
-000002  2d                           univ-cons: RELATIVE-OID
-000003  2d                           Length: 45
-000004  2d                           univ-cons: RELATIVE-OID
-000005  42                           Length: 66
-000006  45                           appl-prim: [ 5 ]
-000007  47                           Length: 71
-000008  IN EC PARAMETERS-----.BggqhkjOPQMBBw==.-----END EC PARAMETERS-----.----  
-Error: inconsistent items length, position: 79
+Trying to parse input data against PEM rules
+PEM block: [EC PARAMETERS]
+PEM block: [EC PRIVATE KEY]
+Will use pem decoded/decrypted data as pk input
+000000  06                           univ-prim: OBJECT IDENTIFIER
+000001  08                           Length: 8
+000002  *.H.=...  OID: 1.2.840.10045.3.1.7 (prime256v1)
+00000a  30                           univ-cons: SEQUENCE
+00000b  77                           Length: 119
+00000c  02                           univ-prim: INTEGER
+00000d  01                           Length: 1
+00000e  .  
+00000f  04                           univ-prim: OCTET STRING
+000010  20                           Length: 32
+000011  HC.TU....RX.d}WM.*....3...eN....  
+000031  a0                           cont-cons: [ 0 ]
+000032  0a                           Length: 10
+000033  06                           univ-prim: OBJECT IDENTIFIER
+000034  08                           Length: 8
+000035  *.H.=...  OID: 1.2.840.10045.3.1.7 (prime256v1)
+00003d  a1                           cont-cons: [ 1 ]
+00003e  44                           Length: 68
+00003f  03                           univ-prim: BIT STRING
+000040  42                           Length: 66
+000041  ..b.>]}..'k.F..SRH..|....i.j......6..Lf.b........... 8n0r.e7.....W  

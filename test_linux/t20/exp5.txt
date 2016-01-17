@@ -1,4 +1,7 @@
 Reading from file f5.pem...
+Trying to parse input data against PEM rules
+PEM block: [] (skipped: no PEM information)
+Will use original data as pk input (assuming der-encoded content)
 000000  7f                           appl-cons: [ 31 ]
 000001  45                           Tag number: 69
 000002  4c                           Length: 76

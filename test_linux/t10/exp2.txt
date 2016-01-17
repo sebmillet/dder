@@ -1,4 +1,7 @@
 Reading from file rsa2.der...
+Trying to parse input data against PEM rules
+PEM block: [] (skipped: no PEM information)
+Will use original data as pk input (assuming der-encoded content)
 000000  30                           univ-cons: SEQUENCE
 000001  82 02 5b                     Length: 603
 000004  02                           univ-prim: INTEGER

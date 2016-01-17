@@ -1,4 +1,7 @@
-Reading from file rsa3.der...
+Reading from file rsa3.pem...
+Trying to parse input data against PEM rules
+PEM block: [RSA PRIVATE KEY] (encrypted with DES-EDE3-CBC, salt: EE266D5C6B068EEA)
+Will use pem decoded/decrypted data as pk input
 000000  30                           univ-cons: SEQUENCE
 000001  82 04 a4                     Length: 1188
 000004  02                           univ-prim: INTEGER

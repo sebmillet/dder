@@ -1,4 +1,7 @@
 Reading from file g3.der...
+Trying to parse input data against PEM rules
+PEM block: [] (skipped: no PEM information)
+Will use original data as pk input (assuming der-encoded content)
 000000  30                           univ-cons: SEQUENCE
 000001  82 05 cf                     Length: 1487
 000004  30                           univ-cons: SEQUENCE

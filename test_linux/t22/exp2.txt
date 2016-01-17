@@ -1,39 +1,419 @@
 Reading from file f2.pem...
-000000  2d                           00 1 01101
+Trying to parse input data against PEM rules
+PEM block: [DSA PARAMETERS]
+PEM block: [DSA PRIVATE KEY]
+Will use pem decoded/decrypted data as pk input
+000000  30                           00 1 10000
                                      ^^         Tag class:    0 -> Universal
                                         ^       Tag type:     1 -> Constructed
-                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
-000001  2d                           0 0101101
-                                     ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 45
-000002  2d                           00 1 01101
+                                          ^^^^^ Tag number:  16 -> SEQUENCE
+000001  82 04 2c                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 1068
+000004  02                           00 0 00010
                                      ^^         Tag class:    0 -> Universal
-                                        ^       Tag type:     1 -> Constructed
-                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
-000003  2d                           0 0101101
-                                     ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 45
-000004  2d                           00 1 01101
-                                     ^^         Tag class:    0 -> Universal
-                                        ^       Tag type:     1 -> Constructed
-                                          ^^^^^ Tag number:  13 -> RELATIVE-OID
-000005  42                           0 1000010
-                                     ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 66
-000006  45                           01 0 00101
-                                     ^^         Tag class:    1 -> Application
                                         ^       Tag type:     0 -> Primitive
-                                          ^^^^^ Tag number:   5 -> [ 5 ]
-000007  47                           0 1000111
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000005  82 02 01                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 513
+000008  00 b6 e2 6f    b5 e1 e7 ef   ...o  .... 
+000010  90 0b cd c7    4c e3 76 68   ....  L.vh 
+000018  28 73 da a9    73 bb e4 84   (s..  s... 
+000020  62 5d dd 14    29 3f 6b ad   b]..  )?k. 
+000028  92 e7 92 d2    fe c0 d6 98   ....  .... 
+000030  89 f4 30 33    47 19 da 01   ..03  G... 
+000038  7f c3 5f 87    79 53 1b c1   .._.  yS.. 
+000040  fb 6b c2 f5    c6 43 5a b3   .k..  .CZ. 
+000048  f2 af 2c 13    fa d0 e9 d4   ..,.  .... 
+000050  b7 49 5e 9c    f6 57 7e ec   .I^.  .W~. 
+000058  8a 6a 93 c0    76 86 f1 fb   .j..  v... 
+000060  e6 3f bd 83    70 2a 63 a1   .?..  p*c. 
+000068  d2 bf ae 2d    f2 20 62 b6   ...-  . b. 
+000070  de fe 9d 4d    0a 62 e6 e7   ...M  .b.. 
+000078  bc 70 a2 9f    3b f7 8a c2   .p..  ;... 
+000080  70 0f 22 a6    de a3 53 45   p.".  ..SE 
+000088  9c 87 7e 91    33 2f 86 7a   ..~.  3/.z 
+000090  4a f7 c9 03    9c e0 7f a1   J...  .... 
+000098  32 3f 13 69    58 01 c6 54   2?.i  X..T 
+0000a0  af 0c c6 13    81 5e ef da   ....  .^.. 
+0000a8  f0 9a e2 7f    2f 5f 68 48   ....  /_hH 
+0000b0  7a 0b 13 ee    58 c0 40 15   z...  X.@. 
+0000b8  f0 53 58 6f    2b 2d 6a ec   .SXo  +-j. 
+0000c0  b0 f9 8b 53    88 d9 0d 67   ...S  ...g 
+0000c8  b8 6e cf 15    3d 12 88 62   .n..  =..b 
+0000d0  10 9c fa b7    ec 0c 77 bd   ....  ..w. 
+0000d8  2a ef b1 2a    f7 ad d0 4d   *..*  ...M 
+0000e0  b3 f8 0b ab    65 bb 41 d5   ....  e.A. 
+0000e8  93 15 52 09    50 20 f3 5f   ..R.  P ._ 
+0000f0  71 e0 32 4e    c9 b0 73 be   q.2N  ..s. 
+0000f8  da 7f cf 58    05 ce cc 88   ...X  .... 
+000100  f8 2b cf 4b    c7 76 cc d8   .+.K  .v.. 
+000108  4c a7 7c b2    f1 df 99 7f   L.|.  .... 
+000110  13 06 cf 5a    b2 bb de cb   ...Z  .... 
+000118  d9 61 3c 4f    22 7f 50 10   .a<O  ".P. 
+000120  85 df 3f 49    91 ad 31 74   ..?I  ..1t 
+000128  27 8e 3b 7d    94 6f 42 84   '.;}  .oB. 
+000130  50 07 53 8d    24 47 68 4d   P.S.  $GhM 
+000138  a1 7a a0 d8    70 a7 84 be   .z..  p... 
+000140  de ad c3 4f    84 bb 9d ff   ...O  .... 
+000148  cf b3 7d 63    db 18 4d ff   ..}c  ..M. 
+000150  85 41 c5 65    a3 70 eb d5   .A.e  .p.. 
+000158  f5 70 19 bf    8c 90 12 98   .p..  .... 
+000160  a3 ca 14 78    ed 58 6d 95   ...x  .Xm. 
+000168  13 29 56 4b    0b d6 91 9c   .)VK  .... 
+000170  f1 a6 21 d9    5e 2e d4 6b   ..!.  ^..k 
+000178  e3 e9 9e a1    04 22 97 be   ....  .".. 
+000180  66 7e 6f f1    76 0b 2e 5a   f~o.  v..Z 
+000188  4d 46 08 3e    a5 2d dd b3   MF.>  .-.. 
+000190  ac 99 50 9c    f8 98 83 bc   ..P.  .... 
+000198  3f b6 ac f1    71 95 9d 53   ?...  q..S 
+0001a0  18 14 5f 29    35 16 7f 43   .._)  5..C 
+0001a8  46 f1 01 ce    be 16 77 41   F...  ..wA 
+0001b0  81 b6 22 34    1d f3 8f 01   .."4  .... 
+0001b8  fc 10 e1 e3    db 0b 57 54   ....  ..WT 
+0001c0  8c 23 2a 53    bd 6a fa 4a   .#*S  .j.J 
+0001c8  63 aa f8 28    ea 45 6c 17   c..(  .El. 
+0001d0  42 74 52 2f    70 1c e4 40   BtR/  p..@ 
+0001d8  6f 16 79 50    d2 66 b4 b3   o.yP  .f.. 
+0001e0  fa 6c 44 11    1b 72 e5 e7   .lD.  .r.. 
+0001e8  d6 d5 dd f6    9a ff 37 20   ....  ..7  
+0001f0  6b 4c cb ee    19 8f bd 8c   kL..  .... 
+0001f8  3e 94 41 57    67 e7 b8 8c   >.AW  g... 
+000200  f1 00 1b 19    df e8 d4 3c   ....  ...< 
+000208  ad                           .          
+000209  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+00020a  21                           0 0100001
                                      ^          Len type: 0 -> ONE BYTE
-                                       ^^^^^^^  Len: 71
-000008  49 4e 20 44    53 41 20 50   IN D  SA P 
-000010  41 52 41 4d    45 54 45 52   ARAM  ETER 
-000018  53 2d 2d 2d    2d 2d 0a 4d   S---  --.M 
-000020  49 49 45 4c    41 4b 43 41   IIEL  AKCA 
-000028  67 45 41 74    75 4a 76 74   gEAt  uJvt 
-000030  65 48 6e 37    35 41 4c 7a   eHn7  5ALz 
-000038  63 64 4d 34    33 5a 6f 4b   cdM4  3ZoK 
-000040  48 50 61 71    58 4f 37 35   HPaq  XO75 
-000048  49 52 69 58    64 30 55      IRiX  d0U  
-Error: inconsistent items length, position: 79
+                                       ^^^^^^^  Len: 33
+00020b  00 ff b4 9c    25 b6 50 a7   ....  %.P. 
+000213  4f 5f 60 c2    5e e3 91 76   O_`.  ^..v 
+00021b  79 ac 25 f5    9b 46 f9 49   y.%.  .F.I 
+000223  bd 50 80 d2    9a c4 a4 43   .P..  ...C 
+00022b  77                           w          
+00022c  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+00022d  82 02 00                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 512
+000230  34 32 5f cf    67 3a f2 46   42_.  g:.F 
+000238  3f fe e9 13    94 59 2c 38   ?...  .Y,8 
+000240  cd bc 0a 2b    e9 4c fd c4   ...+  .L.. 
+000248  aa 4d 67 bd    70 7b 64 44   .Mg.  p{dD 
+000250  7b be 86 dd    5d 5d c7 07   {...  ]].. 
+000258  d6 82 6f 78    b4 0d 13 db   ..ox  .... 
+000260  a8 d6 08 60    56 19 b8 5e   ...`  V..^ 
+000268  9e 76 bc 61    81 43 f9 44   .v.a  .C.D 
+000270  af 64 09 53    1f 9b c6 e3   .d.S  .... 
+000278  84 c5 ab 10    4d d2 12 e9   ....  M... 
+000280  7e 8b fc f3    e5 19 eb 13   ~...  .... 
+000288  18 fe 74 14    f7 f0 37 df   ..t.  ..7. 
+000290  fb f9 7b 3c    1e d8 06 f3   ..{<  .... 
+000298  ce 55 7a 08    f2 e5 67 b4   .Uz.  ..g. 
+0002a0  62 5f 06 88    71 44 d3 1a   b_..  qD.. 
+0002a8  a2 de d6 0e    47 10 ef a7   ....  G... 
+0002b0  0d 99 61 96    dc 69 df c0   ..a.  .i.. 
+0002b8  4f 28 bc 30    c5 5e 24 2c   O(.0  .^$, 
+0002c0  79 e4 4b 8f    f7 3d 81 d1   y.K.  .=.. 
+0002c8  2e d1 83 69    53 81 06 30   ...i  S..0 
+0002d0  1c ef 47 2e    cd 71 3d 8c   ..G.  .q=. 
+0002d8  b7 62 42 3e    4b 69 64 70   .bB>  Kidp 
+0002e0  8a 34 51 9d    52 cc 96 1d   .4Q.  R... 
+0002e8  29 12 c1 65    e6 1e 68 ed   )..e  ..h. 
+0002f0  fb be aa 52    37 32 37 41   ...R  727A 
+0002f8  a4 6b 0b 9f    6a f1 d4 ec   .k..  j... 
+000300  c3 64 11 c8    b8 b1 6f ce   .d..  ..o. 
+000308  4a 87 7b b3    92 fd 7b 88   J.{.  ..{. 
+000310  44 7a 94 51    31 3b 6c 37   Dz.Q  1;l7 
+000318  57 88 4b f8    5e 6f 5f 6e   W.K.  ^o_n 
+000320  4d 5e 1e 97    6d be f6 e6   M^..  m... 
+000328  a5 e6 82 40    25 a1 c4 e0   ...@  %... 
+000330  99 7e 56 3b    c6 58 9c eb   .~V;  .X.. 
+000338  53 a6 4d b9    47 e9 cb 97   S.M.  G... 
+000340  7c d2 88 df    cd 54 eb 31   |...  .T.1 
+000348  68 fc b7 bf    1a c9 71 1a   h...  ..q. 
+000350  a7 31 e2 dc    11 30 f2 ec   .1..  .0.. 
+000358  68 30 82 00    85 8a 98 93   h0..  .... 
+000360  0c a1 8e 90    7f bd b1 05   ....  .... 
+000368  f7 82 6f 90    83 15 24 9f   ..o.  ..$. 
+000370  7d 38 a2 96    ef bd 05 64   }8..  ...d 
+000378  d8 1c af dc    de e7 33 5d   ....  ..3] 
+000380  d0 66 32 9b    5c 50 48 24   .f2.  \PH$ 
+000388  50 96 c2 77    1c 2c 4b 1b   P..w  .,K. 
+000390  d9 ec dc e8    e4 36 3d 5e   ....  .6=^ 
+000398  df 3c 7b c3    91 24 eb d4   .<{.  .$.. 
+0003a0  7e be 7f 14    11 39 48 3f   ~...  .9H? 
+0003a8  90 de 52 ab    7c 10 d1 f0   ..R.  |... 
+0003b0  1c 98 b5 b8    0a 84 a7 04   ....  .... 
+0003b8  95 3a a0 f5    c5 b9 ad 5f   .:..  ..._ 
+0003c0  1a c2 21 b9    ea dd 47 3d   ..!.  ..G= 
+0003c8  fe c2 90 51    28 54 ba df   ...Q  (T.. 
+0003d0  e9 7a 0d 9b    d2 40 3a 03   .z..  .@:. 
+0003d8  e3 24 1c 3f    e3 db 79 71   .$.?  ..yq 
+0003e0  af 83 ec ec    d6 3c 1d ab   ....  .<.. 
+0003e8  09 41 47 12    74 a8 1f e6   .AG.  t... 
+0003f0  84 a1 5f b9    2d c3 d8 92   .._.  -... 
+0003f8  75 f4 7b a8    c4 20 50 60   u.{.  . P` 
+000400  d1 a4 e2 b5    d6 03 4f 6c   ....  ..Ol 
+000408  83 91 9c ee    23 82 39 0e   ....  #.9. 
+000410  b2 16 6f 17    6e 97 16 ea   ..o.  n... 
+000418  52 f5 a3 cf    27 67 5b 62   R...  'g[b 
+000420  97 ab 5d a5    8c 5c b0 ab   ..].  .\.. 
+000428  c5 b7 4a 4c    e8 7d 54 59   ..JL  .}TY 
+000430  30                           00 1 10000
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     1 -> Constructed
+                                          ^^^^^ Tag number:  16 -> SEQUENCE
+000431  82 06 55                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 1621
+000434  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000435  01                           0 0000001
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 1
+000436  00                           .          
+000437  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000438  82 02 01                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 513
+00043b  00 b6 e2 6f    b5 e1 e7 ef   ...o  .... 
+000443  90 0b cd c7    4c e3 76 68   ....  L.vh 
+00044b  28 73 da a9    73 bb e4 84   (s..  s... 
+000453  62 5d dd 14    29 3f 6b ad   b]..  )?k. 
+00045b  92 e7 92 d2    fe c0 d6 98   ....  .... 
+000463  89 f4 30 33    47 19 da 01   ..03  G... 
+00046b  7f c3 5f 87    79 53 1b c1   .._.  yS.. 
+000473  fb 6b c2 f5    c6 43 5a b3   .k..  .CZ. 
+00047b  f2 af 2c 13    fa d0 e9 d4   ..,.  .... 
+000483  b7 49 5e 9c    f6 57 7e ec   .I^.  .W~. 
+00048b  8a 6a 93 c0    76 86 f1 fb   .j..  v... 
+000493  e6 3f bd 83    70 2a 63 a1   .?..  p*c. 
+00049b  d2 bf ae 2d    f2 20 62 b6   ...-  . b. 
+0004a3  de fe 9d 4d    0a 62 e6 e7   ...M  .b.. 
+0004ab  bc 70 a2 9f    3b f7 8a c2   .p..  ;... 
+0004b3  70 0f 22 a6    de a3 53 45   p.".  ..SE 
+0004bb  9c 87 7e 91    33 2f 86 7a   ..~.  3/.z 
+0004c3  4a f7 c9 03    9c e0 7f a1   J...  .... 
+0004cb  32 3f 13 69    58 01 c6 54   2?.i  X..T 
+0004d3  af 0c c6 13    81 5e ef da   ....  .^.. 
+0004db  f0 9a e2 7f    2f 5f 68 48   ....  /_hH 
+0004e3  7a 0b 13 ee    58 c0 40 15   z...  X.@. 
+0004eb  f0 53 58 6f    2b 2d 6a ec   .SXo  +-j. 
+0004f3  b0 f9 8b 53    88 d9 0d 67   ...S  ...g 
+0004fb  b8 6e cf 15    3d 12 88 62   .n..  =..b 
+000503  10 9c fa b7    ec 0c 77 bd   ....  ..w. 
+00050b  2a ef b1 2a    f7 ad d0 4d   *..*  ...M 
+000513  b3 f8 0b ab    65 bb 41 d5   ....  e.A. 
+00051b  93 15 52 09    50 20 f3 5f   ..R.  P ._ 
+000523  71 e0 32 4e    c9 b0 73 be   q.2N  ..s. 
+00052b  da 7f cf 58    05 ce cc 88   ...X  .... 
+000533  f8 2b cf 4b    c7 76 cc d8   .+.K  .v.. 
+00053b  4c a7 7c b2    f1 df 99 7f   L.|.  .... 
+000543  13 06 cf 5a    b2 bb de cb   ...Z  .... 
+00054b  d9 61 3c 4f    22 7f 50 10   .a<O  ".P. 
+000553  85 df 3f 49    91 ad 31 74   ..?I  ..1t 
+00055b  27 8e 3b 7d    94 6f 42 84   '.;}  .oB. 
+000563  50 07 53 8d    24 47 68 4d   P.S.  $GhM 
+00056b  a1 7a a0 d8    70 a7 84 be   .z..  p... 
+000573  de ad c3 4f    84 bb 9d ff   ...O  .... 
+00057b  cf b3 7d 63    db 18 4d ff   ..}c  ..M. 
+000583  85 41 c5 65    a3 70 eb d5   .A.e  .p.. 
+00058b  f5 70 19 bf    8c 90 12 98   .p..  .... 
+000593  a3 ca 14 78    ed 58 6d 95   ...x  .Xm. 
+00059b  13 29 56 4b    0b d6 91 9c   .)VK  .... 
+0005a3  f1 a6 21 d9    5e 2e d4 6b   ..!.  ^..k 
+0005ab  e3 e9 9e a1    04 22 97 be   ....  .".. 
+0005b3  66 7e 6f f1    76 0b 2e 5a   f~o.  v..Z 
+0005bb  4d 46 08 3e    a5 2d dd b3   MF.>  .-.. 
+0005c3  ac 99 50 9c    f8 98 83 bc   ..P.  .... 
+0005cb  3f b6 ac f1    71 95 9d 53   ?...  q..S 
+0005d3  18 14 5f 29    35 16 7f 43   .._)  5..C 
+0005db  46 f1 01 ce    be 16 77 41   F...  ..wA 
+0005e3  81 b6 22 34    1d f3 8f 01   .."4  .... 
+0005eb  fc 10 e1 e3    db 0b 57 54   ....  ..WT 
+0005f3  8c 23 2a 53    bd 6a fa 4a   .#*S  .j.J 
+0005fb  63 aa f8 28    ea 45 6c 17   c..(  .El. 
+000603  42 74 52 2f    70 1c e4 40   BtR/  p..@ 
+00060b  6f 16 79 50    d2 66 b4 b3   o.yP  .f.. 
+000613  fa 6c 44 11    1b 72 e5 e7   .lD.  .r.. 
+00061b  d6 d5 dd f6    9a ff 37 20   ....  ..7  
+000623  6b 4c cb ee    19 8f bd 8c   kL..  .... 
+00062b  3e 94 41 57    67 e7 b8 8c   >.AW  g... 
+000633  f1 00 1b 19    df e8 d4 3c   ....  ...< 
+00063b  ad                           .          
+00063c  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+00063d  21                           0 0100001
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 33
+00063e  00 ff b4 9c    25 b6 50 a7   ....  %.P. 
+000646  4f 5f 60 c2    5e e3 91 76   O_`.  ^..v 
+00064e  79 ac 25 f5    9b 46 f9 49   y.%.  .F.I 
+000656  bd 50 80 d2    9a c4 a4 43   .P..  ...C 
+00065e  77                           w          
+00065f  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000660  82 02 00                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 512
+000663  34 32 5f cf    67 3a f2 46   42_.  g:.F 
+00066b  3f fe e9 13    94 59 2c 38   ?...  .Y,8 
+000673  cd bc 0a 2b    e9 4c fd c4   ...+  .L.. 
+00067b  aa 4d 67 bd    70 7b 64 44   .Mg.  p{dD 
+000683  7b be 86 dd    5d 5d c7 07   {...  ]].. 
+00068b  d6 82 6f 78    b4 0d 13 db   ..ox  .... 
+000693  a8 d6 08 60    56 19 b8 5e   ...`  V..^ 
+00069b  9e 76 bc 61    81 43 f9 44   .v.a  .C.D 
+0006a3  af 64 09 53    1f 9b c6 e3   .d.S  .... 
+0006ab  84 c5 ab 10    4d d2 12 e9   ....  M... 
+0006b3  7e 8b fc f3    e5 19 eb 13   ~...  .... 
+0006bb  18 fe 74 14    f7 f0 37 df   ..t.  ..7. 
+0006c3  fb f9 7b 3c    1e d8 06 f3   ..{<  .... 
+0006cb  ce 55 7a 08    f2 e5 67 b4   .Uz.  ..g. 
+0006d3  62 5f 06 88    71 44 d3 1a   b_..  qD.. 
+0006db  a2 de d6 0e    47 10 ef a7   ....  G... 
+0006e3  0d 99 61 96    dc 69 df c0   ..a.  .i.. 
+0006eb  4f 28 bc 30    c5 5e 24 2c   O(.0  .^$, 
+0006f3  79 e4 4b 8f    f7 3d 81 d1   y.K.  .=.. 
+0006fb  2e d1 83 69    53 81 06 30   ...i  S..0 
+000703  1c ef 47 2e    cd 71 3d 8c   ..G.  .q=. 
+00070b  b7 62 42 3e    4b 69 64 70   .bB>  Kidp 
+000713  8a 34 51 9d    52 cc 96 1d   .4Q.  R... 
+00071b  29 12 c1 65    e6 1e 68 ed   )..e  ..h. 
+000723  fb be aa 52    37 32 37 41   ...R  727A 
+00072b  a4 6b 0b 9f    6a f1 d4 ec   .k..  j... 
+000733  c3 64 11 c8    b8 b1 6f ce   .d..  ..o. 
+00073b  4a 87 7b b3    92 fd 7b 88   J.{.  ..{. 
+000743  44 7a 94 51    31 3b 6c 37   Dz.Q  1;l7 
+00074b  57 88 4b f8    5e 6f 5f 6e   W.K.  ^o_n 
+000753  4d 5e 1e 97    6d be f6 e6   M^..  m... 
+00075b  a5 e6 82 40    25 a1 c4 e0   ...@  %... 
+000763  99 7e 56 3b    c6 58 9c eb   .~V;  .X.. 
+00076b  53 a6 4d b9    47 e9 cb 97   S.M.  G... 
+000773  7c d2 88 df    cd 54 eb 31   |...  .T.1 
+00077b  68 fc b7 bf    1a c9 71 1a   h...  ..q. 
+000783  a7 31 e2 dc    11 30 f2 ec   .1..  .0.. 
+00078b  68 30 82 00    85 8a 98 93   h0..  .... 
+000793  0c a1 8e 90    7f bd b1 05   ....  .... 
+00079b  f7 82 6f 90    83 15 24 9f   ..o.  ..$. 
+0007a3  7d 38 a2 96    ef bd 05 64   }8..  ...d 
+0007ab  d8 1c af dc    de e7 33 5d   ....  ..3] 
+0007b3  d0 66 32 9b    5c 50 48 24   .f2.  \PH$ 
+0007bb  50 96 c2 77    1c 2c 4b 1b   P..w  .,K. 
+0007c3  d9 ec dc e8    e4 36 3d 5e   ....  .6=^ 
+0007cb  df 3c 7b c3    91 24 eb d4   .<{.  .$.. 
+0007d3  7e be 7f 14    11 39 48 3f   ~...  .9H? 
+0007db  90 de 52 ab    7c 10 d1 f0   ..R.  |... 
+0007e3  1c 98 b5 b8    0a 84 a7 04   ....  .... 
+0007eb  95 3a a0 f5    c5 b9 ad 5f   .:..  ..._ 
+0007f3  1a c2 21 b9    ea dd 47 3d   ..!.  ..G= 
+0007fb  fe c2 90 51    28 54 ba df   ...Q  (T.. 
+000803  e9 7a 0d 9b    d2 40 3a 03   .z..  .@:. 
+00080b  e3 24 1c 3f    e3 db 79 71   .$.?  ..yq 
+000813  af 83 ec ec    d6 3c 1d ab   ....  .<.. 
+00081b  09 41 47 12    74 a8 1f e6   .AG.  t... 
+000823  84 a1 5f b9    2d c3 d8 92   .._.  -... 
+00082b  75 f4 7b a8    c4 20 50 60   u.{.  . P` 
+000833  d1 a4 e2 b5    d6 03 4f 6c   ....  ..Ol 
+00083b  83 91 9c ee    23 82 39 0e   ....  #.9. 
+000843  b2 16 6f 17    6e 97 16 ea   ..o.  n... 
+00084b  52 f5 a3 cf    27 67 5b 62   R...  'g[b 
+000853  97 ab 5d a5    8c 5c b0 ab   ..].  .\.. 
+00085b  c5 b7 4a 4c    e8 7d 54 59   ..JL  .}TY 
+000863  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000864  82 02 00                     1 0000010
+                                     ^          Len type: 1 -> MULTI BYTES
+                                       ^^^^^^^  Len nb bytes: 2, value: 512
+000867  08 d3 52 fb    68 8c a9 30   ..R.  h..0 
+00086f  6e 72 da 33    c4 97 f2 77   nr.3  ...w 
+000877  c6 af 09 78    88 19 d0 94   ...x  .... 
+00087f  cd e4 6c 04    c1 85 3a 2a   ..l.  ..:* 
+000887  e9 6d 39 16    15 49 b8 ae   .m9.  .I.. 
+00088f  cf 20 d1 a3    cb 98 d6 92   . ..  .... 
+000897  7d d5 87 61    a0 ca 46 a4   }..a  ..F. 
+00089f  ae 2e 27 5f    14 4e 93 77   ..'_  .N.w 
+0008a7  38 0a 7f 6d    5a af 69 db   8..m  Z.i. 
+0008af  8b de b2 9a    b9 25 0a cf   ....  .%.. 
+0008b7  44 87 f7 90    fc dc e3 10   D...  .... 
+0008bf  f0 2b 93 11    d3 88 8f 6e   .+..  ...n 
+0008c7  28 ba e9 0f    88 e0 06 0b   (...  .... 
+0008cf  5f 3c 09 0e    fa fe f7 f9   _<..  .... 
+0008d7  ee 11 ed 03    00 3d e2 97   ....  .=.. 
+0008df  be e7 38 a3    94 63 74 16   ..8.  .ct. 
+0008e7  21 65 4f ce    f0 91 d1 5b   !eO.  ...[ 
+0008ef  b0 45 91 50    32 44 2c c8   .E.P  2D,. 
+0008f7  a2 ba 3f df    90 65 8a 0f   ..?.  .e.. 
+0008ff  1d 0a 7a 20    b1 0d 28 8f   ..z   ..(. 
+000907  8b 20 35 08    55 ca f2 75   . 5.  U..u 
+00090f  06 ae fb ae    6d 94 ea ab   ....  m... 
+000917  0b 9d 58 52    02 c8 58 01   ..XR  ..X. 
+00091f  be d7 37 3b    92 05 b5 a3   ..7;  .... 
+000927  8e 8e 51 4d    97 49 6f 2e   ..QM  .Io. 
+00092f  b7 d1 58 08    06 21 ad 17   ..X.  .!.. 
+000937  81 e0 8a 57    ad ac e5 5a   ...W  ...Z 
+00093f  95 ba 54 cf    4c a3 19 79   ..T.  L..y 
+000947  84 2f 15 22    ec 97 af 41   ./."  ...A 
+00094f  48 ba 0b cd    a6 fb c9 ea   H...  .... 
+000957  2b cb 3e 79    36 84 cc e7   +.>y  6... 
+00095f  f3 55 3a 22    87 f9 06 99   .U:"  .... 
+000967  a7 f7 09 17    8b f5 5d 66   ....  ..]f 
+00096f  b6 e2 bb 91    53 44 74 b2   ....  SDt. 
+000977  16 37 3b 25    5b 6c 8d f5   .7;%  [l.. 
+00097f  18 e6 f7 5f    23 50 68 7c   ..._  #Ph| 
+000987  49 d4 68 3c    f8 9c a8 d7   I.h<  .... 
+00098f  e0 e8 d8 d1    86 6c 21 f7   ....  .l!. 
+000997  f5 96 41 da    f2 c6 ec 80   ..A.  .... 
+00099f  b6 bf c7 4b    6c e9 c0 c2   ...K  l... 
+0009a7  5d 42 c9 c6    73 24 98 3a   ]B..  s$.: 
+0009af  56 40 8d 6d    69 1c 2d ce   V@.m  i.-. 
+0009b7  81 d9 2b 43    1b 48 b4 49   ..+C  .H.I 
+0009bf  39 d8 4f 79    62 f3 61 61   9.Oy  b.aa 
+0009c7  18 5b 44 8d    1d 3a ad d6   .[D.  .:.. 
+0009cf  3e 2b 90 46    5c 42 1f 59   >+.F  \B.Y 
+0009d7  3e fd e6 79    86 8f 2a bb   >..y  ..*. 
+0009df  da 1b 93 d3    11 bc f2 5e   ....  ...^ 
+0009e7  3c a0 5f 65    68 b1 5f 2e   <._e  h._. 
+0009ef  08 66 ff 31    43 e0 43 ad   .f.1  C.C. 
+0009f7  fa 8d 0e d2    4e a7 d7 93   ....  N... 
+0009ff  c5 4c 0c ad    ac 61 5d 10   .L..  .a]. 
+000a07  91 72 ac 5d    26 6a 10 cd   .r.]  &j.. 
+000a0f  6d 50 86 43    37 e9 eb 05   mP.C  7... 
+000a17  a9 f6 61 42    65 f5 71 50   ..aB  e.qP 
+000a1f  5f 87 1b b7    07 8a 68 5d   _...  ..h] 
+000a27  a6 1f 35 8b    0b 7c 67 5a   ..5.  .|gZ 
+000a2f  0d 7a dc f0    d0 15 3b e8   .z..  ..;. 
+000a37  51 82 6f a9    28 97 be 83   Q.o.  (... 
+000a3f  67 04 d3 07    2d fe 18 b7   g...  -... 
+000a47  7a 01 e7 e0    24 83 56 8a   z...  $.V. 
+000a4f  64 9e 94 14    20 3b 07 d7   d...   ;.. 
+000a57  f9 bd 91 06    10 dc 81 1e   ....  .... 
+000a5f  b6 f0 e8 c6    9a 73 1e 03   ....  .s.. 
+000a67  02                           00 0 00010
+                                     ^^         Tag class:    0 -> Universal
+                                        ^       Tag type:     0 -> Primitive
+                                          ^^^^^ Tag number:   2 -> INTEGER
+000a68  20                           0 0100000
+                                     ^          Len type: 0 -> ONE BYTE
+                                       ^^^^^^^  Len: 32
+000a69  52 54 6b 2c    53 fb 4b 2d   RTk,  S.K- 
+000a71  8b 70 05 bf    b9 25 93 48   .p..  .%.H 
+000a79  52 ff e5 82    81 f3 67 71   R...  ..gq 
+000a81  7e 6e 76 56    a2 3d e8 80   ~nvV  .=.. 

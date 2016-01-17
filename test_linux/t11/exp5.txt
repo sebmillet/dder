@@ -1,4 +1,7 @@
-Reading from file rsa5.der...
+Reading from file rsa5.pem...
+Trying to parse input data against PEM rules
+PEM block: [RSA PRIVATE KEY] (encrypted with AES-128-CBC, salt: CFA1ED961B5F3F6DE2179A4FE2AC777B)
+Will use pem decoded/decrypted data as pk input
 000000  30                           univ-cons: SEQUENCE
 000001  82 12 29                     Length: 4649
 000004  02                           univ-prim: INTEGER

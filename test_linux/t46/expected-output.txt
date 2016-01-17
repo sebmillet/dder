@@ -1,5 +1,8 @@
 Warning: primitive/constructed bit mismatch, enforcing primitive
 Error: data length too big, position: 8
 Reading from file z7bis.der...
+Trying to parse input data against PEM rules
+PEM block: [] (skipped: no PEM information)
+Will use original data as pk input (assuming der-encoded content)
 000000  2a                           univ-cons: ENUMERATED
 000001  86 48 86 f7    0d 01 07      Length: 79744507642119

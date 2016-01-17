@@ -1,0 +1,6 @@
+Reading from file rsa4.pem...
+Trying to parse input data against PEM rules
+PEM block: [RSA PRIVATE KEY] (encrypted with AES-128-CBC, salt: 10667F892424218C1F01C1BC50286A8A)
+Will use pem decoded/decrypted data as pk input
+decryption error
+No PEM data available
