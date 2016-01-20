@@ -31,12 +31,16 @@ CPPFLAGS = /nologo /W4 /D_CRT_SECURE_NO_WARNINGS $(DEBCPP) $(SSLCPP)
 LDFLAGS = /nologo $(DEBLD) $(SSLLD)
 
 !if "$(NOSSL)" != "1"
+OBJS = $(BUILD)\dder.obj $(BUILD)\ppem.obj
 all : libsslwarning
 !endif
+!if "$(NOSSL)" == "1"
+OBJS = $(BUILD)\dder.obj
+!endif
+
 all : $(BUILD)
 all : $(BUILD)\dder.exe
 
-OBJS = $(BUILD)\dder.obj
 
 libsslwarning :
 	@echo "******************************************************"
@@ -66,10 +70,14 @@ $(BUILD) :
 	-if not exist $(BUILD) mkdir $(BUILD)
 
 $(BUILD)\dder.exe : $(OBJS)
-	link $(LDFLAGS) $(OBJS) $(SSLLDE) User32.lib /OUT:$@
+	link $(LDFLAGS) $(OBJS) $(SSLLDE) User32.lib Gdi32.lib /OUT:$@
 
 $(BUILD)\dder.obj : src\dder.c
 	cl $(CPPFLAGS) /Fo$@ /c src\dder.c
+!if "$(NOSSL)" != "1"
+$(BUILD)\ppem.obj : src\ppem.c
+	cl $(CPPFLAGS) /Fo$@ /c src\ppem.c
+!endif
 
 mrproper : clean
 
