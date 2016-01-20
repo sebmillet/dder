@@ -11,7 +11,7 @@ Will use original data as pk input (assuming der-encoded content)
                                        ^^^^^^^  Len: 42
 000002  20                           00 1 00000
                                      ^^         Tag class:    0 -> Universal
-                                        ^       Tag type:     1 -> Constructed
+                                        ^       Tag type:     0 -> Primitive
                                           ^^^^^ Tag number:   0 -> EOC
 000003  64                           0 1100100
                                      ^          Len type: 0 -> ONE BYTE

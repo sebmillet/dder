@@ -4,7 +4,7 @@ PEM block: [] (skipped: no PEM information)
 Will use original data as pk input (assuming der-encoded content)
 000000  2f                           univ-cons: (reserved)
 000001  2a                           Length: 42
-000002  20                           univ-cons: EOC
+000002  20                           univ-prim: EOC
 000003  64                           Length: 100
 000004  der.c */../* Parse der files */../* S..bastien Millet, February 2015 */../*#define DEBUG*/..#include  
 Warning: primitive/constructed bit mismatch, enforcing primitive

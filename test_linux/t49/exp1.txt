@@ -1,0 +1,7 @@
+Reading from file bin1.der...
+000000  23 80                                                univ-cons: BIT STRING, len: 0
+===000002  03 03                                                univ-prim: BIT STRING, len: 3
+===000004  00 0a 3b                                             ..;                
+===000007  03 05                                                univ-prim: BIT STRING, len: 5
+===000009  04 5f 29 1c d0                                       ._)..              
+===00000e  00 00                                                univ-prim: EOC, len: 0

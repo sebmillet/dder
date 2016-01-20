@@ -1,4 +1,4 @@
 Reading from file z7bis1.der...
-000000  2a 86 48 86 f7 0d 01 07                              univ-cons: ENUMERATED, len: 79744507642119
+000000  2a 86 48 86 f7 0d 01 07                              univ-prim: ENUMERATED, len: 79744507642119
 Warning: primitive/constructed bit mismatch, enforcing primitive
 Error: data length too big, position: 8

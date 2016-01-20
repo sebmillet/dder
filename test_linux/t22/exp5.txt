@@ -127,7 +127,7 @@ Will use original data as pk input (assuming der-encoded content)
                                        ^^^^^^^  Len: 0
 000028  20                           00 1 00000
                                      ^^         Tag class:    0 -> Universal
-                                        ^       Tag type:     1 -> Constructed
+                                        ^       Tag type:     0 -> Primitive
                                           ^^^^^ Tag number:   0 -> EOC
 Warning: primitive/constructed bit mismatch, enforcing primitive
 Error: number of bytes to encode length exceeds maximum, position: 41

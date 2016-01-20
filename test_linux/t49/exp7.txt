@@ -1,0 +1,14 @@
+Reading from file bin7.der...
+000000  30 10                                                univ-cons: SEQUENCE, len: 16
+===000002  23 80                                                univ-cons: BIT STRING, len: 0
+======000004  03 03                                                univ-prim: BIT STRING, len: 3
+======000006  00 0a 3b                                             ..;                
+======000009  03 05                                                univ-prim: BIT STRING, len: 5
+======00000b  04 5f 29 1c d0                                       ._)..              
+======000010  00 00                                                univ-prim: EOC, len: 0
+000012  23 80                                                univ-cons: BIT STRING, len: 0
+===000014  03 03                                                univ-prim: BIT STRING, len: 3
+===000016  00 0a 3b                                             ..;                
+===000019  03 05                                                univ-prim: BIT STRING, len: 5
+===00001b  04 5f 29 1c d0                                       ._)..              
+===000020  00 00                                                univ-prim: EOC, len: 0

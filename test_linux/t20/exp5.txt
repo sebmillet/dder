@@ -40,6 +40,6 @@ Will use original data as pk input (assuming der-encoded content)
 000025  00                           Length: 0
 000026  00                           univ-prim: EOC
 000027  00                           Length: 0
-000028  20                           univ-cons: EOC
+000028  20                           univ-prim: EOC
 Warning: primitive/constructed bit mismatch, enforcing primitive
 Error: number of bytes to encode length exceeds maximum, position: 41

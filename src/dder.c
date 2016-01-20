@@ -51,6 +51,7 @@ typedef struct {
 	int p_or_c;
 	int number;
 	unsigned long length;
+	int indefinite;
 	char hbytes[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES + 1];
 	int hlen;
 } taglength_t;
@@ -92,7 +93,7 @@ struct t_tag_universal_class {
 };
 
 struct t_tag_universal_class universal_class_tags[] = {
-	{"EOC", 0, 0},
+	{"EOC", 0, 0},               /* TAG_U_EOC */
 	{"BOOLEAN", 0, 0},
 	{"INTEGER", 0, 0},
 	{"BIT STRING", 2, 0},
@@ -125,6 +126,7 @@ struct t_tag_universal_class universal_class_tags[] = {
 	{"BMPString", 2, 1},
 	{"(long form)", -1, 0}       /* TAG_U_LONG_FORMAT */
 };
+#define TAG_U_EOC               0
 #define TAG_U_OBJECT_IDENTIFIER 6
 #define TAG_U_LONG_FORMAT       31
 
@@ -560,7 +562,7 @@ void get_tag_name(char *s, const size_t slen, const int tag_class, const int tag
 }
 
 int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, taglength_t *tl, const int recursive_level,
-					int loose_read)
+					int loose_read, ssize_t *consumed)
 {
 	int c;
 	size_t old_offset = *offset;
@@ -571,8 +573,8 @@ int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, tagleng
 	tl->hlen = 0;
 	tl->class = (c & 0xc0) >> 6;
 	tl->p_or_c = (c & 0x20) >> 5;
-	int original_type = tl->p_or_c;
 	tl->number = (c & 0x1F);
+	tl->indefinite = FALSE;
 	int type = universal_class_tags[tl->number].type;
 	if (tl->class == TAG_CLASS_UNIVERSAL && type >= 0 && type <= 1 && tl->p_or_c != type) {
 		tl->p_or_c = TAG_TYPE_PRIMITIVE;
@@ -581,9 +583,6 @@ int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, tagleng
 	char tag_name[100];
 	get_tag_name(tag_name, sizeof(tag_name), tl->class, tl->number);
 
-/*    char buf[TAG_U_LONG_FORMAT_MAX_BYTES + LENGTH_MULTIBYTES_MAX_BYTES];*/
-
-/*    buf[0] = (char)c;*/
 	if (opt_ol >= L_VERBOSE)
 		out_sequence(old_offset, tl->hbytes, 1, 0, OD_UNDEF, recursive_level);
 
@@ -594,11 +593,11 @@ int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, tagleng
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		outln(L_ENFORCE, "^^         Tag class:  %3i -> %s", tl->class, classes[tl->class]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
-		outln(L_ENFORCE, "   ^       Tag type:   %3i -> %s", original_type, PCs[original_type]);
+		outln(L_ENFORCE, "   ^       Tag type:   %3i -> %s", tl->p_or_c, PCs[tl->p_or_c]);
 		out_sequence(0, NULL, 0, 0, OD_UNDEF, recursive_level);
 		outln(L_ENFORCE, "     ^^^^^ Tag number: %3i -> %s", tl->number, tag_name);
 	} else if (opt_ol >= L_VERBOSE) {
-		outln(L_ENFORCE, "%s-%s: %s", short_classes[tl->class], short_PCs[original_type], tag_name);
+		outln(L_ENFORCE, "%s-%s: %s", short_classes[tl->class], short_PCs[tl->p_or_c], tag_name);
 	}
 
 	int pos = 0;
@@ -673,8 +672,8 @@ int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, tagleng
 		if (n > LENGTH_MULTIBYTES_MAX_BYTES - 1) {
 			myfclose(vf, "number of bytes to encode length exceeds maximum", old_loffset);
 			return 0;
-		} else if (n == 0) {
-			myfclose(vf, "number of bytes to encode length cannot be null", old_loffset);
+		} else if (n == 0 && tl->p_or_c != TAG_TYPE_CONSTRUCTED) {
+			myfclose(vf, "number of bytes to encode length cannot be null for a primitive", old_loffset);
 			return 0;
 		}
 		tl->length = 0;
@@ -686,6 +685,8 @@ int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, tagleng
 			tl->length += (unsigned int)cc;
 			bl[i] = (char)cc;
 		}
+		if (!tl->length)
+			tl->indefinite = TRUE;
 	}
 	if (opt_ol >= L_VERBOSE)
 		out_sequence(old_loffset, bl, (unsigned long)n + 1, 0, OD_UNDEF, recursive_level);
@@ -709,11 +710,15 @@ int parse_taglength(vf_t *vf, size_t *offset, ssize_t *remaining_length, tagleng
 
 	if (opt_ol == L_NORMAL) {
 		out_sequence(old_offset, tl->hbytes, (size_t)(pos + n + 2), 0, OD_UNDEF, recursive_level);
-		outln(L_ENFORCE, "%s-%s: %s, len: %lu", short_classes[tl->class], short_PCs[original_type], tag_name, tl->length);
+		outln(L_ENFORCE, "%s-%s: %s, len: %lu", short_classes[tl->class], short_PCs[tl->p_or_c], tag_name, tl->length);
 	}
 
 	*remaining_length -= (n + 1);
 	tl->hlen += (n + 1);
+	*consumed += tl->hlen;
+
+		/* FIXME */
+/*    printf("*consumed = %lu, tl->hlen = %i\n", *consumed, tl->hlen);*/
 
 	return check_position(vf, *offset, *remaining_length, 0);
 }
@@ -766,7 +771,8 @@ int decode_oid(char *p, const size_t plen, const char *buf, const size_t buflen)
 	return 1;
 }
 
-void parse(vf_t *vf, size_t *offset, ssize_t *remaining_length, const int recursive_level, int loose_read)
+int parse(vf_t *vf, size_t *offset, ssize_t *remaining_length, const int recursive_level, int loose_read,
+			ssize_t *consumed, int is_inside_indefinite)
 {
 	taglength_t tl;
 
@@ -774,39 +780,59 @@ void parse(vf_t *vf, size_t *offset, ssize_t *remaining_length, const int recurs
 		myfclose(vf, "number of recursive calls limit reached, now stopping", *offset);
 	}
 
-	if (!parse_taglength(vf, offset, remaining_length, &tl, recursive_level, loose_read))
-		return;
+	if (!parse_taglength(vf, offset, remaining_length, &tl, recursive_level, loose_read, consumed))
+		return FALSE;
 	if (tl.length > MAX_DATA_BLOCK_LEN) {
 		myfclose(vf, "data length too big", *offset);
-		return;
+		return FALSE;
 	}
+
+	int is_EOC = FALSE;
 
 	if (tl.p_or_c == TAG_TYPE_CONSTRUCTED) {
 		ssize_t inner_remaining_length = (ssize_t)tl.length;
+		if (tl.indefinite) {
+			assert(!tl.length);
+			inner_remaining_length = INT_MAX;
+		}
+		ssize_t inner_consumed = 0;
 		while(inner_remaining_length >= 1 && vf_is_initialized(vf)) {
-			parse(vf, offset, &inner_remaining_length, recursive_level + 1, FALSE);
-		}
-		if (inner_remaining_length && vf_is_initialized(vf)) {
-			myfclose(vf, "contained data out of container boundaries", *offset);
-			return;
-		}
-		*remaining_length -= (ssize_t)tl.length;
-	} else {
-		char *buf;
-		buf = (char *)malloc(tl.length);
-		size_t nbread;
-		nbread = vf_fread(buf, 1, (size_t)tl.length, vf);
-		size_t old_offset = *offset;
-		*offset += nbread;
-		*remaining_length -= (ssize_t)nbread;
 
-		if (nbread >= 1) {
-			out_data_t od = opt_od;
-			if (opt_od == OD_SMART && tl.class == TAG_CLASS_UNIVERSAL &&
-				(size_t)tl.number < sizeof(universal_class_tags) / sizeof(*universal_class_tags)) {
-				od = universal_class_tags[tl.number].is_string ? OD_ENFORCE_TEXT : OD_ENFORCE_HEX;
+				/* FIXME */
+/*            printf("Offset: %04X, inner_consumed: %04X\n", *offset, inner_consumed);*/
+
+			if (parse(vf, offset, &inner_remaining_length, recursive_level + 1, FALSE, &inner_consumed, tl.indefinite)) {
+				if (tl.indefinite)
+					break;
 			}
-			out_sequence(old_offset, buf, nbread, 1, od, recursive_level);
+		}
+		if (!tl.indefinite && inner_remaining_length && vf_is_initialized(vf)) {
+			myfclose(vf, "contained data out of container boundaries", *offset);
+			return FALSE;
+		}
+/*        *remaining_length -= (ssize_t)tl.length;*/
+		*remaining_length -= inner_consumed;
+		*consumed += inner_consumed;
+	} else {
+		char *buf = NULL;
+
+		size_t nbread = 0;
+		if (tl.length) {
+			buf = (char *)malloc(tl.length);
+			nbread = vf_fread(buf, 1, (size_t)tl.length, vf);
+			size_t old_offset = *offset;
+			*offset += nbread;
+			*remaining_length -= (ssize_t)nbread;
+			*consumed += (ssize_t)nbread;
+
+			if (nbread >= 1) {
+				out_data_t od = opt_od;
+				if (opt_od == OD_SMART && tl.class == TAG_CLASS_UNIVERSAL &&
+					(size_t)tl.number < sizeof(universal_class_tags) / sizeof(*universal_class_tags)) {
+					od = universal_class_tags[tl.number].is_string ? OD_ENFORCE_TEXT : OD_ENFORCE_HEX;
+				}
+				out_sequence(old_offset, buf, nbread, 1, od, recursive_level);
+			}
 		}
 
 		if (nbread != tl.length) {
@@ -820,7 +846,10 @@ void parse(vf_t *vf, size_t *offset, ssize_t *remaining_length, const int recurs
 		} else {
 			if (!check_position(vf, *offset, *remaining_length, 1)) {
 				free(buf);
-				return;
+				return FALSE;
+			}
+			if (tl.class == TAG_CLASS_UNIVERSAL && tl.number == TAG_U_EOC) {
+				is_EOC = TRUE;
 			}
 			if (tl.class == TAG_CLASS_UNIVERSAL && tl.number == TAG_U_OBJECT_IDENTIFIER) {
 				const size_t sizeof_printable = 200;
@@ -857,13 +886,13 @@ void parse(vf_t *vf, size_t *offset, ssize_t *remaining_length, const int recurs
 		}
 		if (!vf_is_initialized(vf)) {
 			free(buf);
-			return;
+			return is_EOC;
 		}
 		free(buf);
 		if (nbread >= 1)
 			outln(L_ENFORCE, "");
 	}
-	return;
+	return is_EOC;
 }
 
 #ifdef HAS_LIB_OPENSSL
@@ -1163,7 +1192,8 @@ const size_t STDIN_BUFSIZE = 1024;
 
 	size_t offset = 0;
 	do {
-		parse(vf, &offset, &s, 0, TRUE);
+		ssize_t consumed = 0;
+		parse(vf, &offset, &s, 0, TRUE, &consumed, FALSE);
 	} while (vf_is_initialized(vf));
 	if (vf_is_initialized(vf) && fname) {
 		if (s != 0 || vf_fgetc(vf) != EOF) {

@@ -4,7 +4,7 @@ PEM block: [] (skipped: no PEM information)
 Will use original data as pk input (assuming der-encoded content)
 000000  2f                           univ-cons: (reserved)
 000001  2a                           Length: 42
-000002  20                           univ-cons: EOC
+000002  20                           univ-prim: EOC
 000003  64                           Length: 100
 000004  64 65 72 2e    63 20 2a 2f   der.  c */ 
 00000c  0a 0a 2f 2a    20 50 61 72   ../*   Par 
