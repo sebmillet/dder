@@ -27,7 +27,11 @@ CPPFLAGS = -Wall $(DEBCPP) $(SSLCPP)
 LDFLAGS = -Wall $(DEBLD) $(SSLLD)
 
 ifneq ($(NOSSL), 1)
+OBJS = $(BUILD)\dder.o $(BUILD)\ppem.o
 all : libsslwarning
+endif
+ifeq ($(NOSSL), 1)
+OBJS = $(BUILD)\dder.o
 endif
 
 all : $(BUILD)
@@ -60,11 +64,16 @@ libsslwarning :
 $(BUILD) :
 	-if not exist $(BUILD) mkdir $(BUILD)
 
-$(BUILD)\dder.exe : $(BUILD)\dder.o
-	$(GCC) $(BUILD)\dder.o -o $(BUILD)\dder.exe $(LDFLAGS)
+$(BUILD)\dder.exe : $(OBJS)
+	$(GCC) $(OBJS) -o $(BUILD)\dder.exe $(LDFLAGS) -lGdi32
 
 $(BUILD)\dder.o : src\dder.c
 	$(GCC) -c $< -o $@ $(CPPFLAGS)
+
+ifneq ($(NOSSL), 1)
+$(BUILD)\ppem.o : src\ppem.c
+	$(GCC) -c $< -o $@ $(CPPFLAGS)
+endif
 
 mrproper : clean
 
