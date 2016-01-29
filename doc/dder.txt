@@ -3,7 +3,7 @@ dder(1) 		    General Commands Manual		       dder(1)
 
 
 NAME
-       dder - a program to display low level DER encoded content
+       dder - a program to display DER encoded content
 
 
 SYNOPSIS

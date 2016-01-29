@@ -2,7 +2,7 @@
 
 /* Parse der files */
 
-/* Sébastien Millet, February 2015 */
+/* Sébastien Millet, 2015 - 2016 */
 
 /*#define DEBUG*/
 
@@ -927,10 +927,10 @@ char *cb_password_pre()
 		if (!SetConsoleMode(h, console_mode & ~ENABLE_ECHO_INPUT))
 			return NULL;
 #else
-		struct termios old, new;
-		if (tcgetattr(fileno(stdin), &old) != 0)
+		struct termios current, new;
+		if (tcgetattr(fileno(stdin), &current) != 0)
 			return NULL;
-		new = old;
+		new = current;
 		new.c_lflag &= ~ECHO;
 		if (tcsetattr(fileno(stdin), TCSAFLUSH, &new) != 0)
 			return NULL;
@@ -941,9 +941,9 @@ char *cb_password_pre()
 		char *r = fgets(readpwd, PASSWORD_MAX_BYTES, stdin);
 
 #if defined(_WIN32) || defined(_WIN64)
-		SetConsoleMode(h, console_mode & ~ENABLE_ECHO_INPUT);
+		SetConsoleMode(h, console_mode);
 #else
-		tcsetattr(fileno(stdin), TCSAFLUSH, &old);
+		tcsetattr(fileno(stdin), TCSAFLUSH, &current);
 #endif
 
 		if (!r) {
