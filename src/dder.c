@@ -20,7 +20,12 @@
 #include <stdarg.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#else
 #include <termios.h>
+#endif
 
 #ifdef HAS_LIB_OPENSSL
 #include <openssl/objects.h>
@@ -28,7 +33,7 @@
 
 #include "ppem.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 #define snprintf _snprintf
 #define strcasecmp _stricmp
 #endif
@@ -913,19 +918,33 @@ char *cb_password_pre()
 
 	if (!opt_password) {
 
+#if defined(_WIN32) || defined(_WIN64)
+		HANDLE h;
+		DWORD console_mode;
+		h = GetStdHandle(STD_INPUT_HANDLE);
+		if (!GetConsoleMode(h, &console_mode))
+			return NULL;
+		if (!SetConsoleMode(h, console_mode & ~ENABLE_ECHO_INPUT))
+			return NULL;
+#else
 		struct termios old, new;
 		if (tcgetattr(fileno(stdin), &old) != 0)
 			return NULL;
 		new = old;
 		new.c_lflag &= ~ECHO;
 		if (tcsetattr(fileno(stdin), TCSAFLUSH, &new) != 0)
-		return NULL;
+			return NULL;
+#endif
 
 		printf("Please type in the password:\n");
 		char *readpwd = malloc(PASSWORD_MAX_BYTES);
 		char *r = fgets(readpwd, PASSWORD_MAX_BYTES, stdin);
 
+#if defined(_WIN32) || defined(_WIN64)
+		SetConsoleMode(h, console_mode & ~ENABLE_ECHO_INPUT);
+#else
 		tcsetattr(fileno(stdin), TCSAFLUSH, &old);
+#endif
 
 		if (!r) {
 			free(readpwd);
@@ -1172,7 +1191,7 @@ const size_t STDIN_BUFSIZE = 1024;
 	vf = vf_construct();
 
 	const unsigned char *pkdata = NULL;
-	size_t pkdata_len;
+	size_t pkdata_len = 0;
 
 	ssize_t s;
 
