@@ -1,0 +1,62 @@
+.\" Written by Sébastien Millet
+.\"
+.TH dder 1 "version 0.5" "January 2016"
+
+.SH NAME
+.TP
+dder \- a program to display low level DER encoded content
+
+.SH SYNOPSIS
+.TP
+\fBdder\fP [\fIOPTIONS\fP]... [FILE]
+
+.SH DESCRIPTION
+.TP
+\fIdder\fP parses the input according to DER encoding standard
+.TP
+\fIdder\fP can read PEM encoded files and can also decrypt it as needed
+.br
+dder will detect the encoding used and manage input as appropriate, unless option \fB-der\fP is used
+.SH OPTIONS
+.TP
+If FILE is not specified, read the standard input
+.TP
+.B \-version
+Display version information and exit
+.TP
+.B \-verbose
+Be more talkative
+.TP
+.B \-veryverbose
+Be very talkative
+.TP
+.B \-text
+Enforce text output of data values
+.TP
+.B \-hex
+Enforce hexadecimal output of data values
+.TP
+\fB\-width\fP \fIN\fP
+Number of bytes per line, must be even
+.TP
+\fB\-password\fP \fIpwd\fP
+Set password to \fIpwd\fP when decrypting a PEM encoded input
+.TP
+.B \-der
+Assume input data is DER-encoded
+.TP
+\fB\-recursive\fP \fIS\fP
+String to add at the beginning of output lines, one occurence os \fIS\fP at each depth level
+.TP
+.B \-\-
+End of options, the next option is a file
+.SH INITIALIZATION FILES
+.TP
+None
+.SH ENVIRONMENT VARIABLES
+.TP
+None
+.SH AUTHOR
+.TP
+Written by Sébastien Millet <milletseb@laposte.net>
+

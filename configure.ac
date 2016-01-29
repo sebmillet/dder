@@ -2,19 +2,19 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([dder], [0.1], [milletseb@laposte.net])
+AC_INIT([dder], [0.5], [milletseb@laposte.net])
 AC_CONFIG_SRCDIR([src/dder.c])
 AC_CONFIG_AUX_DIR([admin])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([subdir-objects])
 
+AM_MAINTAINER_MODE
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_MAKE_SET
 AC_PROG_CPP
-
-# Checks for libraries.
 
 # Checks for header files.
 AC_CHECK_HEADERS([limits.h stdlib.h string.h ssl.h])
@@ -26,6 +26,14 @@ AC_TYPE_SSIZE_T
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([strcasecmp strerror])
+
+if test "x$USE_MAINTAINER_MODE" = "xyes"; then
+	build_docs=yes
+else
+	build_docs=no
+fi
+
+AM_CONDITIONAL(BUILD_DOCS, test $build_docs = yes)
 
 AC_ARG_ENABLE(ssl,
 			  [  --disable-ssl           compile without the openssl library])
@@ -39,5 +47,6 @@ fi
 AM_CONDITIONAL(WITH_OPENSSL, [ test "${enable_ssl}" = yes ])
 
 AC_CONFIG_FILES([Makefile
-                 src/Makefile])
+                 src/Makefile
+                 doc/Makefile])
 AC_OUTPUT

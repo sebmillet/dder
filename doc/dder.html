@@ -1,0 +1,113 @@
+Content-type: text/html; charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of dder</TITLE>
+</HEAD><BODY>
+<H1>dder</H1>
+Section: User Commands  (1)<BR>Updated: version 0.5<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<DL COMPACT>
+<DT>dder - a program to display low level DER encoded content<DD>
+<P>
+</DL>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<DL COMPACT>
+<DT><B>dder</B> [<I>OPTIONS</I>]... [FILE]<DD>
+<P>
+</DL>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<DT><I>dder</I> parses the input according to DER encoding standard<DD>
+<DT><I>dder</I> can read PEM encoded files and can also decrypt it as needed<DD>
+<BR>
+
+dder will detect the encoding used and manage input as appropriate, unless option <B>-der</B> is used
+</DL>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>If FILE is not specified, read the standard input<DD>
+<DT><B>-version</B>
+
+<DD>
+Display version information and exit
+<DT><B>-verbose</B>
+
+<DD>
+Be more talkative
+<DT><B>-veryverbose</B>
+
+<DD>
+Be very talkative
+<DT><B>-text</B>
+
+<DD>
+Enforce text output of data values
+<DT><B>-hex</B>
+
+<DD>
+Enforce hexadecimal output of data values
+<DT><B>-width</B> <I>N</I><DD>
+Number of bytes per line, must be even
+<DT><B>-password</B> <I>pwd</I><DD>
+Set password to <I>pwd</I> when decrypting a PEM encoded input
+<DT><B>-der</B>
+
+<DD>
+Assume input data is DER-encoded
+<DT><B>-recursive</B> <I>S</I><DD>
+String to add at the beginning of output lines, one occurence os <I>S</I> at each depth level
+<DT><B>--</B>
+
+<DD>
+End of options, the next option is a file
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>INITIALIZATION FILES</H2>
+
+<DL COMPACT>
+<DT>None<DD>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>ENVIRONMENT VARIABLES</H2>
+
+<DL COMPACT>
+<DT>None<DD>
+</DL>
+<A NAME="lbAH">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+<DL COMPACT>
+<DT>Written by Sébastien Millet &lt;<A HREF="mailto:milletseb@laposte.net">milletseb@laposte.net</A>&gt;<DD>
+<P>
+<P>
+</DL>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">INITIALIZATION FILES</A><DD>
+<DT><A HREF="#lbAG">ENVIRONMENT VARIABLES</A><DD>
+<DT><A HREF="#lbAH">AUTHOR</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:19 GMT, January 29, 2016
+</BODY>
+</HTML>

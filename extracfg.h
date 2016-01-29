@@ -8,7 +8,7 @@
 #define PACKAGE_NAME "dder"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "dder 0.1"
+#define PACKAGE_STRING "dder 0.5"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "dder"
@@ -17,8 +17,8 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1"
+#define PACKAGE_VERSION "0.5"
 
 /* Version number of package */
-#define VERSION "0.1"
+#define VERSION "0.5"
 

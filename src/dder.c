@@ -6,6 +6,12 @@
 
 /*#define DEBUG*/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#else
+#include "..\extracfg.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -14,6 +20,7 @@
 #include <stdarg.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <termios.h>
 
 #ifdef HAS_LIB_OPENSSL
 #include <openssl/objects.h>
@@ -370,12 +377,12 @@ void usage()
 
 void version()
 {
-	out(L_ENFORCE, "dder version 0.1");
+	out(L_ENFORCE, PACKAGE_NAME " " VERSION);
 #ifdef DEBUG
 	out(L_ENFORCE, "d");
 #endif
 	outln(L_ENFORCE, "");
-	outln(L_ENFORCE, "Copyright 2015 Sébastien Millet.");
+	outln(L_ENFORCE, "Copyright 2015, 2016 Sébastien Millet.");
 	outln(L_ENFORCE, "This is free software with ABSOLUTELY NO WARRANTY.");
 	exit(0);
 }
@@ -905,9 +912,22 @@ char *cb_password_pre()
 	char *password;
 
 	if (!opt_password) {
-		fprintf(stderr, "Please type in the password:\n");
+
+		struct termios old, new;
+		if (tcgetattr(fileno(stdin), &old) != 0)
+			return NULL;
+		new = old;
+		new.c_lflag &= ~ECHO;
+		if (tcsetattr(fileno(stdin), TCSAFLUSH, &new) != 0)
+		return NULL;
+
+		printf("Please type in the password:\n");
 		char *readpwd = malloc(PASSWORD_MAX_BYTES);
-		if (!fgets(readpwd, PASSWORD_MAX_BYTES, stdin)) {
+		char *r = fgets(readpwd, PASSWORD_MAX_BYTES, stdin);
+
+		tcsetattr(fileno(stdin), TCSAFLUSH, &old);
+
+		if (!r) {
 			free(readpwd);
 			return NULL;
 		}

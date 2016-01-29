@@ -1,4 +1,15 @@
+2016-01-29 Sébastien Millet <milletseb@laposte.net>
+
+	* Version 0.5 built
+	* Support of PEM encoding
+	* Support of indefinite length form = 0-length terminated by EOC
+	* Display OID names not only their sequence of numbers
+	* Provides a manual to dder
+	* Link dder with openssl to support PEM and OID features above, provide
+	  compile options to generate executable without these features
+
 2015-12-23 Sébastien Millet <milletseb@laposte.net>
 
+	* Version 0.1 built
 	* 'autotool'ed dder
 

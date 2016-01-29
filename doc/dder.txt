@@ -1,0 +1,62 @@
+dder(1) 		    General Commands Manual		       dder(1)
+
+
+
+NAME
+       dder - a program to display low level DER encoded content
+
+
+SYNOPSIS
+       dder [OPTIONS]... [FILE]
+
+
+DESCRIPTION
+       dder parses the input according to DER encoding standard
+
+       dder can read PEM encoded files and can also decrypt it as needed
+	      dder will detect the encoding used and manage input as appropri‐
+	      ate, unless option -der is used
+
+OPTIONS
+       If FILE is not specified, read the standard input
+
+       -version
+	      Display version information and exit
+
+       -verbose
+	      Be more talkative
+
+       -veryverbose
+	      Be very talkative
+
+       -text  Enforce text output of data values
+
+       -hex   Enforce hexadecimal output of data values
+
+       -width N
+	      Number of bytes per line, must be even
+
+       -password pwd
+	      Set password to pwd when decrypting a PEM encoded input
+
+       -der   Assume input data is DER-encoded
+
+       -recursive S
+	      String to add at the beginning of output lines, one occurence os
+	      S at each depth level
+
+       --     End of options, the next option is a file
+
+INITIALIZATION FILES
+       None
+
+ENVIRONMENT VARIABLES
+       None
+
+AUTHOR
+       Written by Sébastien Millet <milletseb@laposte.net>
+
+
+
+
+January 2016			  version 0.5			       dder(1)
