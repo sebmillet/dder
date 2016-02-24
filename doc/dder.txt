@@ -59,4 +59,4 @@ AUTHOR
 
 
 
-January 2016			  version 0.5			       dder(1)
+February 2016			 version 0.5.1			       dder(1)

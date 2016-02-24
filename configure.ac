@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([dder], [0.5], [milletseb@laposte.net])
+AC_INIT([dder], [0.5.1], [milletseb@laposte.net])
 AC_CONFIG_SRCDIR([src/dder.c])
 AC_CONFIG_AUX_DIR([admin])
 AC_CONFIG_HEADERS([config.h])

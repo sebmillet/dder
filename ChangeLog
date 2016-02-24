@@ -1,3 +1,8 @@
+2016-xx-xx Sébastien Millet <milletseb@laposte.net>
+
+	* Version 0.5.1 built
+	* Fixes a bug in src/dder.c:s_strncat
+
 2016-01-29 Sébastien Millet <milletseb@laposte.net>
 
 	* Version 0.5 built
